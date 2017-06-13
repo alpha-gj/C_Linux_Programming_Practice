@@ -1,0 +1,12 @@
+[alias]
+	co = checkout
+	st = status
+	br = branch
+	ci = commit
+[pull]
+	rebase = true
+[user]
+	email = Guang-Jie_Jhang@alphanetworks.com
+	name = alpha-gj
+[push]
+	default = matching
