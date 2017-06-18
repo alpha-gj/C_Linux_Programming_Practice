@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 		/* Open input and output files */
 		inputFd = open(argv[1], O_RDONLY);
 		if (inputFd == -1 ) {
-			fprintf(stderr,"%s [%d] open fail\n", __FUNCTION__, __LINE__);
+			fprintf(stderr,"%s [%d] %s\n", __FUNCTION__, __LINE__, strerror(errno));
 			break;
 		}
 
@@ -40,11 +40,11 @@ int main(int argc, char *argv[])
 		
 		outputFd = open(argv[2], openFlags, filePerms);
 		if (outputFd == -1 ) {
-			fprintf(stderr,"%s [%d] open fail\n", __FUNCTION__, __LINE__);
+			fprintf(stderr,"%s [%d] %s\n", __FUNCTION__, __LINE__, strerror(errno));
 			break;
 		}
-
-		fprintf(stderr,"%s [%d] filePerms is %o\n",
+		
+		fprintf(stdout,"%s [%d] filePerms is %o\n",
 				__FUNCTION__, __LINE__, filePerms);
 
 		/* Transfer data until we encounter end of input or an error */	
@@ -54,23 +54,20 @@ int main(int argc, char *argv[])
 						__FUNCTION__, __LINE__);
 				break;
 			}
-			fprintf(stderr,"%s [%d] buffer is \n%s\n",
+			fprintf(stdout,"%s [%d] buffer is \n%s\n",
 					__FUNCTION__, __LINE__, buf);
-			fprintf(stderr,"%s [%d] numRead is %d\n",
+			fprintf(stdout,"%s [%d] numRead is %d\n",
 					__FUNCTION__, __LINE__, numRead);
-			fprintf(stderr,"%s [%d] numWrite is %d\n",
+			fprintf(stdout,"%s [%d] numWrite is %d\n",
 					__FUNCTION__, __LINE__, numWrite);
-		}
+		} 
 
-		printf("After while loop\n");
+		/* if numRead value will be 0, it saids enconuter EOF */
+			fprintf(stdout,"%s [%d] it saids enconuter EOF, numRead is %d\n",
+					__FUNCTION__, __LINE__, numRead);
 
-		fprintf(stderr,"%s [%d] numRead is %d\n",
-				__FUNCTION__, __LINE__, numRead);
-		fprintf(stderr,"%s [%d] numWrite is %d\n",
-				__FUNCTION__, __LINE__, numWrite);
-
-		if (numRead == -1) {
-			fprintf(stderr,"%s [%d] read fail\n", __FUNCTION__, __LINE__);
+		if (numRead == -1 || numWrite == -1) {
+			fprintf(stderr,"%s [%d] %s\n", __FUNCTION__, __LINE__, strerror(errno));
 			break;
 		}
 
@@ -79,19 +76,21 @@ int main(int argc, char *argv[])
 	} while(false);
 
 	/* Check fd is close or not */
-	if (inputFd != -1) {
-			close(inputFd);
-			inputFd = -1;
+	if (inputFd != -1 && (close(inputFd) == -1)) {  
+		fprintf(stderr,"%s [%d] %s\n", __FUNCTION__, __LINE__, strerror(errno));
+	} else {
+		inputFd = -1;
 	}
 	
-	if (outputFd != -1) {
-			close(outputFd);
-			outputFd = -1;
+	if (outputFd != -1 && (close(outputFd) == -1)) {
+		fprintf(stderr,"%s [%d] %s\n", __FUNCTION__, __LINE__, strerror(errno));
+	} else {
+		outputFd = -1;
 	}
-	
+
 	/* Result */
 	fprintf(stderr, "\n\n%s is ending... result is %s!\n",
-			argv[0], (ret) ? "OK" : "Fail" );
+			argv[0], (errno == 0 && ret) ? "OK" : "Fail");
 
 	exit(EXIT_SUCCESS);
 }
