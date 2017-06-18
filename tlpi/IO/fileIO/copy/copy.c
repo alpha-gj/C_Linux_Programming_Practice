@@ -79,11 +79,15 @@ int main(int argc, char *argv[])
 	} while(false);
 
 	/* Check fd is close or not */
-	if (close(inputFd) == -1)
-			fprintf(stderr,"%s [%d] close fail\n", __FUNCTION__, __LINE__);
-
-	if (close(outputFd) == -1)
-			fprintf(stderr,"%s [%d] close fail\n", __FUNCTION__, __LINE__);
+	if (inputFd != -1) {
+			close(inputFd);
+			inputFd = -1;
+	}
+	
+	if (outputFd != -1) {
+			close(outputFd);
+			outputFd = -1;
+	}
 	
 	/* Result */
 	fprintf(stderr, "\n\n%s is ending... result is %s!\n",
