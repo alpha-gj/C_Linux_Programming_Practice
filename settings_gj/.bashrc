@@ -132,8 +132,9 @@ alias cdd='cd /home/gj/Desktop'
 alias cdl='cd /home/gj/Downloads'
 
 #linux_c
-alias gc='cd /home/gj/git/linux_C_practice/c'
-alias gl='cd /home/gj/git/linux_C_practice/tlpi'
+alias cdg='cd /home/gj/git/linux_C_practice'
+alias cdgc='cd /home/gj/git/linux_C_practice/c'
+alias cdgl='cd /home/gj/git/linux_C_practice/tlpi'
 
 #CS-6022
 alias cdr='cd /home/gj/git/ralink'
