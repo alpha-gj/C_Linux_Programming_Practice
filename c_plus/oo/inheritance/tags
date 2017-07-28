@@ -1,0 +1,28 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CC	Makefile	/^CC = g++$/;"	m
+GPA	undergraduate.h	/^		double GPA;$/;"	m	class:Undergraduate
+OBJS	Makefile	/^OBJS = $(shell find . -name *.cpp | cut -d\/ -f2 | cut -d. -f1).o $/;"	m
+Target	Makefile	/^Target = $(shell find . -name *.cpp | cut -d\/ -f2 | cut -d. -f1) $/;"	m
+Undergraduate	undergraduate.h	/^class Undergraduate:public student$/;"	c
+age	student.h	/^		int age;$/;"	m	class:student
+height	student.h	/^		int height;$/;"	m	class:student
+isAdult	undergraduate.h	/^bool Undergraduate::isAdult()$/;"	f	class:Undergraduate
+main	inheritance.cpp	/^int main()$/;"	f
+name	student.h	/^		char name[10];$/;"	m	class:student
+sage	student.h	/^int student::sage()$/;"	f	class:student
+score	undergraduate.h	/^double Undergraduate::score()$/;"	f	class:Undergraduate
+set	student.h	/^void student::set(const char *n, int a, int h, int w)$/;"	f	class:student
+setGPA	undergraduate.h	/^void Undergraduate::setGPA(double g)$/;"	f	class:Undergraduate
+sheight	student.h	/^int student::sheight()$/;"	f	class:student
+sname	student.h	/^char * student::sname()$/;"	f	class:student
+student	student.h	/^class student$/;"	c
+student	student.h	/^student::student()$/;"	f	class:student
+student	student.h	/^student::student(const char *n, int a, int h, int w)$/;"	f	class:student
+sweight	student.h	/^int student::sweight()$/;"	f	class:student
+test	student.h	/^		int test;$/;"	m	class:student
+weight	student.h	/^		int weight;$/;"	m	class:student
