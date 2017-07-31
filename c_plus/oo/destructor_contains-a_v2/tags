@@ -1,0 +1,167 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AEC_RESET	Variable.h	38;"	d
+BLINK	Color.h	/^	BLINK,$/;"	e	enum:__anon1
+BLINK_PERIOD	Variable.h	20;"	d
+BREATHING	Color.h	/^	BREATHING,$/;"	e	enum:__anon1
+BREATHING_PERIOD	Variable.h	19;"	d
+BUTTON_GPIO_NUM	Variable.h	24;"	d
+BUTTON_POLLING_TIME	Variable.h	1;"	d
+CALL_OUT_TONE	Variable.h	40;"	d
+CC	Makefile	/^CC = g++$/;"	m
+COLOR_PATTERN	Color.h	/^}COLOR_PATTERN;$/;"	t	typeref:enum:__anon2
+CONNECTED	StatesHolder.h	/^	CONNECTED,$/;"	e	enum:MAINSTATES
+Color	Color.cpp	/^Color::Color()$/;"	f	class:Color
+Color	Color.h	/^class Color {$/;"	c
+CreateHandlerByStates	Watchdog.cpp	/^IPCHandler *Watchdog::CreateHandlerByStates()$/;"	f	class:Watchdog
+CreateStatesHolder	StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
+DISCONNECTED	StatesHolder.h	/^	DISCONNECTED,$/;"	e	enum:MAINSTATES
+ENTER_NORMAL_COUNT	Variable.h	6;"	d
+ENTER_REBOOT_COUNT	Variable.h	7;"	d
+ENTER_REPORT_COUNT	Variable.h	9;"	d
+ENTER_RESET_COUNT	Variable.h	10;"	d
+ENTER_STANDBY_COUNT	Variable.h	8;"	d
+ENTER_TWT_COUNT	Variable.h	5;"	d
+ENTER_WPS_COUNT	Variable.h	11;"	d
+GPIO_READ_FAIL_COUNT	Variable.h	13;"	d
+GetMainHandlerState	PowerUpHandler.cpp	/^MAINSTATES PowerUpHandler::GetMainHandlerState()$/;"	f	class:PowerUpHandler
+GetMainHandlerState	RebootHandler.cpp	/^MAINSTATES RebootHandler::GetMainHandlerState()$/;"	f	class:RebootHandler
+GetMainHandlerState	ResetHandler.cpp	/^MAINSTATES ResetHandler::GetMainHandlerState()$/;"	f	class:ResetHandler
+GetMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetMainStates()$/;"	f	class:StatesHolder
+GetOldMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetOldMainStates()$/;"	f	class:StatesHolder
+GoNextState	IPCHandler.cpp	/^bool IPCHandler::GoNextState()$/;"	f	class:IPCHandler
+INTERACTIVE_MODE_PERCENT	Color.h	19;"	d
+IPCHandler	IPCHandler.cpp	/^IPCHandler::IPCHandler()$/;"	f	class:IPCHandler
+IPCHandler	IPCHandler.h	/^class IPCHandler$/;"	c
+IR_AUTO_BY_LIGHT	Common.h	/^	IR_AUTO_BY_LIGHT,$/;"	e	enum:IR_CONTORLLER
+IR_CONTORLLER	Common.h	/^enum IR_CONTORLLER {$/;"	g
+IR_MANUAL	Common.h	/^	IR_MANUAL,$/;"	e	enum:IR_CONTORLLER
+IR_OFF_ALWAYS_DAY	Common.h	/^	IR_OFF_ALWAYS_DAY,$/;"	e	enum:IR_CONTORLLER
+IR_ON_ALWAYS_NIGHT	Common.h	/^	IR_ON_ALWAYS_NIGHT,$/;"	e	enum:IR_CONTORLLER
+LED_BLUE	Color.h	/^	LED_BLUE,$/;"	e	enum:__anon2
+LED_GREEN	Color.h	/^	LED_GREEN,$/;"	e	enum:__anon2
+LED_OFF	Color.h	/^	LED_OFF,$/;"	e	enum:__anon2
+LED_ORANGE	Color.h	/^	LED_ORANGE,$/;"	e	enum:__anon2
+LED_RED	Color.h	/^	LED_RED,$/;"	e	enum:__anon2
+LED_WHITE	Color.h	/^	LED_WHITE,$/;"	e	enum:__anon2
+LED_WORKING_MODE	Color.h	/^}LED_WORKING_MODE;$/;"	t	typeref:enum:__anon1
+LED_YELLOW	Color.h	/^	LED_YELLOW,$/;"	e	enum:__anon2
+LIGHT_MODE	Common.h	/^enum LIGHT_MODE {$/;"	g
+LOAD_CALL_OUT_TONE	Variable.h	41;"	d
+MAINSTATES	StatesHolder.h	/^enum MAINSTATES {$/;"	g
+MAINSTATES_COUNT	StatesHolder.h	/^	MAINSTATES_COUNT,$/;"	e	enum:MAINSTATES
+MAX_GEO_INIT_RETRY	Variable.h	23;"	d
+MAX_GPIO_NUM	Variable.h	25;"	d
+NAME_CALL_OUT_TONE	Variable.h	39;"	d
+NETWORK_RESTART_TIMEOUT	Variable.h	16;"	d
+OBJS	Makefile	/^OBJS = $(shell find . -name *.cpp | cut -d\/ -f2 | cut -d. -f1).o $/;"	m
+OFF	Color.h	/^	OFF,$/;"	e	enum:__anon1
+PLAY_BOOTINGUP_TONE	Variable.h	28;"	d
+PLAY_BOOTINGUP_VOICE	Variable.h	29;"	d
+PLAY_CALL_OUT_TONE	Variable.h	42;"	d
+PLAY_FINALIZING_END_VOICE	Variable.h	34;"	d
+PLAY_INITIALING_START_VOICE	Variable.h	27;"	d
+PLAY_PAIRED_END_VOICE	Variable.h	32;"	d
+PLAY_PAIRING_START_VOICE	Variable.h	33;"	d
+PLAY_TWT_BEGIN_TONE	Variable.h	36;"	d
+PLAY_TWT_END_TONE	Variable.h	37;"	d
+PLAY_TWT_START_TONE	Variable.h	35;"	d
+POLLING_TIMEOUT	Variable.h	2;"	d
+POWERUP	StatesHolder.h	/^	POWERUP,$/;"	e	enum:MAINSTATES
+PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::PowerUpHandler()$/;"	f	class:PowerUpHandler
+PowerUpHandler	PowerUpHandler.h	/^class PowerUpHandler : public IPCHandler$/;"	c
+QUICK_FLICKER_PERIOD	Variable.h	21;"	d
+REBOOT	StatesHolder.h	/^	REBOOT,$/;"	e	enum:MAINSTATES
+RESET	StatesHolder.h	/^	RESET,$/;"	e	enum:MAINSTATES
+RebootHandler	RebootHandler.cpp	/^RebootHandler::RebootHandler()$/;"	f	class:RebootHandler
+RebootHandler	RebootHandler.h	/^class RebootHandler : public IPCHandler$/;"	c
+ResetHandler	ResetHandler.cpp	/^ResetHandler::ResetHandler()$/;"	f	class:ResetHandler
+ResetHandler	ResetHandler.h	/^class ResetHandler : public IPCHandler$/;"	c
+SETUP	StatesHolder.h	/^	SETUP,$/;"	e	enum:MAINSTATES
+SETUP_CONNECT_FAIL_VOICE	Variable.h	30;"	d
+SOLID	Color.h	/^	SOLID,$/;"	e	enum:__anon1
+SOLID_PERIOD	Variable.h	18;"	d
+SetMainStates	StatesHolder.cpp	/^void StatesHolder::SetMainStates(MAINSTATES s)$/;"	f	class:StatesHolder
+StatesHolder	StatesHolder.cpp	/^StatesHolder::StatesHolder()$/;"	f	class:StatesHolder
+StatesHolder	StatesHolder.h	/^class StatesHolder$/;"	c
+StoreColor	Color.cpp	/^void Color::StoreColor(Color c)$/;"	f	class:Color
+TIME_BASE	Variable.h	3;"	d
+Target	Makefile	/^Target = $(shell find . -name *.cpp | cut -d\/ -f2 | cut -d. -f1) $/;"	m
+UNDER_ALWAYS_DAY_MODE	Common.h	/^	UNDER_ALWAYS_DAY_MODE,$/;"	e	enum:LIGHT_MODE
+UNDER_ALWAYS_NIGHT_MODE	Common.h	/^	UNDER_ALWAYS_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
+UNDER_DAY_MODE	Common.h	/^	UNDER_DAY_MODE,$/;"	e	enum:LIGHT_MODE
+UNDER_NIGHT_MODE	Common.h	/^	UNDER_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
+WAIT_CALL_OUT_COUNT	Variable.h	12;"	d
+WAIT_CONNECT_TO_DEVICE	Variable.h	15;"	d
+WAIT_HEART_BEAT_COUNT	Variable.h	4;"	d
+WAIT_WPS_STATE_COUNT	Variable.h	14;"	d
+WPS_BEGIN_TONE	Variable.h	31;"	d
+Watchdog	Watchdog.cpp	/^Watchdog::Watchdog()$/;"	f	class:Watchdog
+Watchdog	Watchdog.h	/^class Watchdog$/;"	c
+_COLOR_H_	Color.h	2;"	d
+_COMMON_H_	Common.h	2;"	d
+_IPCHANDLER_H_	IPCHandler.h	2;"	d
+_POWERUPHANDLER_H_	PowerUpHandler.h	2;"	d
+_REBOOTHANDLER_H_	RebootHandler.h	2;"	d
+_RESETHANDLER_H_	ResetHandler.h	2;"	d
+_STATESHOLDER_H_	StatesHolder.h	2;"	d
+associated	StatesHolder.h	/^	bool associated;$/;"	m	struct:net_states
+check_associate	PowerUpHandler.cpp	/^void PowerUpHandler::check_associate()$/;"	f	class:PowerUpHandler
+diff_curr_uptime_count	Common.cpp	/^long diff_curr_uptime_count(struct timeval t)$/;"	f
+dog	Watchdog.cpp	/^Watchdog *dog = NULL;$/;"	v
+get_quit	Common.cpp	/^bool get_quit()$/;"	f
+get_reload	Common.cpp	/^bool get_reload()$/;"	f
+get_uptime	Common.cpp	/^struct timeval get_uptime()$/;"	f
+handle_factory_reset	IPCHandler.cpp	/^int IPCHandler::handle_factory_reset()$/;"	f	class:IPCHandler
+handle_ipc_depend_on_status	PowerUpHandler.cpp	/^int PowerUpHandler::handle_ipc_depend_on_status(IpcCommand cmd)$/;"	f	class:PowerUpHandler
+handle_ipc_depend_on_status	RebootHandler.cpp	/^int RebootHandler::handle_ipc_depend_on_status(IpcCommand \/*cmd*\/)$/;"	f	class:RebootHandler
+handle_ipc_depend_on_status	ResetHandler.cpp	/^int ResetHandler::handle_ipc_depend_on_status(IpcCommand \/*cmd*\/)$/;"	f	class:ResetHandler
+handle_network_states	IPCHandler.cpp	/^int IPCHandler::handle_network_states()$/;"	f	class:IPCHandler
+handle_select_time_out	IPCHandler.cpp	/^int IPCHandler::handle_select_time_out()$/;"	f	class:IPCHandler
+holder	IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
+holder	StatesHolder.cpp	/^static StatesHolder *holder = NULL;$/;"	v	file:
+holder	Watchdog.h	/^	StatesHolder *holder;$/;"	m	class:Watchdog
+init	IPCHandler.cpp	/^int IPCHandler::init()$/;"	f	class:IPCHandler
+init	PowerUpHandler.cpp	/^int PowerUpHandler::init()$/;"	f	class:PowerUpHandler
+init	RebootHandler.cpp	/^int RebootHandler::init()$/;"	f	class:RebootHandler
+init	ResetHandler.cpp	/^int ResetHandler::init()$/;"	f	class:ResetHandler
+init	Watchdog.cpp	/^int Watchdog::init()$/;"	f	class:Watchdog
+initSignal	Watchdog.cpp	/^bool initSignal()$/;"	f
+ipc_daemon	IPCHandler.h	/^	IpcDaemon ipc_daemon;$/;"	m	class:IPCHandler
+is_quit	Common.cpp	/^bool is_quit = false;$/;"	v
+is_reload	Common.cpp	/^bool is_reload = false;$/;"	v
+main	Watchdog.cpp	/^int main(int \/*argc*\/, const char *argv[])$/;"	f
+mainStates	StatesHolder.h	/^	MAINSTATES mainStates;$/;"	m	class:StatesHolder
+mainStatesLock	StatesHolder.h	/^	pthread_mutex_t mainStatesLock;$/;"	m	class:StatesHolder
+needHandleAssociated	StatesHolder.h	/^	bool needHandleAssociated;$/;"	m	struct:net_states
+net_states	StatesHolder.h	/^struct net_states {$/;"	s
+oldMainStates	StatesHolder.h	/^	MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
+pack	IPCHandler.h	/^	MultiCastPackage pack;$/;"	m	class:IPCHandler
+referCount	StatesHolder.cpp	/^static int referCount = 0;$/;"	v	file:
+release	IPCHandler.cpp	/^int IPCHandler::release()$/;"	f	class:IPCHandler
+release	PowerUpHandler.cpp	/^int PowerUpHandler::release()$/;"	f	class:PowerUpHandler
+release	RebootHandler.cpp	/^int RebootHandler::release()$/;"	f	class:RebootHandler
+release	ResetHandler.cpp	/^int ResetHandler::release()$/;"	f	class:ResetHandler
+release	Watchdog.cpp	/^int Watchdog::release()$/;"	f	class:Watchdog
+releaseStatesHolder	StatesHolder.cpp	/^void StatesHolder::releaseStatesHolder()$/;"	f	class:StatesHolder
+requestExitHandler	Watchdog.cpp	/^void requestExitHandler(int sigNum)$/;"	f
+requestReloadHandler	Watchdog.cpp	/^void requestReloadHandler(int sigNum)$/;"	f
+run	Watchdog.cpp	/^int Watchdog::run()$/;"	f	class:Watchdog
+run_parsing_command	IPCHandler.cpp	/^int IPCHandler::run_parsing_command()$/;"	f	class:IPCHandler
+send_ipccmd	Common.cpp	/^void send_ipccmd(const char *path, int ipc)$/;"	f
+sender	IPCHandler.h	/^	MultiSender sender;$/;"	m	class:IPCHandler
+set_quit	Common.cpp	/^void set_quit(bool b)$/;"	f
+set_reload	Common.cpp	/^void set_reload(bool b)$/;"	f
+start_thread	Common.cpp	/^int start_thread(void *callback, pthread_t & pid, void *pass)$/;"	f
+start_thread_join	Common.cpp	/^int start_thread_join(void *callback, pthread_t & pid, void *pass)$/;"	f
+~Color	Color.cpp	/^Color::~Color()$/;"	f	class:Color
+~IPCHandler	IPCHandler.cpp	/^IPCHandler::~IPCHandler()$/;"	f	class:IPCHandler
+~PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::~PowerUpHandler()$/;"	f	class:PowerUpHandler
+~RebootHandler	RebootHandler.cpp	/^RebootHandler::~RebootHandler()$/;"	f	class:RebootHandler
+~ResetHandler	ResetHandler.cpp	/^ResetHandler::~ResetHandler()$/;"	f	class:ResetHandler
+~StatesHolder	StatesHolder.cpp	/^StatesHolder::~StatesHolder()$/;"	f	class:StatesHolder
+~Watchdog	Watchdog.cpp	/^Watchdog::~Watchdog()$/;"	f	class:Watchdog
