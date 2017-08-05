@@ -11,10 +11,15 @@ enum MAINSTATES {
 
 class StatesHolder
 {
+
+public:
+	static StatesHolder *holder;
+	static int referCount;
+
 public:
 	virtual ~StatesHolder ();
 	static StatesHolder *CreateStatesHolder();
-	static void releaseStatesHolder();
+	static int releaseStatesHolder();
 
 public:
 	void SetMainStates(MAINSTATES s);

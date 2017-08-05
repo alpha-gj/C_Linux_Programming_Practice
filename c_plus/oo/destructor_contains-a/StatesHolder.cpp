@@ -2,8 +2,8 @@
 #include <iostream>
 using namespace std;
 
-static StatesHolder *holder = NULL;
-static int referCount = 0;
+StatesHolder *StatesHolder::holder = NULL;
+int StatesHolder::referCount = 0;
 
 StatesHolder *StatesHolder::CreateStatesHolder()
 {
@@ -17,9 +17,35 @@ StatesHolder *StatesHolder::CreateStatesHolder()
 	return holder;
 }
 
-void StatesHolder::releaseStatesHolder()
+int StatesHolder::releaseStatesHolder()
 {
-	
+#if 1
+	bool ret = false;
+	do {
+
+		if (holder == NULL || referCount == 0) {
+			fprintf(stderr, "%s: %s[%d] holder has been NULL or referCount is %d\n", __FILE__, __FUNCTION__, __LINE__, referCount);
+			break;
+		}
+
+		if (referCount > 0) {
+			--referCount;
+			fprintf(stderr, "%s: %s[%d] referCount is %d\n", __FILE__, __FUNCTION__, __LINE__, referCount);
+		}
+
+		if (referCount == 0) {
+			delete holder;
+			holder = NULL;
+			fprintf(stderr, "%s: %s[%d] holder has been NULL & referCount is %d\n", __FILE__, __FUNCTION__, __LINE__, referCount);
+		}
+
+		ret = true;
+
+	} while(false);
+
+	return ret;
+#else 
+
 	if (holder) {
 		fprintf(stderr, "%s: %s[%d] holder is delete, referCount is %d\n", __FILE__, __FUNCTION__, __LINE__, referCount);
 		if (referCount <=  0) {
@@ -29,6 +55,7 @@ void StatesHolder::releaseStatesHolder()
 			--referCount;
 		}
 	}
+#endif
 	
 }
 
