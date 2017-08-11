@@ -34,6 +34,7 @@ int IPCHandler::init()
 
 int IPCHandler::release()
 {
+	fprintf(stderr, "%s: %s[%d] IPCHandler is released\n", __FILE__, __FUNCTION__, __LINE__);
 	if (holder) {
 		StatesHolder::releaseStatesHolder();
 		holder = NULL;

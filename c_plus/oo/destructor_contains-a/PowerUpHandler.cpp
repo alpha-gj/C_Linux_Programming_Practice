@@ -36,8 +36,11 @@ int PowerUpHandler::init()
 
 int PowerUpHandler::release()
 {
+#if 1
+	fprintf(stderr, "%s: %s[%d] PowerUpHandler is released\n", __FILE__, __FUNCTION__, __LINE__);
 	IPCHandler::release();
 	return 0;
+#endif
 }
 
 MAINSTATES PowerUpHandler::GetMainHandlerState()

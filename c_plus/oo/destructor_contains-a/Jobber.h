@@ -19,12 +19,20 @@ class Jobber
 {
 public:
 	Jobber ();
+#if 1
 	virtual ~Jobber ();
 	virtual int init();
 	virtual int run();
 	virtual int release();
+#else
+	~Jobber ();
+	int init();   	
+	int run();
+	int release();
+#endif
 
 protected:
 	StatesHolder *holder;
+	IPCHandler *handler;
 	IPCHandler *CreateHandlerByStates();
 };

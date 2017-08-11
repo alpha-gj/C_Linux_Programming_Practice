@@ -7,7 +7,8 @@ int StatesHolder::referCount = 0;
 
 StatesHolder *StatesHolder::CreateStatesHolder()
 {
-	if (holder == NULL) {
+
+	if (holder == NULL)  {
 		holder = new StatesHolder();
 	}
 	if (holder) {
@@ -36,7 +37,7 @@ int StatesHolder::releaseStatesHolder()
 		if (referCount == 0) {
 			delete holder;
 			holder = NULL;
-			fprintf(stderr, "%s: %s[%d] holder has been NULL & referCount is %d\n", __FILE__, __FUNCTION__, __LINE__, referCount);
+			fprintf(stderr, "%s: %s[%d] holder is deleted\n", __FILE__, __FUNCTION__, __LINE__);
 		}
 
 		ret = true;

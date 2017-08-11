@@ -13,6 +13,8 @@ Jobber::Jobber()
 
 Jobber::~Jobber()
 {
+	//make sure source is free or not?
+	// check holder or handler
 	cout << "*** Jobber destructer is running ... ***" << endl;
 }
 
@@ -37,9 +39,16 @@ int Jobber::run()
 			fprintf(stderr, "%s: %s[%d] handler create is OK\n", __FILE__, __FUNCTION__, __LINE__);
 			if (!handler->init()) {
 				fprintf(stderr, "%s: %s[%d] handler init is OK\n", __FILE__, __FUNCTION__, __LINE__);
-				//handler->run_parsing_command();
+#if 0				
+				fprintf(stderr, "\n%s: %s[%d] handler->run_parsing_command()\n\n", __FILE__, __FUNCTION__, __LINE__);
+				handler->run_parsing_command();
+#else
+				fprintf(stderr, "%s: %s[%d] handler->run_parsing_command()\n", __FILE__, __FUNCTION__, __LINE__);
+				sleep(3);
+#endif
 			}
 			handler->release();
+			fprintf(stderr, "%s: %s[%d] handler is deleted\n", __FILE__, __FUNCTION__, __LINE__);
 			delete handler;
 		} else {
 			fprintf(stderr, "%s: %s[%d] handler create is fail\n", __FILE__, __FUNCTION__, __LINE__);
@@ -51,6 +60,7 @@ int Jobber::run()
 
 int Jobber::release()
 {
+	fprintf(stdout, "%s: %s[%d] Jobber is released\n", __FILE__, __FUNCTION__, __LINE__);
 	if (holder) {
 		StatesHolder::releaseStatesHolder();
 	}
@@ -89,6 +99,7 @@ int main(int /*argc*/, const char *argv[])
 			sleep(1);
 		}
 		job->release();
+		fprintf(stderr, "%s: %s[%d] jobber is deleted\n", __FILE__, __FUNCTION__, __LINE__);
 		delete job;
 	} else {
 		fprintf(stderr, "%s: %s[%d] can not alloc memory for job\n", __FILE__, __FUNCTION__, __LINE__);

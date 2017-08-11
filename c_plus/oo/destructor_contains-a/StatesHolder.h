@@ -13,7 +13,6 @@ class StatesHolder
 {
 
 public:
-	static StatesHolder *holder;
 	static int referCount;
 
 public:
@@ -28,6 +27,7 @@ public:
 
 private:
 	StatesHolder ();
+	static StatesHolder *holder;
 
 private:
 
