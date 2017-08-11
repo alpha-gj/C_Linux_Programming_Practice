@@ -41,5 +41,22 @@ int main(void)
 		arr_ptr_gj = ++arr_ptr_gj;	
 	}
 
+	printf("\n");
+	int a[5] = {1, 2, 3, 4, 5};
+	int *ptr = (int *)(&a + 1);
+	printf("address of &a + 1 is %x , and  *(&a + 1) is %d\n", &a + 1, *(&a+1));
+	printf("address of &a is %x , and  *(&a) is %d\n", &a, *(&a));
+	printf("address of &a - 1 is %x , and  *(&a - 1) is %d\n", &a - 1, *(&a-1));
+	printf("\n");
+
+	printf("address of a + 1 is %x , and is *(a + 1) is %d\n", a + 1, *(a+1));
+	printf("address of a is %x , and is *(a) is %d\n", a, *a );
+	printf("address of a - 1 is %x , and is *(a - 1) is %d\n", a - 1, *(a-1));
+
+#if 0
+	printf("%d, %d, %x\n", *(a+1), *(ptr), (ptr));
+	printf("%d, %d, %x\n", *(a+1), *(ptr-1), (ptr-1));
+	printf("%d, %d, %x\n", *(a+1), *(ptr-2), (ptr-2));
+#endif
 
 }
