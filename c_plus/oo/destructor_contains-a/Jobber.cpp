@@ -6,9 +6,13 @@ Jobber *job = NULL;
 bool get_quit = false;
 bool get_reload = false;
 
-Jobber::Jobber()
+Jobber::Jobber():holder(NULL)
 {
 	cout << "*** Jobber constructer without pra is running ... ***" << endl;
+		holder = StatesHolder::CreateStatesHolder();
+		if (!holder) {
+			fprintf(stderr, "%s: %s[%d] can not alloc holder\n", __FILE__, __FUNCTION__, __LINE__);
+		}
 }
 
 Jobber::~Jobber()
@@ -16,6 +20,10 @@ Jobber::~Jobber()
 	//make sure source is free or not?
 	// check holder or handler
 	cout << "*** Jobber destructer is running ... ***" << endl;
+	if (holder) {
+		StatesHolder::releaseStatesHolder();
+		holder = NULL;
+	}
 }
 
 int Jobber::init()
@@ -34,8 +42,9 @@ int Jobber::init()
 
 int Jobber::run()
 {
-		IPCHandler *handler = CreateHandlerByStates();
-		if (handler) {
+	IPCHandler *handler = CreateHandlerByStates();
+		 if (handler) {
+#if 0			
 			fprintf(stderr, "%s: %s[%d] handler create is OK\n", __FILE__, __FUNCTION__, __LINE__);
 			if (!handler->init()) {
 				fprintf(stderr, "%s: %s[%d] handler init is OK\n", __FILE__, __FUNCTION__, __LINE__);
@@ -48,8 +57,15 @@ int Jobber::run()
 #endif
 			}
 			handler->release();
+#else
+				handler->run_parsing_command();
+				fprintf(stderr, "%s: %s[%d] handler->run_parsing_command()\n", __FILE__, __FUNCTION__, __LINE__);
+				sleep(1);
+
+#endif
 			fprintf(stderr, "%s: %s[%d] handler is deleted\n", __FILE__, __FUNCTION__, __LINE__);
 			delete handler;
+			handler = NULL;
 		} else {
 			fprintf(stderr, "%s: %s[%d] handler create is fail\n", __FILE__, __FUNCTION__, __LINE__);
 			sleep(1);
@@ -91,14 +107,11 @@ IPCHandler *Jobber::CreateHandlerByStates()
 
 int main(int /*argc*/, const char *argv[])
 {
+
+	fprintf(stderr, "%s: %s[%d] jobber is new\n", __FILE__, __FUNCTION__, __LINE__);
 	job = new Jobber();
-	if (job) {
-		if (!job->init()) {
+	if (job != NULL) {
 			job->run();
-		} else {
-			sleep(1);
-		}
-		job->release();
 		fprintf(stderr, "%s: %s[%d] jobber is deleted\n", __FILE__, __FUNCTION__, __LINE__);
 		delete job;
 	} else {

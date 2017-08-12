@@ -2,14 +2,32 @@
 #include <iostream>
 using namespace std;
 
-IPCHandler::IPCHandler()
+IPCHandler::IPCHandler():holder(NULL)
 {
 	cout << "*** IPCHandler constructer without pra is running ... ***" << endl;
+	/*
+	do {
+		if (ipc_daemon.init(WATCHDOG_SOCKET_NAME) < 0) {
+			ERROR("create ipc daemon fail");
+			break;
+		}
+		ret = 0;
+	} while(false);
+	led.init();
+	*/
+	holder = StatesHolder::CreateStatesHolder();
+	if (holder == NULL) {
+		fprintf(stderr, "%s: %s[%d] can not alloc holder\n", __FILE__, __FUNCTION__, __LINE__);
+	}
 }
 
 IPCHandler::~IPCHandler()
 {
 	cout << "*** IPCHandler destructer is running ... ***" << endl;
+	if (holder) {
+		StatesHolder::releaseStatesHolder();
+		holder = NULL;
+	}
 }
 
 int IPCHandler::init()
@@ -24,21 +42,23 @@ int IPCHandler::init()
 		ret = 0;
 	} while(false);
 	led.init();
-	*/
 	holder = StatesHolder::CreateStatesHolder();
 	if (!holder) {
 		fprintf(stderr, "%s: %s[%d] can not alloc holder\n", __FILE__, __FUNCTION__, __LINE__);
 	}
+	*/
 	return ret;
 }
 
 int IPCHandler::release()
 {
+	/*
 	fprintf(stderr, "%s: %s[%d] IPCHandler is released\n", __FILE__, __FUNCTION__, __LINE__);
 	if (holder) {
 		StatesHolder::releaseStatesHolder();
 		holder = NULL;
 	}
+	*/
 	return 0;
 }
 

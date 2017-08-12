@@ -1,6 +1,6 @@
 #include "PowerUpHandler.h"
 
-PowerUpHandler::PowerUpHandler()
+PowerUpHandler::PowerUpHandler():number(0)
 {
 	printf("*** PowerUpHandler construter is running... ***\n");
 }
@@ -36,7 +36,7 @@ int PowerUpHandler::init()
 
 int PowerUpHandler::release()
 {
-#if 1
+#if 0
 	fprintf(stderr, "%s: %s[%d] PowerUpHandler is released\n", __FILE__, __FUNCTION__, __LINE__);
 	IPCHandler::release();
 	return 0;
