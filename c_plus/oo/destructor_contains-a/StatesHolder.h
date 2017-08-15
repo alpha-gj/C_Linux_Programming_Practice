@@ -16,7 +16,6 @@ public:
 	static int referCount;
 
 public:
-	virtual ~StatesHolder ();
 	static StatesHolder *CreateStatesHolder();
 	static int releaseStatesHolder();
 
@@ -26,8 +25,11 @@ public:
 	MAINSTATES GetOldMainStates();
 
 private:
-	StatesHolder ();
+	StatesHolder();
+	StatesHolder(const StatesHolder&);
+	StatesHolder& operator=(const StatesHolder&);
 	static StatesHolder *holder;
+	virtual ~StatesHolder();
 
 private:
 
