@@ -7,7 +7,6 @@ int StatesHolder::referCount = 0;
 
 StatesHolder *StatesHolder::CreateStatesHolder()
 {
-
 	if (holder == NULL)  {
 		holder = new StatesHolder();
 	}
@@ -60,11 +59,9 @@ int StatesHolder::releaseStatesHolder()
 	
 }
 
-StatesHolder::StatesHolder()
+StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)
 {
 	cout << "*** StatesHolder constructer without pra is running ... ***" << endl;
-	mainStates = POWERUP;
-	oldMainStates = mainStates;
 }
 
 StatesHolder::~StatesHolder()

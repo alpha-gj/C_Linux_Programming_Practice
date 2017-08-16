@@ -28,8 +28,8 @@ private:
 	StatesHolder();
 	StatesHolder(const StatesHolder&);
 	StatesHolder& operator=(const StatesHolder&);
+	~StatesHolder();
 	static StatesHolder *holder;
-	virtual ~StatesHolder();
 
 private:
 
