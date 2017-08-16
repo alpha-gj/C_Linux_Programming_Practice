@@ -17,9 +17,8 @@ StatesHolder *StatesHolder::CreateStatesHolder()
 	return holder;
 }
 
-int StatesHolder::releaseStatesHolder()
+int StatesHolder::ReleaseStatesHolder()
 {
-#if 1
 	bool ret = false;
 	do {
 
@@ -44,19 +43,6 @@ int StatesHolder::releaseStatesHolder()
 	} while(false);
 
 	return ret;
-#else 
-
-	if (holder) {
-		fprintf(stderr, "%s: %s[%d] holder is delete, referCount is %d\n", __FILE__, __FUNCTION__, __LINE__, referCount);
-		if (referCount <=  0) {
-			delete holder;
-			holder = NULL;
-		} else {
-			--referCount;
-		}
-	}
-#endif
-	
 }
 
 StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)

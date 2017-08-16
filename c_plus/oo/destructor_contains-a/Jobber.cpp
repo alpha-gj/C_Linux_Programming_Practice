@@ -21,48 +21,32 @@ Jobber::~Jobber()
 	// check holder or handler
 	cout << "*** Jobber destructer is running ... ***" << endl;
 	if (holder) {
-		StatesHolder::releaseStatesHolder();
+		StatesHolder::ReleaseStatesHolder();
 		holder = NULL;
 	}
 }
 
 int Jobber::init()
 {
+	fprintf(stdout, "%s: %s[%d] Jobber is inited\n", __FILE__, __FUNCTION__, __LINE__);
 	int ret = -1;
-	do {
-		holder = StatesHolder::CreateStatesHolder();
-		if (!holder) {
-			fprintf(stderr, "%s: %s[%d] can not alloc holder\n", __FILE__, __FUNCTION__, __LINE__);
-			break;
-		}
-		ret = 0;
-	} while(false);
+	//TODO
+	ret = 0;
 	return ret;
 }
 
 int Jobber::run()
 {
 	IPCHandler *handler = CreateHandlerByStates();
+	int ret = -1;
+	//TODO
+	ret = 0;
 		 if (handler) {
-#if 0			
-			fprintf(stderr, "%s: %s[%d] handler create is OK\n", __FILE__, __FUNCTION__, __LINE__);
-			if (!handler->init()) {
-				fprintf(stderr, "%s: %s[%d] handler init is OK\n", __FILE__, __FUNCTION__, __LINE__);
-#if 0				
-				fprintf(stderr, "\n%s: %s[%d] handler->run_parsing_command()\n\n", __FILE__, __FUNCTION__, __LINE__);
-				handler->run_parsing_command();
-#else
+
 				fprintf(stderr, "%s: %s[%d] handler->run_parsing_command()\n", __FILE__, __FUNCTION__, __LINE__);
-				sleep(3);
-#endif
-			}
-			handler->release();
-#else
 				handler->run_parsing_command();
-				fprintf(stderr, "%s: %s[%d] handler->run_parsing_command()\n", __FILE__, __FUNCTION__, __LINE__);
 				sleep(1);
 
-#endif
 			fprintf(stderr, "%s: %s[%d] handler is deleted\n", __FILE__, __FUNCTION__, __LINE__);
 			delete handler;
 			handler = NULL;
@@ -71,16 +55,16 @@ int Jobber::run()
 			sleep(1);
 		}
 
-	return 0;
+	return ret;
 }
 
 int Jobber::release()
 {
 	fprintf(stdout, "%s: %s[%d] Jobber is released\n", __FILE__, __FUNCTION__, __LINE__);
-	if (holder) {
-		StatesHolder::releaseStatesHolder();
-	}
-	return 0;
+	int ret = -1;
+	//TODO
+	ret = 0;
+	return ret;
 }
 
 IPCHandler *Jobber::CreateHandlerByStates()
@@ -107,17 +91,22 @@ IPCHandler *Jobber::CreateHandlerByStates()
 
 int main(int /*argc*/, const char *argv[])
 {
+		fprintf(stderr, "%s: %s[%d] jobber is new\n", __FILE__, __FUNCTION__, __LINE__);
+		job = new Jobber();
+		if (job != NULL) {
+			if(!job->init()) {
+				job->run();
+			} else {
+				sleep(1);
+			}
+			job->release();
 
-	fprintf(stderr, "%s: %s[%d] jobber is new\n", __FILE__, __FUNCTION__, __LINE__);
-	job = new Jobber();
-	if (job != NULL) {
-			job->run();
-		fprintf(stderr, "%s: %s[%d] jobber is deleted\n", __FILE__, __FUNCTION__, __LINE__);
-		delete job;
-	} else {
-		fprintf(stderr, "%s: %s[%d] can not alloc memory for job\n", __FILE__, __FUNCTION__, __LINE__);
-		sleep(1);
-	}
+			fprintf(stderr, "%s: %s[%d] jobber is deleted\n", __FILE__, __FUNCTION__, __LINE__);
+			delete job;
+		} else {
+			fprintf(stderr, "%s: %s[%d] can not alloc memory for job\n", __FILE__, __FUNCTION__, __LINE__);
+			sleep(1);
+		}
 	return EXIT_SUCCESS;
 }
 

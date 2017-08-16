@@ -17,7 +17,7 @@ public:
 
 public:
 	static StatesHolder *CreateStatesHolder();
-	static int releaseStatesHolder();
+	static int ReleaseStatesHolder();
 
 public:
 	void SetMainStates(MAINSTATES s);

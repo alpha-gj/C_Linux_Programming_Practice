@@ -25,7 +25,7 @@ IPCHandler::~IPCHandler()
 {
 	cout << "*** IPCHandler destructer is running ... ***" << endl;
 	if (holder) {
-		StatesHolder::releaseStatesHolder();
+		StatesHolder::ReleaseStatesHolder();
 		holder = NULL;
 	}
 }
