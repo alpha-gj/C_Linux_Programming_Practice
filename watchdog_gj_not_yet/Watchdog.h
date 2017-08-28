@@ -12,19 +12,15 @@
 #include <iostream>
 #include "StatesHolder.h"
 #include "IPCHandler.h"
+#include "Common.h"
 
-#define AUDIO_ALER_MAX_DB 100
-
-class Jobber
+class Watchdog
 {
+	public:
+		Watchdog ();
+		~Watchdog ();
+		int run();
 	private:
 		StatesHolder *holder;
 		IPCHandler *CreateHandlerByStates();
-
-	public:
-		Jobber ();
-		~Jobber ();
-		int init();   	
-		int run();
-		int release();
 };

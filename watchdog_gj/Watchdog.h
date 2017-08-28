@@ -9,21 +9,18 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <math.h>
+#include <iostream>
 #include "StatesHolder.h"
 #include "IPCHandler.h"
+#include "Common.h"
 
 class Watchdog
 {
-public:
-	Watchdog ();
-	virtual ~Watchdog ();
-	virtual int init();
-	virtual int run();
-	virtual int release();
-
-protected:
-	StatesHolder *holder;
-	IPCHandler *CreateHandlerByStates();
-
-private:
+	public:
+		Watchdog ();
+		~Watchdog ();
+		int run();
+	private:
+		StatesHolder *holder;
+		IPCHandler *CreateHandlerByStates();
 };
