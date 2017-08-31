@@ -1,6 +1,5 @@
 #include <iostream>
 #include "ButtonController.h"
-using namespace std;
 
 ButtonController::ButtonController()
 {
@@ -14,22 +13,23 @@ ButtonController::~ButtonController()
 
 int ButtonController::init()
 {
-	
+	fprintf(stderr, "Button init\n");
 	return (int)AHAL_BTN_Init();
 }
 
 int ButtonController::deinit()
 {
+	fprintf(stderr, "Button deinit\n");
 	return (int)AHAL_BTN_UnInit();
 }
 
 
-int ButtonController::set_hw_info_by_struct(void *hw_struct) 
+int ButtonController::set_hw_info(void *hw_struct) 
 {
 	return (int) AHAL_RET_NOT_SUPPORT;
 }
 
-int ButtonController::get_hw_info_by_struct(void *hw_struct)
+int ButtonController::get_hw_info(void *hw_struct)
 {
 	/*
 	AHAL_RET ret = AHAL_RET_FAIL;

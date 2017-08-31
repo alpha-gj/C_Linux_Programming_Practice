@@ -12,31 +12,31 @@ enum MAINSTATES {
 class StatesHolder
 {
 
-private:
-	/* Deny constructor, copy constructor */
-	StatesHolder(const StatesHolder&);
-	StatesHolder& operator=(const StatesHolder&);
+	private:
+		/* Deny constructor, copy constructor */
+		StatesHolder(const StatesHolder&);
+		StatesHolder& operator=(const StatesHolder&);
 
-	/* Follow Singleton Pattern */
-	static StatesHolder *holder;
-	static int referCount;
+		/* Follow Singleton Pattern */
+		static StatesHolder *holder;
+		static int referCount;
 
-	//pthread_mutex_t mainStatesLock;
-	MAINSTATES mainStates;
-	MAINSTATES oldMainStates;
+		//pthread_mutex_t mainStatesLock;
+		MAINSTATES mainStates;
+		MAINSTATES oldMainStates;
 
-protected:
-	StatesHolder();
-	~StatesHolder();
+	protected:
+		StatesHolder();
+		~StatesHolder();
 
-public:
-	/* Follow Singleton Pattern */
-	static StatesHolder *CreateStatesHolder();
-	static int ReleaseStatesHolder();
+	public:
+		/* Follow Singleton Pattern */
+		static StatesHolder *CreateStatesHolder();
+		static int ReleaseStatesHolder();
 
-	void SetMainStates(MAINSTATES s);
-	MAINSTATES GetMainStates();
-	MAINSTATES GetOldMainStates();
+		void SetMainStates(MAINSTATES s);
+		MAINSTATES GetMainStates();
+		MAINSTATES GetOldMainStates();
 };
 
 #endif

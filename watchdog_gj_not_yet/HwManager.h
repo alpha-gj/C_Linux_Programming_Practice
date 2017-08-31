@@ -7,6 +7,7 @@
 #include "pib/pib.h"
 #include "tinydb/tinydb.h"
 #include "HwController.h"
+#include "ButtonController.h"
 
 class HwManager
 {
@@ -16,6 +17,7 @@ class HwManager
 		~HwManager();
 		HwManager(const HwManager&);
 		HwManager& operator=(const HwManager&);
+
 
 		/* Follow Singleton Pattern */
 		static HwManager *hw_manager;
@@ -31,8 +33,10 @@ class HwManager
 		static int ReleaseHwManager();
 
 		/* Operate HW object from API */
-		bool init_hw_info_by_type(const char* hw_name);
-		bool deinit_hw_info_by_type(const char* hw_name);
+		int init();
+		int deinit();
+		int init_hw_info_by_type(const char* hw_name);
+		int deinit_hw_info_by_type(const char* hw_name);
 		int set_hw_info_by_type(const char* hw_name, void* hw_struct);
 		int get_hw_info_by_type(const char* hw_name, void* hw_struct);
 		int run_hw_info_detect_by_type(const char* hw_name);

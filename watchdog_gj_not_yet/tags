@@ -31,6 +31,7 @@ CreateHandlerByStates	Watchdog.cpp	/^IPCHandler *Watchdog::CreateHandlerByStates
 CreateHwManager	HwManager.cpp	/^HwManager *HwManager::CreateHwManager()$/;"	f	class:HwManager
 CreateStatesHolder	StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
 DAEMON	Makefile	/^DAEMON = Watchdog$/;"	m
+DAY_TO_NIGHT_SEC	HWController.h	21;"	d
 DAY_TO_NIGHT_SEC	HwController.h	21;"	d
 DEASSOCIATED	Status.h	/^	DEASSOCIATED,$/;"	e	enum:network_status
 DEPENDS	Makefile	/^DEPENDS := $(DEPENDS:%.cpp=%.d)$/;"	m
@@ -53,6 +54,7 @@ GetStatusBySelect	map_iterator_factoryPattern.cpp	/^		int GetStatusBySelect(cons
 GoNextState	IPCHandler.cpp	/^bool IPCHandler::GoNextState()$/;"	f	class:IPCHandler
 Holder	map_iterator_factoryPattern.cpp	/^		Holder() {$/;"	f	class:Holder
 Holder	map_iterator_factoryPattern.cpp	/^class Holder$/;"	c	file:
+HwController	HWController.h	/^class HwController$/;"	c
 HwController	HwController.cpp	/^HwController::HwController()$/;"	f	class:HwController
 HwController	HwController.h	/^class HwController$/;"	c
 HwManager	HwManager.cpp	/^HwManager::HwManager()$/;"	f	class:HwManager
@@ -78,6 +80,7 @@ MAX_GPIO_NUM	Variable.h	26;"	d
 NAME_CALL_OUT_TONE	Variable.h	40;"	d
 NETWORK_RESTART_TIMEOUT	Variable.h	16;"	d
 NETWORK_STATUS	Status.h	/^} NETWORK_STATUS;$/;"	t	typeref:enum:network_status
+NIGHT_TO_DAY_SEC	HWController.h	22;"	d
 NIGHT_TO_DAY_SEC	HwController.h	22;"	d
 NM	Makefile	/^NM        = $(CROSS_COMPILE)nm$/;"	m
 NetworkStatus	Status.h	/^NetworkStatus::NetworkStatus()$/;"	f	class:NetworkStatus
@@ -123,6 +126,7 @@ Status	Status.h	/^Status::Status()$/;"	f	class:Status
 Status	Status.h	/^class Status $/;"	c
 TARGETS	Makefile	/^TARGETS = $(DAEMON)$/;"	m
 TIME_BASE	Variable.h	3;"	d
+TIME_INTERVAL	HWController.h	20;"	d
 TIME_INTERVAL	HwController.h	20;"	d
 UNDER_ALWAYS_DAY_MODE	Common.h	/^	UNDER_ALWAYS_DAY_MODE,$/;"	e	enum:LIGHT_MODE
 UNDER_ALWAYS_NIGHT_MODE	Common.h	/^	UNDER_ALWAYS_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
@@ -135,12 +139,13 @@ WAIT_WPS_STATE_COUNT	Variable.h	14;"	d
 WPS_BEGIN_TONE	Variable.h	32;"	d
 WPS_PBC_SCAN_COUNT	Variable.h	17;"	d
 WPS_STATUS	Status.h	/^} WPS_STATUS;$/;"	t	typeref:enum:wps_status
-Watchdog	Watchdog.cpp	/^Watchdog::Watchdog():holder(NULL)$/;"	f	class:Watchdog
+Watchdog	Watchdog.cpp	/^Watchdog::Watchdog():hw_manager(NULL),holder(NULL)$/;"	f	class:Watchdog
 Watchdog	Watchdog.h	/^class Watchdog$/;"	c
 WpsStatus	Status.h	/^WpsStatus::WpsStatus()$/;"	f	class:WpsStatus
 WpsStatus	Status.h	/^class WpsStatus : public Status$/;"	c
 _BUTTONCONTROLLER_H_	ButtonController.h	2;"	d
 _COMMON_H_	Common.h	2;"	d
+_HWCONTROLLER_H_	HWController.h	2;"	d
 _HWCONTROLLER_H_	HwController.h	2;"	d
 _HWMANAGER_H_	HwManager.h	2;"	d
 _IPCHANDLER_H_	IPCHandler.h	2;"	d
@@ -148,9 +153,11 @@ _POWERUPHANDLER_H_	PowerUpHandler.h	2;"	d
 _STATESHOLDER_H_	StatesHolder.h	2;"	d
 check_associate	PowerUpHandler.cpp	/^void PowerUpHandler::check_associate()$/;"	f	class:PowerUpHandler
 deinit	ButtonController.cpp	/^int ButtonController::deinit()$/;"	f	class:ButtonController
-deinit_hw_info_by_type	HwManager.cpp	/^bool HwManager::deinit_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
+deinit	HwManager.cpp	/^int HwManager::deinit()$/;"	f	class:HwManager
+deinit	Watchdog.cpp	/^int Watchdog::deinit()$/;"	f	class:Watchdog
+deinit_hw_info_by_type	HwManager.cpp	/^int HwManager::deinit_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
 diff_curr_uptime_count	Common.cpp	/^long diff_curr_uptime_count(struct timeval t)$/;"	f
-get_hw_info_by_struct	ButtonController.cpp	/^int ButtonController::get_hw_info_by_struct(void *hw_struct)$/;"	f	class:ButtonController
+get_hw_info	ButtonController.cpp	/^int ButtonController::get_hw_info(void *hw_struct)$/;"	f	class:ButtonController
 get_hw_info_by_type	HwManager.cpp	/^int HwManager::get_hw_info_by_type(const char* hw_name, void* hw_struct)$/;"	f	class:HwManager
 get_quit	Common.cpp	/^bool get_quit()$/;"	f
 get_reload	Common.cpp	/^bool get_reload()$/;"	f
@@ -160,40 +167,45 @@ handle_ipc_depend_on_status	PowerUpHandler.cpp	/^int PowerUpHandler::handle_ipc_
 handle_network_states	IPCHandler.cpp	/^int IPCHandler::handle_network_states()$/;"	f	class:IPCHandler
 handle_select_time_out	IPCHandler.cpp	/^int IPCHandler::handle_select_time_out()$/;"	f	class:IPCHandler
 holder	IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
-holder	StatesHolder.h	/^	static StatesHolder *holder;$/;"	m	class:StatesHolder
+holder	StatesHolder.h	/^		static StatesHolder *holder;$/;"	m	class:StatesHolder
 holder	Watchdog.h	/^		StatesHolder *holder;$/;"	m	class:Watchdog
 hw_manager	HwManager.h	/^		static HwManager *hw_manager;$/;"	m	class:HwManager
 hw_manager	Watchdog.h	/^		HwManager *hw_manager;$/;"	m	class:Watchdog
 id	ButtonController.h	/^	AHAL_BTN_ID id;$/;"	m	struct:BUTTON
 in_map_status	map_iterator_factoryPattern.cpp	/^		map<const char*, Status *>::iterator in_map_status;$/;"	m	class:Holder	file:
 init	ButtonController.cpp	/^int ButtonController::init()$/;"	f	class:ButtonController
+init	HwManager.cpp	/^int HwManager::init()$/;"	f	class:HwManager
 init	IPCHandler.cpp	/^int IPCHandler::init()$/;"	f	class:IPCHandler
 init	PowerUpHandler.cpp	/^int PowerUpHandler::init()$/;"	f	class:PowerUpHandler
+init	Watchdog.cpp	/^int Watchdog::init()$/;"	f	class:Watchdog
 initSignal	Watchdog.cpp	/^bool initSignal()$/;"	f
-init_hw_info_by_type	HwManager.cpp	/^bool HwManager::init_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
+init_hw_info_by_type	HwManager.cpp	/^int HwManager::init_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
+ipc_daemon	IPCHandler.h	/^	IpcDaemon ipc_daemon;$/;"	m	class:IPCHandler
+ipc_fd	IPCHandler.h	/^	int ipc_fd;$/;"	m	class:IPCHandler
 is_quit	Common.cpp	/^bool is_quit = false;$/;"	v
 is_reload	Common.cpp	/^bool is_reload = false;$/;"	v
 main	Watchdog.cpp	/^int main(int \/*argc*\/, const char *argv[])$/;"	f
 main	map_iterator_factoryPattern.cpp	/^int main()$/;"	f
-mainStates	StatesHolder.h	/^	MAINSTATES mainStates;$/;"	m	class:StatesHolder
+mainStates	StatesHolder.h	/^		MAINSTATES mainStates;$/;"	m	class:StatesHolder
 map_hw_controller	HwManager.h	/^		map<const char*, HwController *> map_hw_controller;$/;"	m	class:HwManager
 map_status	map_iterator_factoryPattern.cpp	/^		map<const char*, Status *> map_status;$/;"	m	class:Holder	file:
 network_status	Status.h	/^typedef enum network_status {$/;"	g
-oldMainStates	StatesHolder.h	/^	MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
+oldMainStates	StatesHolder.h	/^		MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
 referCount	HwManager.cpp	/^int HwManager::referCount = 0;$/;"	m	class:HwManager	file:
 referCount	HwManager.h	/^		static int referCount;$/;"	m	class:HwManager
 referCount	StatesHolder.cpp	/^int StatesHolder::referCount = 0;$/;"	m	class:StatesHolder	file:
-referCount	StatesHolder.h	/^	static int referCount;$/;"	m	class:StatesHolder
+referCount	StatesHolder.h	/^		static int referCount;$/;"	m	class:StatesHolder
 release	IPCHandler.cpp	/^int IPCHandler::release()$/;"	f	class:IPCHandler
 release	PowerUpHandler.cpp	/^int PowerUpHandler::release()$/;"	f	class:PowerUpHandler
 requestExitHandler	Watchdog.cpp	/^void requestExitHandler(int sigNum)$/;"	f
 requestReloadHandler	Watchdog.cpp	/^void requestReloadHandler(int sigNum)$/;"	f
+result	HWController.h	/^		bool result;$/;"	m	class:HwController
 run	Watchdog.cpp	/^int Watchdog::run()$/;"	f	class:Watchdog
 run_hw_info_detect	ButtonController.cpp	/^int ButtonController::run_hw_info_detect()$/;"	f	class:ButtonController
 run_hw_info_detect_by_type	HwManager.cpp	/^int HwManager::run_hw_info_detect_by_type(const char* hw_name)$/;"	f	class:HwManager
 run_parsing_command	IPCHandler.cpp	/^int IPCHandler::run_parsing_command()$/;"	f	class:IPCHandler
 send_ipccmd	Common.cpp	/^void send_ipccmd(const char *path, int ipc)$/;"	f
-set_hw_info_by_struct	ButtonController.cpp	/^int ButtonController::set_hw_info_by_struct(void *hw_struct) $/;"	f	class:ButtonController
+set_hw_info	ButtonController.cpp	/^int ButtonController::set_hw_info(void *hw_struct) $/;"	f	class:ButtonController
 set_hw_info_by_type	HwManager.cpp	/^int HwManager::set_hw_info_by_type(const char* hw_name, void* hw_struct)$/;"	f	class:HwManager
 set_quit	Common.cpp	/^void set_quit(bool b)$/;"	f
 set_reload	Common.cpp	/^void set_reload(bool b)$/;"	f

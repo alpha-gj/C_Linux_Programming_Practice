@@ -2,13 +2,19 @@
 using namespace std;
 Watchdog *dog = NULL;
 
-Watchdog::Watchdog():holder(NULL)
+Watchdog::Watchdog():hw_manager(NULL),holder(NULL)
 {
 	cout << "*** Jobber constructer without pra is running ... ***" << endl;
+		hw_manager = HwManager::CreateHwManager();
+		if (!hw_manager) {
+			fprintf(stderr, "%s: %s[%d] can not alloc holder\n", __FILE__, __FUNCTION__, __LINE__);
+		}
+
 		holder = StatesHolder::CreateStatesHolder();
 		if (!holder) {
 			fprintf(stderr, "%s: %s[%d] can not alloc holder\n", __FILE__, __FUNCTION__, __LINE__);
 		}
+
 }
 
 Watchdog::~Watchdog()
@@ -20,10 +26,26 @@ Watchdog::~Watchdog()
 		StatesHolder::ReleaseStatesHolder();
 		holder = NULL;
 	}
+
+	if (hw_manager) {
+		HwManager::ReleaseHwManager();
+		hw_manager = NULL;
+	}
+}
+
+int Watchdog::init()
+{
+	return -1;
+}
+
+int Watchdog::deinit()
+{
+	return -1;
 }
 
 int Watchdog::run()
 {
+#if 0
 	while(!get_quit() && !get_reload()) {
 		IPCHandler *handler = CreateHandlerByStates();
 		if (handler) {
@@ -35,6 +57,17 @@ int Watchdog::run()
 			sleep(1);
 		}
 	}
+#else
+		IPCHandler *handler = CreateHandlerByStates();
+		if (handler) {
+			handler->run_parsing_command();
+			delete handler;
+			handler = NULL;
+		} else {
+			INFO("BUG@%d", __LINE__);
+			sleep(1);
+		}
+#endif
 	return 0;
 }
 
@@ -147,6 +180,9 @@ int main(int /*argc*/, const char *argv[])
 				ERROR("can not alloc memory for dog");
 				sleep(1);
 			}
+
+			sleep(10);
+			printf("============================\n\n\n");
 		} while (!get_quit());
 		closelog();
 		return EXIT_SUCCESS;

@@ -9,6 +9,7 @@ IPCHandler::IPCHandler():holder(NULL)
 
 	ipc_fd = ipc_daemon.init(WATCHDOG_SOCKET_NAME);
 
+	cout << "ipc_fd is " << ipc_fd << endl;
 	do {
 		if (ipc_fd < 0) {
 			ERROR("create ipc daemon fail");
@@ -26,13 +27,14 @@ IPCHandler::IPCHandler():holder(NULL)
 IPCHandler::~IPCHandler()
 {
 	cout << "*** IPCHandler destructer is running ... ***" << endl;
+	cout << "ipc_fd is " << ipc_fd << endl;
 	if (holder) {
 		StatesHolder::ReleaseStatesHolder();
 		holder = NULL;
 	}
 
-	//FIXME It should be closed by ipc_daemon.deinit, but ipc_damemon didin't implement this function.
-	close(ipc_fd);
+	//TODO It should be closed by ipc_daemon.deinit, but ipc_damemon didin't implement this function.
+	//close(ipc_fd); <--- need it? ls /proc/$(pidof Watchdog)/fd to watch it.
 }
 
 int IPCHandler::init()

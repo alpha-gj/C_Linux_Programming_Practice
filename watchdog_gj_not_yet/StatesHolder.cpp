@@ -12,7 +12,7 @@ StatesHolder *StatesHolder::CreateStatesHolder()
 	}
 	if (holder) {
 		++referCount;
-		printf("refer Count is %d\n", referCount);
+		printf("StatesHolder refer Count is %d\n", referCount);
 	}
 	return holder;
 }
