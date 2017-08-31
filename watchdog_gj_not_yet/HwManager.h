@@ -2,26 +2,28 @@
 #define _HWMANAGER_H_
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+#include <map>
 #include "pib/pib.h"
 #include "tinydb/tinydb.h"
+#include "HwController.h"
 
 class HwManager
 {
 	private:
 		/* Deny constructor & copy constructor */
-		HwManger();
-		~HwManger();
-		HwManger(const HwManager&);
-		HwManager& operator=(const HwManger&);
+		HwManager();
+		~HwManager();
+		HwManager(const HwManager&);
+		HwManager& operator=(const HwManager&);
 
 		/* Follow Singleton Pattern */
-		static int referCount;
 		static HwManager *hw_manager;
+		static int referCount;
 
 		/* Access HW object from MAP */
-		HwController *hw_controller;
 		map<const char*, HwController *> map_hw_controller;
-		map<const char*, HwController *>::iterator in_map_hw_controller;
+		HwController *ReturnHwControllerObjectByType(const char* hw_name);
 
 	public:
 		/* Follow Singleton Pattern */
@@ -31,9 +33,9 @@ class HwManager
 		/* Operate HW object from API */
 		bool init_hw_info_by_type(const char* hw_name);
 		bool deinit_hw_info_by_type(const char* hw_name);
-		int set_hw_info_by_type(const char* hw_name, void hw_struct);
-		int get_hw_info_by_type(const char* hw_name, void hw_struct);
+		int set_hw_info_by_type(const char* hw_name, void* hw_struct);
+		int get_hw_info_by_type(const char* hw_name, void* hw_struct);
 		int run_hw_info_detect_by_type(const char* hw_name);
-}
+};
 
 #endif

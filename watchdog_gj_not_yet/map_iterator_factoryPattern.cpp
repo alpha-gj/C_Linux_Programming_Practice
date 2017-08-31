@@ -23,9 +23,14 @@ class Holder
 			in_map_status = map_status.find(status);
 			if ( in_map_status == map_status.end())
 			{
+				if (in_map_status == NULL)	
+				{
+					cout << "NULL" << endl;
+				}
 				cout << "Not found" << endl;
 				return -1;
 			}
+
 			status_getter = in_map_status->second;
 			return status_getter->GetStatus();
 		}

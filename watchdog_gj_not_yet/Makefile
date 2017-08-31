@@ -1,25 +1,72 @@
-CC = g++
-Target = $(shell find . -name *.cpp | cut -d/ -f2 | cut -d. -f1) 
-OBJS = $(shell find . -name *.cpp | cut -d/ -f2 | cut -d. -f1).o 
-# it add a space after $Target...I don't know why.
-#OBJS = $(Target).o
+DAEMON = Watchdog
+TARGETS = $(DAEMON)
 
-.PHONY: all clean install
+SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp IPCHandler.cpp Common.cpp \
+	   ButtonController.cpp \
+	   PowerUpHandler.cpp
 
-install: all
 
-all: $(Target) 
+PREFIX = $(PJ_PREFIX)
+CROSS_COMPILE = $(PJ_TARGET)-
 
-#all:
-#	@echo $(Target)
-#	@echo $(OBJS)
+CFLAGS    = $(PLATFORM_CFLAGS) -Wall -W -D$(subst -,_,$(PJ_MODEL))
+CXXFLAGS  = $(CFLAGS)
+CPPFLAGS  = $(PLATFORM_CPPFLAGS) -D_REENTRANT -D_LINUX -I$(PREFIX)/include -I$(PREFIX)/include/ahal\
+			-I../include 
+LDFLAGS   = $(PLATFORM_LDFLAGS) -s -Wl,-rpath-link=$(PJ_RPATH)
+LOADLIBES = $(PLATFORM_LOADLIBES) -L$(PREFIX)/lib
+LDLIBS    = $(PLATFORM_LDLIBS) -lpthread -lcam -ltinydb -lsensor -lMulCast -lwlan -lusb-1.0 -lasound -lahal -laudio\
+				-lstdc++ -lipc -ldomain_socket -lpib -lif_info -lm -lstr -lwatcher
 
-%.o: %.cpp
-	$(CC) -c -o $@ $<
+CC        = $(CROSS_COMPILE)gcc
+CPP       = $(CROSS_COMPILE)gcc -E
+CXX       = $(CROSS_COMPILE)g++
+AS        = $(CROSS_COMPILE)as
+AR        = $(CROSS_COMPILE)ar
+LD        = $(CROSS_COMPILE)ld
+NM        = $(CROSS_COMPILE)nm
+OBJCOPY   = $(CROSS_COMPILE)objcopy
+OBJDUMP   = $(CROSS_COMPILE)objdump
+RANLIB    = $(CROSS_COMPILE)ranlib
+READELF   = $(CROSS_COMPILE)readelf
+SIZE      = $(CROSS_COMPILE)size
+STRINGS   = $(CROSS_COMPILE)strings
+STRIP     = $(CROSS_COMPILE)strip
 
-$(Target): $(OBJS)
-	$(CC) -o $@ $^
+#include config.mk
 
+.PHONY: all clean
+all: .options $(TARGETS) $(UTEST) 
 clean:
-	rm -f $(Target) 
-	rm -f *.o *.d *~
+	rm -f *.o *.d *~ $(VERDOR_DEPS) $(VENDOR_OBJS)
+	rm -f $(TARGETS) $(UTEST)
+
+#include ../common_apps.mk
+install: .options $(TARGETS)
+	# test PREFIX
+	[ "$(PREFIX)" != "" ]
+	install -d -m 755 $(PREFIX_SBINDIR)/
+	install -m 755 $(TARGETS) $(PREFIX_SBINDIR)/
+
+OPTIONS = $(SRCS) $(CPPFLAGS) $(LDLIBS)
+
+.PHONY: .options
+.options:
+	[ -f .options ] || touch .options
+	if [ "$$(md5sum .options | cut -b1-32)" != "$$(echo '$(OPTIONS)' | md5sum | cut -b1-32)" ] ; then \
+		make clean && echo '$(OPTIONS)' > .options; \
+	fi
+
+%.d: %.c
+	$(CC) -c -MM $(CPPFLAGS) $< | sed -re 's,^.*:,$*.o $*.d:,g' > $@
+%.d: %.cpp
+	$(CC) -c -MM $(CPPFLAGS) $< | sed -re 's,^.*:,$*.o $*.d:,g' > $@
+DEPENDS := $(SRCS:%.c=%.d)
+DEPENDS := $(DEPENDS:%.cpp=%.d)
+ifneq ($(MAKECMDGOALS),clean)
+-include $(DEPENDS)
+endif
+
+$(DAEMON): $(DAEMON).o HwManager.o HwController.o StatesHolder.o IPCHandler.o  Common.o \
+	   ButtonController.o \
+	   PowerUpHandler.o

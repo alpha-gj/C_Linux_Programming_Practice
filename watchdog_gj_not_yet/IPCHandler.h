@@ -1,5 +1,10 @@
 #ifndef _IPCHANDLER_H_
 #define _IPCHANDLER_H_
+#include <unistd.h>
+#include "ipc/ipc_cmd.h"
+#include "sys/socket.h"
+#include "todo.h"
+#include "command.h"
 #include "StatesHolder.h"
 
 class IPCHandler
@@ -15,8 +20,11 @@ public:
 	virtual bool GoNextState();
 	virtual MAINSTATES GetMainHandlerState() = 0;
 
+
 protected:
+	IpcDaemon ipc_daemon;
 	virtual int handle_factory_reset();
+	int ipc_fd;
 
 protected:
 	StatesHolder *holder;

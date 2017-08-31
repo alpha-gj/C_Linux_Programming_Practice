@@ -4,127 +4,213 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-AUDIO_ALER_MAX_DB	destructor_contains-a/Jobber.h	16;"	d
-CC	Makefile	/^CC = g++$/;"	m
-CC	destructor_contains-a/Makefile	/^CC = g++$/;"	m
+AEC_RESET	Variable.h	39;"	d
+AR	Makefile	/^AR        = $(CROSS_COMPILE)ar$/;"	m
+AS	Makefile	/^AS        = $(CROSS_COMPILE)as$/;"	m
+ASSOCIATED	Status.h	/^	ASSOCIATED,$/;"	e	enum:network_status
+BLINK_PERIOD	Variable.h	21;"	d
+BREATHING_PERIOD	Variable.h	20;"	d
+BUTTON	ButtonController.h	/^typedef struct BUTTON$/;"	s
+BUTTON_GPIO_NUM	Variable.h	25;"	d
+BUTTON_POLLING_TIME	Variable.h	1;"	d
+BUTTON_SETTING	ButtonController.h	/^} BUTTON_SETTING;$/;"	t	typeref:struct:BUTTON
+ButtonController	ButtonController.cpp	/^ButtonController::ButtonController()$/;"	f	class:ButtonController
+ButtonController	ButtonController.h	/^class ButtonController : public HwController$/;"	c
+CALL_OUT_TONE	Variable.h	41;"	d
+CC	Makefile	/^CC        = $(CROSS_COMPILE)gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS    = $(PLATFORM_CFLAGS) -Wall -W -D$(subst -,_,$(PJ_MODEL))$/;"	m
+CPP	Makefile	/^CPP       = $(CROSS_COMPILE)gcc -E$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS  = $(PLATFORM_CPPFLAGS) -D_REENTRANT -D_LINUX -I$(PREFIX)\/include -I$(PREFIX)\/include\/ahal\\$/;"	m
+CROSS_COMPILE	Makefile	/^CROSS_COMPILE = $(PJ_TARGET)-$/;"	m
+CXX	Makefile	/^CXX       = $(CROSS_COMPILE)g++$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS  = $(CFLAGS)$/;"	m
+CheckStatus	Status.h	/^		virtual bool CheckStatus() {$/;"	f	class:NetworkStatus
+CheckStatus	Status.h	/^		virtual bool CheckStatus() {$/;"	f	class:WpsStatus
+CreateAllStatus	map_iterator_factoryPattern.cpp	/^		bool CreateAllStatus() {$/;"	f	class:Holder
 CreateHandlerByStates	Watchdog.cpp	/^IPCHandler *Watchdog::CreateHandlerByStates()$/;"	f	class:Watchdog
-CreateHandlerByStates	destructor_contains-a/Jobber.cpp	/^IPCHandler *Jobber::CreateHandlerByStates()$/;"	f	class:Jobber
+CreateHwManager	HwManager.cpp	/^HwManager *HwManager::CreateHwManager()$/;"	f	class:HwManager
 CreateStatesHolder	StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
-CreateStatesHolder	destructor_contains-a/StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
+DAEMON	Makefile	/^DAEMON = Watchdog$/;"	m
+DAY_TO_NIGHT_SEC	HwController.h	21;"	d
+DEASSOCIATED	Status.h	/^	DEASSOCIATED,$/;"	e	enum:network_status
+DEPENDS	Makefile	/^DEPENDS := $(DEPENDS:%.cpp=%.d)$/;"	m
+DEPENDS	Makefile	/^DEPENDS := $(SRCS:%.c=%.d)$/;"	m
+ENTER_NORMAL_COUNT	Variable.h	6;"	d
+ENTER_REBOOT_COUNT	Variable.h	7;"	d
+ENTER_REPORT_COUNT	Variable.h	9;"	d
+ENTER_RESET_COUNT	Variable.h	10;"	d
+ENTER_STANDBY_COUNT	Variable.h	8;"	d
+ENTER_TWT_COUNT	Variable.h	5;"	d
+ENTER_WPS_COUNT	Variable.h	11;"	d
+FAIL	Status.h	/^	FAIL,$/;"	e	enum:wps_status
+GPIO_READ_FAIL_COUNT	Variable.h	13;"	d
 GetMainHandlerState	PowerUpHandler.cpp	/^MAINSTATES PowerUpHandler::GetMainHandlerState()$/;"	f	class:PowerUpHandler
-GetMainHandlerState	destructor_contains-a/PowerUpHandler.cpp	/^MAINSTATES PowerUpHandler::GetMainHandlerState()$/;"	f	class:PowerUpHandler
 GetMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetMainStates()$/;"	f	class:StatesHolder
-GetMainStates	destructor_contains-a/StatesHolder.cpp	/^MAINSTATES StatesHolder::GetMainStates()$/;"	f	class:StatesHolder
 GetOldMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetOldMainStates()$/;"	f	class:StatesHolder
-GetOldMainStates	destructor_contains-a/StatesHolder.cpp	/^MAINSTATES StatesHolder::GetOldMainStates()$/;"	f	class:StatesHolder
+GetStatus	Status.h	/^		virtual int GetStatus() {$/;"	f	class:NetworkStatus
+GetStatus	Status.h	/^		virtual int GetStatus() {$/;"	f	class:WpsStatus
+GetStatusBySelect	map_iterator_factoryPattern.cpp	/^		int GetStatusBySelect(const char* status) {$/;"	f	class:Holder
 GoNextState	IPCHandler.cpp	/^bool IPCHandler::GoNextState()$/;"	f	class:IPCHandler
-GoNextState	destructor_contains-a/IPCHandler.cpp	/^bool IPCHandler::GoNextState()$/;"	f	class:IPCHandler
+Holder	map_iterator_factoryPattern.cpp	/^		Holder() {$/;"	f	class:Holder
+Holder	map_iterator_factoryPattern.cpp	/^class Holder$/;"	c	file:
+HwController	HwController.cpp	/^HwController::HwController()$/;"	f	class:HwController
+HwController	HwController.h	/^class HwController$/;"	c
+HwManager	HwManager.cpp	/^HwManager::HwManager()$/;"	f	class:HwManager
+HwManager	HwManager.h	/^class HwManager$/;"	c
+IDLE	Status.h	/^	IDLE = 0,$/;"	e	enum:wps_status
 IPCHandler	IPCHandler.cpp	/^IPCHandler::IPCHandler():holder(NULL)$/;"	f	class:IPCHandler
 IPCHandler	IPCHandler.h	/^class IPCHandler$/;"	c
-IPCHandler	destructor_contains-a/IPCHandler.cpp	/^IPCHandler::IPCHandler():holder(NULL)$/;"	f	class:IPCHandler
-IPCHandler	destructor_contains-a/IPCHandler.h	/^class IPCHandler$/;"	c
 IR_AUTO_BY_LIGHT	Common.h	/^	IR_AUTO_BY_LIGHT,$/;"	e	enum:IR_CONTORLLER
 IR_CONTORLLER	Common.h	/^enum IR_CONTORLLER {$/;"	g
 IR_MANUAL	Common.h	/^	IR_MANUAL,$/;"	e	enum:IR_CONTORLLER
 IR_OFF_ALWAYS_DAY	Common.h	/^	IR_OFF_ALWAYS_DAY,$/;"	e	enum:IR_CONTORLLER
 IR_ON_ALWAYS_NIGHT	Common.h	/^	IR_ON_ALWAYS_NIGHT,$/;"	e	enum:IR_CONTORLLER
-Jobber	destructor_contains-a/Jobber.cpp	/^Jobber::Jobber():holder(NULL)$/;"	f	class:Jobber
-Jobber	destructor_contains-a/Jobber.h	/^class Jobber$/;"	c
+LD	Makefile	/^LD        = $(CROSS_COMPILE)ld$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS   = $(PLATFORM_LDFLAGS) -s -Wl,-rpath-link=$(PJ_RPATH)$/;"	m
+LDLIBS	Makefile	/^LDLIBS    = $(PLATFORM_LDLIBS) -lpthread -lcam -ltinydb -lsensor -lMulCast -lwlan -lusb-1.0 -lasound -lahal -laudio\\$/;"	m
 LIGHT_MODE	Common.h	/^enum LIGHT_MODE {$/;"	g
+LOADLIBES	Makefile	/^LOADLIBES = $(PLATFORM_LOADLIBES) -L$(PREFIX)\/lib$/;"	m
+LOAD_CALL_OUT_TONE	Variable.h	42;"	d
 MAINSTATES	StatesHolder.h	/^enum MAINSTATES {$/;"	g
-MAINSTATES	destructor_contains-a/StatesHolder.h	/^enum MAINSTATES {$/;"	g
 MAINSTATES_COUNT	StatesHolder.h	/^	MAINSTATES_COUNT,$/;"	e	enum:MAINSTATES
-MAINSTATES_COUNT	destructor_contains-a/StatesHolder.h	/^	MAINSTATES_COUNT,$/;"	e	enum:MAINSTATES
-OBJS	Makefile	/^OBJS = $(shell find . -name *.cpp | cut -d\/ -f2 | cut -d. -f1).o $/;"	m
-OBJS	destructor_contains-a/Makefile	/^OBJS = $(shell find . -name *.cpp | cut -d\/ -f2 | cut -d. -f1).o $/;"	m
+MAX_GEO_INIT_RETRY	Variable.h	24;"	d
+MAX_GPIO_NUM	Variable.h	26;"	d
+NAME_CALL_OUT_TONE	Variable.h	40;"	d
+NETWORK_RESTART_TIMEOUT	Variable.h	16;"	d
+NETWORK_STATUS	Status.h	/^} NETWORK_STATUS;$/;"	t	typeref:enum:network_status
+NIGHT_TO_DAY_SEC	HwController.h	22;"	d
+NM	Makefile	/^NM        = $(CROSS_COMPILE)nm$/;"	m
+NetworkStatus	Status.h	/^NetworkStatus::NetworkStatus()$/;"	f	class:NetworkStatus
+NetworkStatus	Status.h	/^class NetworkStatus : public Status$/;"	c
+OBJCOPY	Makefile	/^OBJCOPY   = $(CROSS_COMPILE)objcopy$/;"	m
+OBJDUMP	Makefile	/^OBJDUMP   = $(CROSS_COMPILE)objdump$/;"	m
+OK	Status.h	/^	OK,$/;"	e	enum:wps_status
+OPTIONS	Makefile	/^OPTIONS = $(SRCS) $(CPPFLAGS) $(LDLIBS)$/;"	m
+PAIR	Status.h	/^	PAIR,$/;"	e	enum:wps_status
+PLAY_BOOTINGUP_TONE	Variable.h	29;"	d
+PLAY_BOOTINGUP_VOICE	Variable.h	30;"	d
+PLAY_CALL_OUT_TONE	Variable.h	43;"	d
+PLAY_FINALIZING_END_VOICE	Variable.h	35;"	d
+PLAY_INITIALING_START_VOICE	Variable.h	28;"	d
+PLAY_PAIRED_END_VOICE	Variable.h	33;"	d
+PLAY_PAIRING_START_VOICE	Variable.h	34;"	d
+PLAY_TWT_BEGIN_TONE	Variable.h	37;"	d
+PLAY_TWT_END_TONE	Variable.h	38;"	d
+PLAY_TWT_START_TONE	Variable.h	36;"	d
+POLLING_TIMEOUT	Variable.h	2;"	d
 POWERUP	StatesHolder.h	/^	POWERUP,$/;"	e	enum:MAINSTATES
-POWERUP	destructor_contains-a/StatesHolder.h	/^	POWERUP,$/;"	e	enum:MAINSTATES
-PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::PowerUpHandler():number(0)$/;"	f	class:PowerUpHandler
+PREFIX	Makefile	/^PREFIX = $(PJ_PREFIX)$/;"	m
+PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::PowerUpHandler()$/;"	f	class:PowerUpHandler
 PowerUpHandler	PowerUpHandler.h	/^class PowerUpHandler : public IPCHandler$/;"	c
-PowerUpHandler	destructor_contains-a/PowerUpHandler.cpp	/^PowerUpHandler::PowerUpHandler():number(0)$/;"	f	class:PowerUpHandler
-PowerUpHandler	destructor_contains-a/PowerUpHandler.h	/^class PowerUpHandler : public IPCHandler$/;"	c
+QUICK_FLICKER_PERIOD	Variable.h	22;"	d
+RANLIB	Makefile	/^RANLIB    = $(CROSS_COMPILE)ranlib$/;"	m
+READELF	Makefile	/^READELF   = $(CROSS_COMPILE)readelf$/;"	m
+ReleaseAllStatus	map_iterator_factoryPattern.cpp	/^		bool ReleaseAllStatus() {$/;"	f	class:Holder
+ReleaseHwManager	HwManager.cpp	/^int HwManager::ReleaseHwManager()$/;"	f	class:HwManager
 ReleaseStatesHolder	StatesHolder.cpp	/^int StatesHolder::ReleaseStatesHolder()$/;"	f	class:StatesHolder
-ReleaseStatesHolder	destructor_contains-a/StatesHolder.cpp	/^int StatesHolder::ReleaseStatesHolder()$/;"	f	class:StatesHolder
+ReturnHwControllerObjectByType	HwManager.cpp	/^HwController *HwManager::ReturnHwControllerObjectByType(const char* hw_name)$/;"	f	class:HwManager
+SCAN	Status.h	/^	SCAN,$/;"	e	enum:wps_status
+SETUP_CONNECT_FAIL_VOICE	Variable.h	31;"	d
+SIZE	Makefile	/^SIZE      = $(CROSS_COMPILE)size$/;"	m
+SOLID_PERIOD	Variable.h	19;"	d
+SRCS	Makefile	/^SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp IPCHandler.cpp Common.cpp \\$/;"	m
+STRINGS	Makefile	/^STRINGS   = $(CROSS_COMPILE)strings$/;"	m
+STRIP	Makefile	/^STRIP     = $(CROSS_COMPILE)strip$/;"	m
 SetMainStates	StatesHolder.cpp	/^void StatesHolder::SetMainStates(MAINSTATES s)$/;"	f	class:StatesHolder
-SetMainStates	destructor_contains-a/StatesHolder.cpp	/^void StatesHolder::SetMainStates(MAINSTATES s)$/;"	f	class:StatesHolder
 StatesHolder	StatesHolder.cpp	/^StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)$/;"	f	class:StatesHolder
 StatesHolder	StatesHolder.h	/^class StatesHolder$/;"	c
-StatesHolder	destructor_contains-a/StatesHolder.cpp	/^StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)$/;"	f	class:StatesHolder
-StatesHolder	destructor_contains-a/StatesHolder.h	/^class StatesHolder$/;"	c
-Target	Makefile	/^Target = $(shell find . -name *.cpp | cut -d\/ -f2 | cut -d. -f1) $/;"	m
-Target	destructor_contains-a/Makefile	/^Target = $(shell find . -name *.cpp | cut -d\/ -f2 | cut -d. -f1) $/;"	m
+Status	Status.h	/^Status::Status()$/;"	f	class:Status
+Status	Status.h	/^class Status $/;"	c
+TARGETS	Makefile	/^TARGETS = $(DAEMON)$/;"	m
+TIME_BASE	Variable.h	3;"	d
+TIME_INTERVAL	HwController.h	20;"	d
 UNDER_ALWAYS_DAY_MODE	Common.h	/^	UNDER_ALWAYS_DAY_MODE,$/;"	e	enum:LIGHT_MODE
 UNDER_ALWAYS_NIGHT_MODE	Common.h	/^	UNDER_ALWAYS_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
 UNDER_DAY_MODE	Common.h	/^	UNDER_DAY_MODE,$/;"	e	enum:LIGHT_MODE
 UNDER_NIGHT_MODE	Common.h	/^	UNDER_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
+WAIT_CALL_OUT_COUNT	Variable.h	12;"	d
+WAIT_CONNECT_TO_DEVICE	Variable.h	15;"	d
+WAIT_HEART_BEAT_COUNT	Variable.h	4;"	d
+WAIT_WPS_STATE_COUNT	Variable.h	14;"	d
+WPS_BEGIN_TONE	Variable.h	32;"	d
+WPS_PBC_SCAN_COUNT	Variable.h	17;"	d
+WPS_STATUS	Status.h	/^} WPS_STATUS;$/;"	t	typeref:enum:wps_status
 Watchdog	Watchdog.cpp	/^Watchdog::Watchdog():holder(NULL)$/;"	f	class:Watchdog
 Watchdog	Watchdog.h	/^class Watchdog$/;"	c
+WpsStatus	Status.h	/^WpsStatus::WpsStatus()$/;"	f	class:WpsStatus
+WpsStatus	Status.h	/^class WpsStatus : public Status$/;"	c
+_BUTTONCONTROLLER_H_	ButtonController.h	2;"	d
 _COMMON_H_	Common.h	2;"	d
+_HWCONTROLLER_H_	HwController.h	2;"	d
+_HWMANAGER_H_	HwManager.h	2;"	d
 _IPCHANDLER_H_	IPCHandler.h	2;"	d
-_IPCHANDLER_H_	destructor_contains-a/IPCHandler.h	2;"	d
 _POWERUPHANDLER_H_	PowerUpHandler.h	2;"	d
-_POWERUPHANDLER_H_	destructor_contains-a/PowerUpHandler.h	2;"	d
 _STATESHOLDER_H_	StatesHolder.h	2;"	d
-_STATESHOLDER_H_	destructor_contains-a/StatesHolder.h	2;"	d
+check_associate	PowerUpHandler.cpp	/^void PowerUpHandler::check_associate()$/;"	f	class:PowerUpHandler
+deinit	ButtonController.cpp	/^int ButtonController::deinit()$/;"	f	class:ButtonController
+deinit_hw_info_by_type	HwManager.cpp	/^bool HwManager::deinit_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
 diff_curr_uptime_count	Common.cpp	/^long diff_curr_uptime_count(struct timeval t)$/;"	f
+get_hw_info_by_struct	ButtonController.cpp	/^int ButtonController::get_hw_info_by_struct(void *hw_struct)$/;"	f	class:ButtonController
+get_hw_info_by_type	HwManager.cpp	/^int HwManager::get_hw_info_by_type(const char* hw_name, void* hw_struct)$/;"	f	class:HwManager
 get_quit	Common.cpp	/^bool get_quit()$/;"	f
-get_quit	destructor_contains-a/Jobber.cpp	/^bool get_quit = false;$/;"	v
 get_reload	Common.cpp	/^bool get_reload()$/;"	f
-get_reload	destructor_contains-a/Jobber.cpp	/^bool get_reload = false;$/;"	v
 get_uptime	Common.cpp	/^struct timeval get_uptime()$/;"	f
 handle_factory_reset	IPCHandler.cpp	/^int IPCHandler::handle_factory_reset()$/;"	f	class:IPCHandler
-handle_factory_reset	destructor_contains-a/IPCHandler.cpp	/^int IPCHandler::handle_factory_reset()$/;"	f	class:IPCHandler
+handle_ipc_depend_on_status	PowerUpHandler.cpp	/^int PowerUpHandler::handle_ipc_depend_on_status(IpcCommand cmd)$/;"	f	class:PowerUpHandler
 handle_network_states	IPCHandler.cpp	/^int IPCHandler::handle_network_states()$/;"	f	class:IPCHandler
-handle_network_states	destructor_contains-a/IPCHandler.cpp	/^int IPCHandler::handle_network_states()$/;"	f	class:IPCHandler
 handle_select_time_out	IPCHandler.cpp	/^int IPCHandler::handle_select_time_out()$/;"	f	class:IPCHandler
-handle_select_time_out	destructor_contains-a/IPCHandler.cpp	/^int IPCHandler::handle_select_time_out()$/;"	f	class:IPCHandler
 holder	IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
 holder	StatesHolder.h	/^	static StatesHolder *holder;$/;"	m	class:StatesHolder
 holder	Watchdog.h	/^		StatesHolder *holder;$/;"	m	class:Watchdog
-holder	destructor_contains-a/IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
-holder	destructor_contains-a/Jobber.h	/^		StatesHolder *holder;$/;"	m	class:Jobber
-holder	destructor_contains-a/StatesHolder.h	/^	static StatesHolder *holder;$/;"	m	class:StatesHolder
+hw_manager	HwManager.h	/^		static HwManager *hw_manager;$/;"	m	class:HwManager
+hw_manager	Watchdog.h	/^		HwManager *hw_manager;$/;"	m	class:Watchdog
+id	ButtonController.h	/^	AHAL_BTN_ID id;$/;"	m	struct:BUTTON
+in_map_status	map_iterator_factoryPattern.cpp	/^		map<const char*, Status *>::iterator in_map_status;$/;"	m	class:Holder	file:
+init	ButtonController.cpp	/^int ButtonController::init()$/;"	f	class:ButtonController
 init	IPCHandler.cpp	/^int IPCHandler::init()$/;"	f	class:IPCHandler
 init	PowerUpHandler.cpp	/^int PowerUpHandler::init()$/;"	f	class:PowerUpHandler
-init	destructor_contains-a/IPCHandler.cpp	/^int IPCHandler::init()$/;"	f	class:IPCHandler
-init	destructor_contains-a/Jobber.cpp	/^int Jobber::init()$/;"	f	class:Jobber
-init	destructor_contains-a/PowerUpHandler.cpp	/^int PowerUpHandler::init()$/;"	f	class:PowerUpHandler
 initSignal	Watchdog.cpp	/^bool initSignal()$/;"	f
+init_hw_info_by_type	HwManager.cpp	/^bool HwManager::init_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
 is_quit	Common.cpp	/^bool is_quit = false;$/;"	v
 is_reload	Common.cpp	/^bool is_reload = false;$/;"	v
 main	Watchdog.cpp	/^int main(int \/*argc*\/, const char *argv[])$/;"	f
-main	destructor_contains-a/Jobber.cpp	/^int main(int \/*argc*\/, const char *argv[])$/;"	f
+main	map_iterator_factoryPattern.cpp	/^int main()$/;"	f
 mainStates	StatesHolder.h	/^	MAINSTATES mainStates;$/;"	m	class:StatesHolder
-mainStates	destructor_contains-a/StatesHolder.h	/^	MAINSTATES mainStates;$/;"	m	class:StatesHolder
-number	PowerUpHandler.h	/^	int number;$/;"	m	class:PowerUpHandler
-number	destructor_contains-a/PowerUpHandler.h	/^	int number;$/;"	m	class:PowerUpHandler
+map_hw_controller	HwManager.h	/^		map<const char*, HwController *> map_hw_controller;$/;"	m	class:HwManager
+map_status	map_iterator_factoryPattern.cpp	/^		map<const char*, Status *> map_status;$/;"	m	class:Holder	file:
+network_status	Status.h	/^typedef enum network_status {$/;"	g
 oldMainStates	StatesHolder.h	/^	MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
-oldMainStates	destructor_contains-a/StatesHolder.h	/^	MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
+referCount	HwManager.cpp	/^int HwManager::referCount = 0;$/;"	m	class:HwManager	file:
+referCount	HwManager.h	/^		static int referCount;$/;"	m	class:HwManager
 referCount	StatesHolder.cpp	/^int StatesHolder::referCount = 0;$/;"	m	class:StatesHolder	file:
 referCount	StatesHolder.h	/^	static int referCount;$/;"	m	class:StatesHolder
-referCount	destructor_contains-a/StatesHolder.cpp	/^int StatesHolder::referCount = 0;$/;"	m	class:StatesHolder	file:
-referCount	destructor_contains-a/StatesHolder.h	/^	static int referCount;$/;"	m	class:StatesHolder
 release	IPCHandler.cpp	/^int IPCHandler::release()$/;"	f	class:IPCHandler
 release	PowerUpHandler.cpp	/^int PowerUpHandler::release()$/;"	f	class:PowerUpHandler
-release	destructor_contains-a/IPCHandler.cpp	/^int IPCHandler::release()$/;"	f	class:IPCHandler
-release	destructor_contains-a/Jobber.cpp	/^int Jobber::release()$/;"	f	class:Jobber
-release	destructor_contains-a/PowerUpHandler.cpp	/^int PowerUpHandler::release()$/;"	f	class:PowerUpHandler
 requestExitHandler	Watchdog.cpp	/^void requestExitHandler(int sigNum)$/;"	f
 requestReloadHandler	Watchdog.cpp	/^void requestReloadHandler(int sigNum)$/;"	f
 run	Watchdog.cpp	/^int Watchdog::run()$/;"	f	class:Watchdog
-run	destructor_contains-a/Jobber.cpp	/^int Jobber::run()$/;"	f	class:Jobber
+run_hw_info_detect	ButtonController.cpp	/^int ButtonController::run_hw_info_detect()$/;"	f	class:ButtonController
+run_hw_info_detect_by_type	HwManager.cpp	/^int HwManager::run_hw_info_detect_by_type(const char* hw_name)$/;"	f	class:HwManager
 run_parsing_command	IPCHandler.cpp	/^int IPCHandler::run_parsing_command()$/;"	f	class:IPCHandler
-run_parsing_command	destructor_contains-a/IPCHandler.cpp	/^int IPCHandler::run_parsing_command()$/;"	f	class:IPCHandler
 send_ipccmd	Common.cpp	/^void send_ipccmd(const char *path, int ipc)$/;"	f
+set_hw_info_by_struct	ButtonController.cpp	/^int ButtonController::set_hw_info_by_struct(void *hw_struct) $/;"	f	class:ButtonController
+set_hw_info_by_type	HwManager.cpp	/^int HwManager::set_hw_info_by_type(const char* hw_name, void* hw_struct)$/;"	f	class:HwManager
 set_quit	Common.cpp	/^void set_quit(bool b)$/;"	f
 set_reload	Common.cpp	/^void set_reload(bool b)$/;"	f
 start_thread	Common.cpp	/^int start_thread(void *callback, pthread_t & pid, void *pass)$/;"	f
 start_thread_join	Common.cpp	/^int start_thread_join(void *callback, pthread_t & pid, void *pass)$/;"	f
+status	ButtonController.h	/^	AHAL_BTN_STATUS status;$/;"	m	struct:BUTTON
+status	Status.h	/^		int status;$/;"	m	class:Status
+status_getter	map_iterator_factoryPattern.cpp	/^		Status *status_getter;$/;"	m	class:Holder	file:
+wps_status	Status.h	/^typedef enum wps_status {$/;"	g
+~ButtonController	ButtonController.cpp	/^ButtonController::~ButtonController()$/;"	f	class:ButtonController
+~Holder	map_iterator_factoryPattern.cpp	/^		~Holder() {$/;"	f	class:Holder
+~HwController	HwController.cpp	/^HwController::~HwController()$/;"	f	class:HwController
+~HwManager	HwManager.cpp	/^HwManager::~HwManager()$/;"	f	class:HwManager
 ~IPCHandler	IPCHandler.cpp	/^IPCHandler::~IPCHandler()$/;"	f	class:IPCHandler
-~IPCHandler	destructor_contains-a/IPCHandler.cpp	/^IPCHandler::~IPCHandler()$/;"	f	class:IPCHandler
-~Jobber	destructor_contains-a/Jobber.cpp	/^Jobber::~Jobber()$/;"	f	class:Jobber
+~NetworkStatus	Status.h	/^NetworkStatus::~NetworkStatus()$/;"	f	class:NetworkStatus
 ~PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::~PowerUpHandler()$/;"	f	class:PowerUpHandler
-~PowerUpHandler	destructor_contains-a/PowerUpHandler.cpp	/^PowerUpHandler::~PowerUpHandler()$/;"	f	class:PowerUpHandler
 ~StatesHolder	StatesHolder.cpp	/^StatesHolder::~StatesHolder()$/;"	f	class:StatesHolder
-~StatesHolder	destructor_contains-a/StatesHolder.cpp	/^StatesHolder::~StatesHolder()$/;"	f	class:StatesHolder
+~Status	Status.h	/^Status::~Status()$/;"	f	class:Status
 ~Watchdog	Watchdog.cpp	/^Watchdog::~Watchdog()$/;"	f	class:Watchdog
+~WpsStatus	Status.h	/^WpsStatus::~WpsStatus()$/;"	f	class:WpsStatus

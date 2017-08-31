@@ -8,19 +8,25 @@
 #include <sys/socket.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <math.h>
 #include <iostream>
-#include "StatesHolder.h"
-#include "IPCHandler.h"
+#include "watcher/watcher.h"
 #include "Common.h"
+#include "HwManager.h"
+#include "StatesHolder.h"
+#include "PowerUpHandler.h"
+#include "IPCHandler.h"
+#include "StatesHolder.h"
 
 class Watchdog
 {
 	public:
 		Watchdog ();
 		~Watchdog ();
+		int init();
 		int run();
+		int release();
 	private:
+		HwManager *hw_manager;
 		StatesHolder *holder;
 		IPCHandler *CreateHandlerByStates();
 };

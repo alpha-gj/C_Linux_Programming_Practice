@@ -2,7 +2,7 @@
 #define _HWCONTROLLER_H_
 #include <stdio.h>
 #include <stdlib.h>
-#include "pib/pib.h"
+#include <iostream>
 #include "tinydb/tinydb.h"
 
 /* AHAL LIBS */
@@ -34,12 +34,12 @@ class HwController
 		virtual bool RegisterHw() = 0;
 		virtual bool UnrgisterHw() = 0;
  */
-		/* For inheritance HW */
+	public:
 		virtual int init() = 0;
 		virtual int deinit() = 0;
-		virtual	int set_hw_info(void hw_struct) = 0;		/* Pass struct of data type for setting HW info */
+		virtual	int set_hw_info(void *hw_struct) = 0;		/* Pass struct of data type for setting HW info */
+		virtual	int get_hw_info(void *hw_struct) = 0;		/* Return struct of date type for getting HW info */
 		virtual int run_hw_info_detect() = 0;				/* TODO Need pthread?  Pass struct of data type for checking HW info */
-		virtual	int get_hw_info(void hw_struct) = 0;		/* Return struct of date type for getting HW info */
-}
+};
 
 #endif

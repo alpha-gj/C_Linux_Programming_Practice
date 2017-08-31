@@ -1,27 +1,27 @@
-#include <iostream>
-#include "HwManger.h"
+#include "HwManager.h"
 using namespace std;
 
-static HwManger::hw_manager = NULL;
-int HwManger::referCount = 0;
+HwManager *HwManager::hw_manager = NULL;
+int HwManager::referCount = 0;
 
-HwManger::HwManger():hw_controller(NULL)
+HwManager::HwManager()
 {
-
+	/* Do nothing */
 }
 
-HwManger::~HwManger()
+HwManager::~HwManager()
 {
-	delete hw_controller;
+	/* Do nothing */
 }
 
 HwManager *HwManager::CreateHwManager()
 {
 	if(hw_manager == NULL) {
 		hw_manager = new HwManager();
-	} else if {
+	} else {
 		++referCount;
 	}
+
 	return hw_manager;
 }
 
@@ -51,6 +51,71 @@ int HwManager::ReleaseHwManager()
 	} while(false);
 
 	return ret;
+}
+
+
+HwController *HwManager::ReturnHwControllerObjectByType(const char* hw_name)
+{
+	map<const char*, HwController *>::iterator in_map_hw_controller;
+	HwController *hw_controller = NULL;
+
+	in_map_hw_controller= map_hw_controller.find(hw_name);
+
+	if (in_map_hw_controller == map_hw_controller.end()) {
+		/* No result */
+	} else {
+		/* Get object address */
+		hw_controller = in_map_hw_controller->second;
+	}
+	return hw_controller;
+}
+
+bool HwManager::init_hw_info_by_type(const char* hw_name)
+{
+	HwController *hw_controller = ReturnHwControllerObjectByType(hw_name);
+
+	if (hw_controller == NULL)
+		return false;
+	else
+		return hw_controller->init();
+}
+
+bool HwManager::deinit_hw_info_by_type(const char* hw_name)
+{
+	HwController *hw_controller = ReturnHwControllerObjectByType(hw_name);
+
+	if (hw_controller == NULL)
+		return false;
+	else
+		return hw_controller->deinit();
+}
+
+int HwManager::set_hw_info_by_type(const char* hw_name, void* hw_struct)
+{
+	HwController *hw_controller = ReturnHwControllerObjectByType(hw_name);
+	if (hw_controller == NULL)
+		return -1;
+	else
+		return hw_controller->set_hw_info(hw_struct);
+
+}
+
+int HwManager::get_hw_info_by_type(const char* hw_name, void* hw_struct)
+{
+	HwController *hw_controller = ReturnHwControllerObjectByType(hw_name);
+	if (hw_controller == NULL)
+		return -1;
+	else
+		return hw_controller->get_hw_info(hw_struct);
+}
+
+int HwManager::run_hw_info_detect_by_type(const char* hw_name)
+{
+	HwController *hw_controller = ReturnHwControllerObjectByType(hw_name);
+	if (hw_controller == NULL)
+		return -1;
+	else
+		return hw_controller->run_hw_info_detect();
 }
 
 

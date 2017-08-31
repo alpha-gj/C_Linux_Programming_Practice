@@ -9,7 +9,6 @@ using namespace std;
 class Holder
 {
 	private:
-		Status *status_getter;
 		map<const char*, Status *> map_status;
 		map<const char*, Status *>::iterator in_map_status;
 
@@ -21,6 +20,8 @@ class Holder
 		}
 		int GetStatusBySelect(const char* status) {
 			in_map_status = map_status.find(status);
+			Status *status_getter;
+
 			if ( in_map_status == map_status.end())
 			{
 				cout << "Not found" << endl;

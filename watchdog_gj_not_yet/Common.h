@@ -43,7 +43,9 @@ void set_reload(bool b);
 
 void send_ipccmd(const char *path, int ipc);
 
+/*
 struct timeval get_uptime();
 long diff_curr_uptime_count(timeval t);
+*/
 
 #endif

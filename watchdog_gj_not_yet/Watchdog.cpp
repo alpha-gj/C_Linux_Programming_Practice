@@ -1,6 +1,4 @@
-#include "Jobber.h"
-#include "PowerUpHandler.h"
-#include "StatesHolder.h"
+#include "Watchdog.h"
 using namespace std;
 Watchdog *dog = NULL;
 
@@ -107,6 +105,8 @@ bool initSignal()
 
 int main(int /*argc*/, const char *argv[])
 {
+	
+#if 0
 	int process_stat = watcher(argv[0], "/etc/rc.d/init.d/watchdog.sh");
 	if (process_stat == PARENT_PROCESS) {
 		return 0;
@@ -132,5 +132,24 @@ int main(int /*argc*/, const char *argv[])
 		fprintf(stderr, "fork failed\n");
 		return -1;
 	}
+#else
+		if (!initSignal()) {
+			ERROR("init signal handler failed.");
+			return EXIT_FAILURE;
+		}
+		openlog("JOB4", LOG_PID | LOG_NDELAY, 0);
+		do {
+			dog = new Watchdog();
+			if (dog) {
+				dog->run();
+				delete dog;
+			} else {
+				ERROR("can not alloc memory for dog");
+				sleep(1);
+			}
+		} while (!get_quit());
+		closelog();
+		return EXIT_SUCCESS;
+#endif
 }
 

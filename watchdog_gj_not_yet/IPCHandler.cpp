@@ -4,17 +4,19 @@ using namespace std;
 
 IPCHandler::IPCHandler():holder(NULL)
 {
+	int	ret = -1;
 	cout << "*** IPCHandler constructer without pra is running ... ***" << endl;
-	/*
+
+	ipc_fd = ipc_daemon.init(WATCHDOG_SOCKET_NAME);
+
 	do {
-		if (ipc_daemon.init(WATCHDOG_SOCKET_NAME) < 0) {
+		if (ipc_fd < 0) {
 			ERROR("create ipc daemon fail");
 			break;
 		}
 		ret = 0;
 	} while(false);
-	led.init();
-	*/
+
 	holder = StatesHolder::CreateStatesHolder();
 	if (holder == NULL) {
 		fprintf(stderr, "%s: %s[%d] can not alloc holder\n", __FILE__, __FUNCTION__, __LINE__);
@@ -28,6 +30,9 @@ IPCHandler::~IPCHandler()
 		StatesHolder::ReleaseStatesHolder();
 		holder = NULL;
 	}
+
+	//FIXME It should be closed by ipc_daemon.deinit, but ipc_damemon didin't implement this function.
+	close(ipc_fd);
 }
 
 int IPCHandler::init()
@@ -136,8 +141,8 @@ int IPCHandler::run_parsing_command()
 			handle_network_states();
 		}
 	}
-	return 0;
 	*/
+	return 0;
 }
 
 int IPCHandler::handle_factory_reset()
