@@ -12,6 +12,7 @@ HwManager::HwManager()
 	*/
 	/* New parts of HwController */
 	map_hw_controller.insert(make_pair("BUTTON", new ButtonController()));
+	map_hw_controller.insert(make_pair("BUTTON1", new ButtonController()));
 }
 
 HwManager::~HwManager()
@@ -109,11 +110,20 @@ HwController *HwManager::ReturnHwControllerObjectByType(const char* hw_name)
 	map<const char*, HwController *>::iterator in_map_hw_controller;
 	HwController *hw_controller = NULL;
 
+	for (in_map_hw_controller = map_hw_controller.begin(); 
+		 in_map_hw_controller != map_hw_controller.end(); 
+		 in_map_hw_controller++) {
+		printf("in_map_hw_controller->first is %s\n", in_map_hw_controller->first);
+	}
+	printf("it is %s be found\n", hw_name);
 	in_map_hw_controller= map_hw_controller.find(hw_name);
 
-	if (in_map_hw_controller == map_hw_controller.end()) {
+	if (in_map_hw_controller != map_hw_controller.end()) {
+		printf("Return not find it\n");
+		hw_controller = in_map_hw_controller->second;
 		/* No result */
 	} else {
+		printf("Return find it\n");
 		/* Get object address */
 		hw_controller = in_map_hw_controller->second;
 	}
@@ -153,10 +163,13 @@ int HwManager::set_hw_info_by_type(const char* hw_name, void* hw_struct)
 int HwManager::get_hw_info_by_type(const char* hw_name, void* hw_struct)
 {
 	HwController *hw_controller = ReturnHwControllerObjectByType(hw_name);
-	if (hw_controller == NULL)
+	if (hw_controller == NULL) {
+		printf("Not Found in get\n");
 		return -1; //TODO need to verify, not find out or function is not supported
-	else
+	} else {
+		printf("Found it in get\n");
 		return hw_controller->get_hw_info(hw_struct);
+	}
 }
 
 int HwManager::run_hw_info_detect_by_type(const char* hw_name)

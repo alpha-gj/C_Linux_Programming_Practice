@@ -58,6 +58,20 @@ int Watchdog::run()
 		}
 	}
 #else
+
+	BUTTON_SETTING button_setting {
+		.id = AHAL_BTN_ID_RESET,
+		.status = AHAL_BTN_STATUS_UNKNOWN
+	};
+	hw_manager->get_hw_info_by_type("BUTTON", &button_setting);
+	
+	if(button_setting.status == AHAL_BTN_STATUS_PRESSED)
+		printf("RESET PRESSED!!!!!!!!!!!\n");
+	else if (button_setting.status == AHAL_BTN_STATUS_RELEASE)
+		printf("RESET RELEASE!!!!!!!!!!!\n");
+	else
+		printf("RESET UNKNOW\n");
+
 		IPCHandler *handler = CreateHandlerByStates();
 		if (handler) {
 			handler->run_parsing_command();
@@ -181,7 +195,7 @@ int main(int /*argc*/, const char *argv[])
 				sleep(1);
 			}
 
-			sleep(10);
+			sleep(5);
 			printf("============================\n\n\n");
 		} while (!get_quit());
 		closelog();

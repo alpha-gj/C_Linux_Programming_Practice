@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+//TODO They can include State.h? 
 enum MAINSTATES {
 	POWERUP,
 	MAINSTATES_COUNT,
@@ -11,9 +12,10 @@ enum MAINSTATES {
 
 class StatesHolder
 {
-
 	private:
 		/* Deny constructor, copy constructor */
+		StatesHolder();
+		~StatesHolder();
 		StatesHolder(const StatesHolder&);
 		StatesHolder& operator=(const StatesHolder&);
 
@@ -24,10 +26,6 @@ class StatesHolder
 		//pthread_mutex_t mainStatesLock;
 		MAINSTATES mainStates;
 		MAINSTATES oldMainStates;
-
-	protected:
-		StatesHolder();
-		~StatesHolder();
 
 	public:
 		/* Follow Singleton Pattern */
