@@ -45,6 +45,8 @@ int Watchdog::deinit()
 
 int Watchdog::run()
 {
+#define BUTTON true
+
 #if 0
 	while(!get_quit() && !get_reload()) {
 		IPCHandler *handler = CreateHandlerByStates();
@@ -57,7 +59,7 @@ int Watchdog::run()
 			sleep(1);
 		}
 	}
-#else
+#elif BUTTON
 
 	BUTTON_SETTING button_setting {
 		.id = AHAL_BTN_ID_RESET,
@@ -150,8 +152,9 @@ bool initSignal()
 	return true;
 }
 
-int main(int /*argc*/, const char *argv[])
+int main(int /*argc*/, const char* argv[])
 {
+	(void)argv; // Ignore parameters without "unused" warning
 	
 #if 0
 	int process_stat = watcher(argv[0], "/etc/rc.d/init.d/watchdog.sh");

@@ -12,19 +12,24 @@
 class HwManager
 {
 	private:
-		/* Deny constructor & copy constructor */
+		/* Deny constructor & copy constructor by external */
 		HwManager();
 		~HwManager();
 		HwManager(const HwManager&);
 		HwManager& operator=(const HwManager&);
 
-
 		/* Follow Singleton Pattern */
 		static HwManager *hw_manager;
 		static int referCount;
 
+		/* 
+			NOTE: Don't use const char* as primary key of STL map.
+			It doesn't comapre "xxx", rather it comapres 0x12345678 
+			by using find(...) of STL map. Please use string to replace it.
+    	*/
+
 		/* Access HW object from MAP */
-		map<const char*, HwController *> map_hw_controller;
+		map<string, HwController *> map_hw_controller;
 		HwController *ReturnHwControllerObjectByType(const char* hw_name);
 
 	public:

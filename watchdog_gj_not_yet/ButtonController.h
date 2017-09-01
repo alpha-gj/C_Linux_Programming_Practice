@@ -20,12 +20,9 @@ class ButtonController : public HwController
 		virtual ~ButtonController();
 		virtual int init();
 		virtual int deinit();
-		virtual	int set_hw_info(void* hw_struct);		/* Pass struct of data type for setting HW info */
-		virtual	int get_hw_info(void* hw_struct);		/* Return struct of date type for getting HW info */
-		virtual int run_hw_info_detect();						/* TODO Need pthread?  Pass struct of data type for checking HW info */
-
-		/* Button call function */
-		//TODO select AHAL by paras
+		virtual	int set_hw_info(void* hw_struct = NULL);
+		virtual	int get_hw_info(void* hw_struct);
+		virtual int run_hw_info_detect();
 };
 #endif
 	

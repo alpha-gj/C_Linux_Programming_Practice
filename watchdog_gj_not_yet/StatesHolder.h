@@ -13,7 +13,7 @@ enum MAINSTATES {
 class StatesHolder
 {
 	private:
-		/* Deny constructor, copy constructor */
+		/* Deny constructor & copy constructor by externel */
 		StatesHolder();
 		~StatesHolder();
 		StatesHolder(const StatesHolder&);

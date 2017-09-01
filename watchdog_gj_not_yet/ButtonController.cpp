@@ -24,14 +24,13 @@ int ButtonController::deinit()
 }
 
 
-int ButtonController::set_hw_info(void *hw_struct) 
+int ButtonController::set_hw_info(void *) 
 {
 	return (int)AHAL_RET_NOT_SUPPORT;
 }
 
 int ButtonController::get_hw_info(void *hw_struct)
 {
-	printf("get_hw_info\n");
 	int ret = AHAL_RET_FAIL;
 	BUTTON_SETTING *button_setting = (BUTTON_SETTING *) hw_struct;
 
@@ -39,13 +38,13 @@ int ButtonController::get_hw_info(void *hw_struct)
 	if (ret != AHAL_RET_SUCCESS) {
 		AHAL_DBG_Print(AHAL_DBG_ERROR, "AHAL_BTN_GetStatus fail\n");
 	}
-	
+
 	return (int)ret;
 }
 
 int ButtonController::run_hw_info_detect()
 {
-	/* TODO */
+	/* TODO Need to detect button status to send ipc */
 	return AHAL_RET_NOT_SUPPORT;
 }
 
