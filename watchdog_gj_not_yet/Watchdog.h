@@ -25,6 +25,7 @@ class Watchdog
 		int init();
 		int run();
 		int deinit();
+
 	private:
 		HwManager *hw_manager;
 		StatesHolder *holder;

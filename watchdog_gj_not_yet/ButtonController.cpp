@@ -41,10 +41,3 @@ int ButtonController::get_hw_info(void *hw_struct)
 
 	return (int)ret;
 }
-
-int ButtonController::run_hw_info_detect()
-{
-	/* TODO Need to detect button status to send ipc */
-	return AHAL_RET_NOT_SUPPORT;
-}
-

@@ -46,6 +46,7 @@ int Watchdog::deinit()
 int Watchdog::run()
 {
 #define BUTTON true
+#define WIFI true
 
 #if 0
 	while(!get_quit() && !get_reload()) {
@@ -65,6 +66,8 @@ int Watchdog::run()
 		.id = AHAL_BTN_ID_RESET,
 		.status = AHAL_BTN_STATUS_UNKNOWN
 	};
+
+	printf("id is %d, status is %d\n", button_setting.id, button_setting.status);
 	hw_manager->get_hw_info_by_type("BUTTON", &button_setting);
 	
 	if(button_setting.status == AHAL_BTN_STATUS_PRESSED)
@@ -73,6 +76,46 @@ int Watchdog::run()
 		printf("RESET RELEASE!!!!!!!!!!!\n");
 	else
 		printf("RESET UNKNOW\n");
+#endif
+
+#if 0
+#elif WIFI
+
+	/* RUN WPS */
+	WIFI_SETTING wifi_setting {
+		.DoWps = (AHAL_CST_BOOL) true
+	};
+	hw_manager->set_hw_info_by_type("WIFI", &wifi_setting);
+
+	/* Check WPS & Associated Status*/
+	do {
+		hw_manager->get_hw_info_by_type("WIFI", &wifi_setting);
+		printf("wifi_wps_status is %d\n", wifi_setting.wifi_wps_status);
+
+		if (wifi_setting.wifi_wps_status == AHAL_WIFI_WPS_STATUS_LINK_UP ||
+			wifi_setting.wifi_wps_status == AHAL_WIFI_WPS_STATUS_IDLE	 ||
+			(bool)wifi_setting.isAssociated == true) 
+			break;
+
+		sleep(1);
+	} while(true);
+
+	int count = 10;
+	while(count) {
+		hw_manager->get_hw_info_by_type("WIFI", &wifi_setting);
+		if (wifi_setting.isAssociated == true) {
+			printf("yes associated\n");
+		} else
+			printf("no associated\n");
+
+		printf("rssi1 is %d\n", wifi_setting.wifi_radio_info.rssi1);
+		printf("rssi2 is %d\n", wifi_setting.wifi_radio_info.rssi2);
+		
+		count--;
+		sleep(1);
+	};
+
+#endif
 
 		IPCHandler *handler = CreateHandlerByStates();
 		if (handler) {
@@ -83,7 +126,6 @@ int Watchdog::run()
 			INFO("BUG@%d", __LINE__);
 			sleep(1);
 		}
-#endif
 	return 0;
 }
 

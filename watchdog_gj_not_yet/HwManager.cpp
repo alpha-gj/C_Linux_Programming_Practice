@@ -12,6 +12,7 @@ HwManager::HwManager()
 	*/
 	/* New parts of HwController */
 	map_hw_controller.insert(make_pair("BUTTON", new ButtonController()));
+	map_hw_controller.insert(make_pair("WIFI", new WifiController()));
 }
 
 HwManager::~HwManager()
@@ -160,14 +161,4 @@ int HwManager::get_hw_info_by_type(const char* hw_name, void* hw_struct)
 		return hw_controller->get_hw_info(hw_struct);
 	}
 }
-
-int HwManager::run_hw_info_detect_by_type(const char* hw_name)
-{
-	HwController *hw_controller = ReturnHwControllerObjectByType(hw_name);
-	if (hw_controller == NULL)
-		return -1; //TODO need to verify, not find out or function is not supported
-	else
-		return hw_controller->run_hw_info_detect();
-}
-
 

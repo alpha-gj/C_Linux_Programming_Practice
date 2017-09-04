@@ -2,7 +2,7 @@ DAEMON = Watchdog
 TARGETS = $(DAEMON)
 
 SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp IPCHandler.cpp Common.cpp \
-	   ButtonController.cpp \
+	   ButtonController.cpp WifiController.cpp\
 	   PowerUpHandler.cpp
 
 
@@ -68,5 +68,5 @@ ifneq ($(MAKECMDGOALS),clean)
 endif
 
 $(DAEMON): $(DAEMON).o HwManager.o HwController.o StatesHolder.o IPCHandler.o  Common.o \
-	   ButtonController.o \
+	   ButtonController.o WifiController.o\
 	   PowerUpHandler.o

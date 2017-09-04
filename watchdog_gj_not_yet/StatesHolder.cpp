@@ -48,6 +48,8 @@ int StatesHolder::ReleaseStatesHolder()
 StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)
 {
 	cout << "*** StatesHolder constructer without pra is running ... ***" << endl;
+	//insert something that you want to detect, such as TWT, button, network status, lightsensor(day,night mode)
+	
 }
 
 StatesHolder::~StatesHolder()

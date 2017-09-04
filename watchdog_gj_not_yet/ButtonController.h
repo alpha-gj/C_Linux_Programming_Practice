@@ -22,7 +22,6 @@ class ButtonController : public HwController
 		virtual int deinit();
 		virtual	int set_hw_info(void* hw_struct = NULL);
 		virtual	int get_hw_info(void* hw_struct);
-		virtual int run_hw_info_detect();
 };
 #endif
 	

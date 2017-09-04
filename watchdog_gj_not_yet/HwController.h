@@ -31,18 +31,17 @@
 class HwController
 {
 	protected:
+		HwController();
 /* TODO
 		virtual bool RegisterHw() = 0;
 		virtual bool UnrgisterHw() = 0;
  */
 	public:
-		HwController();
 		virtual ~HwController();
 		virtual int init() = 0;
 		virtual int deinit() = 0;
 		virtual	int set_hw_info(void *hw_struct) = 0;		/* Pass struct of data type for setting HW info */
 		virtual	int get_hw_info(void *hw_struct) = 0;		/* Return struct of date type for getting HW info */
-		virtual int run_hw_info_detect() = 0;				/* TODO Need pthread?  Pass struct of data type for checking HW info */
 };
 
 #endif

@@ -8,6 +8,7 @@
 #include "tinydb/tinydb.h"
 #include "HwController.h"
 #include "ButtonController.h"
+#include "WifiController.h"
 
 class HwManager
 {
@@ -44,7 +45,6 @@ class HwManager
 		int deinit_hw_info_by_type(const char* hw_name);
 		int set_hw_info_by_type(const char* hw_name, void* hw_struct);
 		int get_hw_info_by_type(const char* hw_name, void* hw_struct);
-		int run_hw_info_detect_by_type(const char* hw_name);
 };
 
 #endif
