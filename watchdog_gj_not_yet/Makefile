@@ -3,7 +3,7 @@ TARGETS = $(DAEMON)
 
 SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp SwStatus.cpp IPCHandler.cpp Common.cpp \
 	   ButtonController.cpp WifiController.cpp\
-	   NetworkStatus.cpp\
+	   NetworkStatus.cpp ButtonStatus.cpp\
 	   PowerUpHandler.cpp
 
 
@@ -70,5 +70,5 @@ endif
 
 $(DAEMON): $(DAEMON).o HwManager.o HwController.o StatesHolder.o SwStatus.o IPCHandler.o  Common.o \
 	   ButtonController.o WifiController.o\
-	   NetworkStatus.o \
+	   NetworkStatus.o ButtonStatus.o\
 	   PowerUpHandler.o

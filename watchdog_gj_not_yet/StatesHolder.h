@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include "SwStatus.h"
 #include "NetworkStatus.h"
+#include "ButtonStatus.h"
 
 //TODO They can include State.h? 
 enum MAINSTATES {
@@ -24,6 +25,7 @@ class StatesHolder
 		/* Follow Singleton Pattern */
 		static StatesHolder *holder;
 		static int referCount;
+
 		/* For init & deinit SwStatus objects */
 		int init();
 		int deinit();

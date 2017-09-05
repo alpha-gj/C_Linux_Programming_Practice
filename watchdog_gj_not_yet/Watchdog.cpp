@@ -46,7 +46,7 @@ int Watchdog::deinit()
 int Watchdog::run()
 {
 #define BUTTON true
-#define WIFI true
+#define WIFI false
 
 #if 0
 	while(!get_quit() && !get_reload()) {
@@ -118,16 +118,19 @@ int Watchdog::run()
 	};
 
 #endif
+	fprintf(stderr, "run ButtonStatus detect thread\n");
+	holder->run_status_detect_by_type("ButtonStatus");
 
-		IPCHandler *handler = CreateHandlerByStates();
-		if (handler) {
-			handler->run_parsing_command();
-			delete handler;
-			handler = NULL;
-		} else {
-			INFO("BUG@%d", __LINE__);
-			sleep(1);
-		}
+	IPCHandler *handler = CreateHandlerByStates();
+	if (handler) {
+		handler->run_parsing_command();
+		delete handler;
+		handler = NULL;
+	} else {
+		INFO("BUG@%d", __LINE__);
+		sleep(1);
+	}
+
 	return 0;
 }
 

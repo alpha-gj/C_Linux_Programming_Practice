@@ -15,7 +15,6 @@
 #include "StatesHolder.h"
 #include "PowerUpHandler.h"
 #include "IPCHandler.h"
-#include "StatesHolder.h"
 
 class Watchdog
 {

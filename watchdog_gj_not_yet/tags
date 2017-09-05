@@ -11,15 +11,14 @@ ASSOCIATED	Status.h	/^	ASSOCIATED,$/;"	e	enum:network_status
 BLINK_PERIOD	Variable.h	21;"	d
 BREATHING_PERIOD	Variable.h	20;"	d
 BUTTON	ButtonController.h	/^typedef struct BUTTON$/;"	s
-BUTTON	NetworkStatus.h	/^typedef struct BUTTON$/;"	s
 BUTTON	Watchdog.cpp	48;"	d	file:
 BUTTON_GPIO_NUM	Variable.h	25;"	d
 BUTTON_POLLING_TIME	Variable.h	1;"	d
 BUTTON_SETTING	ButtonController.h	/^} BUTTON_SETTING;$/;"	t	typeref:struct:BUTTON
-BUTTON_SETTING	NetworkStatus.h	/^} BUTTON_SETTING;$/;"	t	typeref:struct:BUTTON
 ButtonController	ButtonController.cpp	/^ButtonController::ButtonController()$/;"	f	class:ButtonController
 ButtonController	ButtonController.h	/^class ButtonController : public HwController$/;"	c
-ButtonController	NetworkStatus.h	/^class ButtonController : public HwController$/;"	c
+ButtonStatus	ButtonStatus.cpp	/^ButtonStatus::ButtonStatus():reset_button_status_pid(0)$/;"	f	class:ButtonStatus
+ButtonStatus	ButtonStatus.h	/^class ButtonStatus : public SwStatus$/;"	c
 CALL_OUT_TONE	Variable.h	41;"	d
 CC	Makefile	/^CC        = $(CROSS_COMPILE)gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS    = $(PLATFORM_CFLAGS) -Wall -W -D$(subst -,_,$(PJ_MODEL))$/;"	m
@@ -30,7 +29,6 @@ CXX	Makefile	/^CXX       = $(CROSS_COMPILE)g++$/;"	m
 CXXFLAGS	Makefile	/^CXXFLAGS  = $(CFLAGS)$/;"	m
 CheckStatus	Status.h	/^		virtual bool CheckStatus() {$/;"	f	class:NetworkStatus
 CheckStatus	Status.h	/^		virtual bool CheckStatus() {$/;"	f	class:WpsStatus
-CreateAllStatus	map_iterator_factoryPattern.cpp	/^		bool CreateAllStatus() {$/;"	f	class:Holder
 CreateHandlerByStates	Watchdog.cpp	/^IPCHandler *Watchdog::CreateHandlerByStates()$/;"	f	class:Watchdog
 CreateHwManager	HwManager.cpp	/^HwManager *HwManager::CreateHwManager()$/;"	f	class:HwManager
 CreateStatesHolder	StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
@@ -54,10 +52,7 @@ GetMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetMainStates()$/;"	f	
 GetOldMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetOldMainStates()$/;"	f	class:StatesHolder
 GetStatus	Status.h	/^		virtual int GetStatus() {$/;"	f	class:NetworkStatus
 GetStatus	Status.h	/^		virtual int GetStatus() {$/;"	f	class:WpsStatus
-GetStatusBySelect	map_iterator_factoryPattern.cpp	/^		int GetStatusBySelect(const char* status) {$/;"	f	class:Holder
 GoNextState	IPCHandler.cpp	/^bool IPCHandler::GoNextState()$/;"	f	class:IPCHandler
-Holder	map_iterator_factoryPattern.cpp	/^		Holder() {$/;"	f	class:Holder
-Holder	map_iterator_factoryPattern.cpp	/^class Holder$/;"	c	file:
 HwController	HwController.cpp	/^HwController::HwController()$/;"	f	class:HwController
 HwController	HwController.h	/^class HwController$/;"	c
 HwManager	HwManager.cpp	/^HwManager::HwManager()$/;"	f	class:HwManager
@@ -85,6 +80,8 @@ NETWORK_RESTART_TIMEOUT	Variable.h	16;"	d
 NETWORK_STATUS	Status.h	/^} NETWORK_STATUS;$/;"	t	typeref:enum:network_status
 NIGHT_TO_DAY_SEC	HwController.h	22;"	d
 NM	Makefile	/^NM        = $(CROSS_COMPILE)nm$/;"	m
+NetworkStatus	NetworkStatus.cpp	/^NetworkStatus::NetworkStatus()$/;"	f	class:NetworkStatus
+NetworkStatus	NetworkStatus.h	/^class NetworkStatus : public SwStatus$/;"	c
 NetworkStatus	Status.h	/^NetworkStatus::NetworkStatus()$/;"	f	class:NetworkStatus
 NetworkStatus	Status.h	/^class NetworkStatus : public Status$/;"	c
 OBJCOPY	Makefile	/^OBJCOPY   = $(CROSS_COMPILE)objcopy$/;"	m
@@ -110,15 +107,15 @@ PowerUpHandler	PowerUpHandler.h	/^class PowerUpHandler : public IPCHandler$/;"	c
 QUICK_FLICKER_PERIOD	Variable.h	22;"	d
 RANLIB	Makefile	/^RANLIB    = $(CROSS_COMPILE)ranlib$/;"	m
 READELF	Makefile	/^READELF   = $(CROSS_COMPILE)readelf$/;"	m
-ReleaseAllStatus	map_iterator_factoryPattern.cpp	/^		bool ReleaseAllStatus() {$/;"	f	class:Holder
 ReleaseHwManager	HwManager.cpp	/^int HwManager::ReleaseHwManager()$/;"	f	class:HwManager
 ReleaseStatesHolder	StatesHolder.cpp	/^int StatesHolder::ReleaseStatesHolder()$/;"	f	class:StatesHolder
-ReturnHwControllerObjectByType	HwManager.cpp	/^HwController *HwManager::ReturnHwControllerObjectByType(const char* hw_name)$/;"	f	class:HwManager
+ReturnHwControllerObjectByType	HwManager.cpp	/^HwController *HwManager::ReturnHwControllerObjectByType(const char* hw_controller_name)$/;"	f	class:HwManager
+ReturnSwStatusObjectByType	StatesHolder.cpp	/^SwStatus *StatesHolder::ReturnSwStatusObjectByType(const char* sw_status_name)$/;"	f	class:StatesHolder
 SCAN	Status.h	/^	SCAN,$/;"	e	enum:wps_status
 SETUP_CONNECT_FAIL_VOICE	Variable.h	31;"	d
 SIZE	Makefile	/^SIZE      = $(CROSS_COMPILE)size$/;"	m
 SOLID_PERIOD	Variable.h	19;"	d
-SRCS	Makefile	/^SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp IPCHandler.cpp Common.cpp \\$/;"	m
+SRCS	Makefile	/^SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp SwStatus.cpp IPCHandler.cpp Common.cpp \\$/;"	m
 STRINGS	Makefile	/^STRINGS   = $(CROSS_COMPILE)strings$/;"	m
 STRIP	Makefile	/^STRIP     = $(CROSS_COMPILE)strip$/;"	m
 SetMainStates	StatesHolder.cpp	/^void StatesHolder::SetMainStates(MAINSTATES s)$/;"	f	class:StatesHolder
@@ -126,6 +123,7 @@ StatesHolder	StatesHolder.cpp	/^StatesHolder::StatesHolder():mainStates(POWERUP)
 StatesHolder	StatesHolder.h	/^class StatesHolder$/;"	c
 Status	Status.h	/^Status::Status()$/;"	f	class:Status
 Status	Status.h	/^class Status $/;"	c
+SwStatus	SwStatus.cpp	/^SwStatus::SwStatus()$/;"	f	class:SwStatus
 SwStatus	SwStatus.h	/^class SwStatus$/;"	c
 TARGETS	Makefile	/^TARGETS = $(DAEMON)$/;"	m
 TIME_BASE	Variable.h	3;"	d
@@ -151,21 +149,29 @@ WifiController	WifiController.h	/^class WifiController : public HwController$/;"
 WpsStatus	Status.h	/^WpsStatus::WpsStatus()$/;"	f	class:WpsStatus
 WpsStatus	Status.h	/^class WpsStatus : public Status$/;"	c
 _BUTTONCONTROLLER_H_	ButtonController.h	2;"	d
-_BUTTONCONTROLLER_H_	NetworkStatus.h	2;"	d
+_BUTTONSTATUS_H_	ButtonStatus.h	2;"	d
 _COMMON_H_	Common.h	2;"	d
 _HWCONTROLLER_H_	HwController.h	2;"	d
 _HWMANAGER_H_	HwManager.h	2;"	d
 _IPCHANDLER_H_	IPCHandler.h	2;"	d
+_NETWORKSTATUS_H_	NetworkStatus.h	2;"	d
 _POWERUPHANDLER_H_	PowerUpHandler.h	2;"	d
 _STATESHOLDER_H_	StatesHolder.h	2;"	d
 _SWSTATUS_H_	SwStatus.h	2;"	d
 _WIFICONTROLLER_H_	WifiController.h	2;"	d
 check_associate	PowerUpHandler.cpp	/^void PowerUpHandler::check_associate()$/;"	f	class:PowerUpHandler
+continue_status_detect	ButtonStatus.cpp	/^int ButtonStatus::continue_status_detect()$/;"	f	class:ButtonStatus
+continue_status_detect	NetworkStatus.cpp	/^int NetworkStatus::continue_status_detect()$/;"	f	class:NetworkStatus
+continue_status_detect_by_type	StatesHolder.cpp	/^int StatesHolder::continue_status_detect_by_type(const char* status_name)$/;"	f	class:StatesHolder
 deinit	ButtonController.cpp	/^int ButtonController::deinit()$/;"	f	class:ButtonController
+deinit	ButtonStatus.cpp	/^int ButtonStatus::deinit()$/;"	f	class:ButtonStatus
 deinit	HwManager.cpp	/^int HwManager::deinit()$/;"	f	class:HwManager
+deinit	NetworkStatus.cpp	/^int NetworkStatus::deinit()$/;"	f	class:NetworkStatus
+deinit	StatesHolder.cpp	/^int StatesHolder::deinit()$/;"	f	class:StatesHolder
 deinit	Watchdog.cpp	/^int Watchdog::deinit()$/;"	f	class:Watchdog
 deinit	WifiController.cpp	/^int WifiController::deinit()$/;"	f	class:WifiController
 deinit_hw_info_by_type	HwManager.cpp	/^int HwManager::deinit_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
+deinit_status_detect_by_type	StatesHolder.cpp	/^int StatesHolder::deinit_status_detect_by_type(const char* status_name)$/;"	f	class:StatesHolder
 diff_curr_uptime_count	Common.cpp	/^long diff_curr_uptime_count(struct timeval t)$/;"	f
 do_wifi_wps	WifiController.cpp	/^int WifiController::do_wifi_wps(void *hw_struct)$/;"	f	class:WifiController
 get_hw_info	ButtonController.cpp	/^int ButtonController::get_hw_info(void *hw_struct)$/;"	f	class:ButtonController
@@ -173,6 +179,9 @@ get_hw_info	WifiController.cpp	/^int WifiController::get_hw_info(void *hw_struct
 get_hw_info_by_type	HwManager.cpp	/^int HwManager::get_hw_info_by_type(const char* hw_name, void* hw_struct)$/;"	f	class:HwManager
 get_quit	Common.cpp	/^bool get_quit()$/;"	f
 get_reload	Common.cpp	/^bool get_reload()$/;"	f
+get_status_detect_flag	ButtonStatus.cpp	/^int ButtonStatus::get_status_detect_flag()$/;"	f	class:ButtonStatus
+get_status_detect_flag	NetworkStatus.cpp	/^int NetworkStatus::get_status_detect_flag()$/;"	f	class:NetworkStatus
+get_status_detect_flag_by_type	StatesHolder.cpp	/^int StatesHolder::get_status_detect_flag_by_type(const char* status_name)$/;"	f	class:StatesHolder
 get_uptime	Common.cpp	/^struct timeval get_uptime()$/;"	f
 get_wifi_associated_status	WifiController.cpp	/^int WifiController::get_wifi_associated_status(void *hw_struct)$/;"	f	class:WifiController
 get_wifi_radio_status	WifiController.cpp	/^int WifiController::get_wifi_radio_status(void *hw_struct)$/;"	f	class:WifiController
@@ -185,19 +194,21 @@ holder	IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
 holder	StatesHolder.h	/^		static StatesHolder *holder;$/;"	m	class:StatesHolder
 holder	Watchdog.h	/^		StatesHolder *holder;$/;"	m	class:Watchdog
 hw_manager	HwManager.h	/^		static HwManager *hw_manager;$/;"	m	class:HwManager
-hw_manager	SwStatus.h	/^		HwManger *hw_manager;$/;"	m	class:SwStatus
+hw_manager	SwStatus.h	/^		HwManager *hw_manager;$/;"	m	class:SwStatus
 hw_manager	Watchdog.h	/^		HwManager *hw_manager;$/;"	m	class:Watchdog
 id	ButtonController.h	/^	AHAL_BTN_ID id;$/;"	m	struct:BUTTON
-id	NetworkStatus.h	/^	AHAL_BTN_ID id;$/;"	m	struct:BUTTON
-in_map_status	map_iterator_factoryPattern.cpp	/^		map<const char*, Status *>::iterator in_map_status;$/;"	m	class:Holder	file:
 init	ButtonController.cpp	/^int ButtonController::init()$/;"	f	class:ButtonController
+init	ButtonStatus.cpp	/^int ButtonStatus::init()$/;"	f	class:ButtonStatus
 init	HwManager.cpp	/^int HwManager::init()$/;"	f	class:HwManager
 init	IPCHandler.cpp	/^int IPCHandler::init()$/;"	f	class:IPCHandler
+init	NetworkStatus.cpp	/^int NetworkStatus::init()$/;"	f	class:NetworkStatus
 init	PowerUpHandler.cpp	/^int PowerUpHandler::init()$/;"	f	class:PowerUpHandler
+init	StatesHolder.cpp	/^int StatesHolder::init()$/;"	f	class:StatesHolder
 init	Watchdog.cpp	/^int Watchdog::init()$/;"	f	class:Watchdog
 init	WifiController.cpp	/^int WifiController::init()$/;"	f	class:WifiController
 initSignal	Watchdog.cpp	/^bool initSignal()$/;"	f
 init_hw_info_by_type	HwManager.cpp	/^int HwManager::init_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
+init_status_detect_by_type	StatesHolder.cpp	/^int StatesHolder::init_status_detect_by_type(const char* status_name)$/;"	f	class:StatesHolder
 ipc_daemon	IPCHandler.h	/^	IpcDaemon ipc_daemon;$/;"	m	class:IPCHandler
 ipc_fd	IPCHandler.h	/^	int ipc_fd;$/;"	m	class:IPCHandler
 isAssociated	WifiController.h	/^	AHAL_CST_BOOL isAssociated;$/;"	m	struct:WIFI
@@ -205,12 +216,14 @@ isContinusDetect	SwStatus.h	/^		bool isContinusDetect;$/;"	m	class:SwStatus
 is_quit	Common.cpp	/^bool is_quit = false;$/;"	v
 is_reload	Common.cpp	/^bool is_reload = false;$/;"	v
 main	Watchdog.cpp	/^int main(int \/*argc*\/, const char* argv[])$/;"	f
-main	map_iterator_factoryPattern.cpp	/^int main()$/;"	f
 mainStates	StatesHolder.h	/^		MAINSTATES mainStates;$/;"	m	class:StatesHolder
 map_hw_controller	HwManager.h	/^		map<string, HwController *> map_hw_controller;$/;"	m	class:HwManager
-map_status	map_iterator_factoryPattern.cpp	/^		map<const char*, Status *> map_status;$/;"	m	class:Holder	file:
+map_sw_status	StatesHolder.h	/^		map<string, SwStatus *> map_sw_status;$/;"	m	class:StatesHolder
 network_status	Status.h	/^typedef enum network_status {$/;"	g
 oldMainStates	StatesHolder.h	/^		MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
+pause_status_detect	ButtonStatus.cpp	/^int ButtonStatus::pause_status_detect() $/;"	f	class:ButtonStatus
+pause_status_detect	NetworkStatus.cpp	/^int NetworkStatus::pause_status_detect() $/;"	f	class:NetworkStatus
+pause_status_detect_by_type	StatesHolder.cpp	/^int StatesHolder::pause_status_detect_by_type(const char* status_name)$/;"	f	class:StatesHolder
 referCount	HwManager.cpp	/^int HwManager::referCount = 0;$/;"	m	class:HwManager	file:
 referCount	HwManager.h	/^		static int referCount;$/;"	m	class:HwManager
 referCount	StatesHolder.cpp	/^int StatesHolder::referCount = 0;$/;"	m	class:StatesHolder	file:
@@ -219,8 +232,13 @@ release	IPCHandler.cpp	/^int IPCHandler::release()$/;"	f	class:IPCHandler
 release	PowerUpHandler.cpp	/^int PowerUpHandler::release()$/;"	f	class:PowerUpHandler
 requestExitHandler	Watchdog.cpp	/^void requestExitHandler(int sigNum)$/;"	f
 requestReloadHandler	Watchdog.cpp	/^void requestReloadHandler(int sigNum)$/;"	f
+reset_button_status_pid	ButtonStatus.h	/^		pthread_t reset_button_status_pid;$/;"	m	class:ButtonStatus
 run	Watchdog.cpp	/^int Watchdog::run()$/;"	f	class:Watchdog
 run_parsing_command	IPCHandler.cpp	/^int IPCHandler::run_parsing_command()$/;"	f	class:IPCHandler
+run_reset_button_status_detect_thread	ButtonStatus.cpp	/^void *ButtonStatus::run_reset_button_status_detect_thread(void *)$/;"	f	class:ButtonStatus
+run_status_detect	ButtonStatus.cpp	/^int ButtonStatus::run_status_detect()$/;"	f	class:ButtonStatus
+run_status_detect	NetworkStatus.cpp	/^int NetworkStatus::run_status_detect()$/;"	f	class:NetworkStatus
+run_status_detect_by_type	StatesHolder.cpp	/^int StatesHolder::run_status_detect_by_type(const char* status_name)$/;"	f	class:StatesHolder
 send_ipccmd	Common.cpp	/^void send_ipccmd(const char *path, int ipc)$/;"	f
 set_hw_info	ButtonController.cpp	/^int ButtonController::set_hw_info(void *) $/;"	f	class:ButtonController
 set_hw_info	WifiController.cpp	/^int WifiController::set_hw_info(void *hw_struct) $/;"	f	class:WifiController
@@ -230,21 +248,21 @@ set_reload	Common.cpp	/^void set_reload(bool b)$/;"	f
 start_thread	Common.cpp	/^int start_thread(void *callback, pthread_t & pid, void *pass)$/;"	f
 start_thread_join	Common.cpp	/^int start_thread_join(void *callback, pthread_t & pid, void *pass)$/;"	f
 status	ButtonController.h	/^	AHAL_BTN_STATUS status;$/;"	m	struct:BUTTON
-status	NetworkStatus.h	/^	AHAL_BTN_STATUS status;$/;"	m	struct:BUTTON
 status	Status.h	/^		int status;$/;"	m	class:Status
-status_getter	map_iterator_factoryPattern.cpp	/^		Status *status_getter;$/;"	m	class:Holder	file:
 wifi_radio_info	WifiController.h	/^	AHAL_WIFI_RADIO_INFO wifi_radio_info;$/;"	m	struct:WIFI
 wifi_wps_status	WifiController.h	/^	AHAL_WIFI_WPS_STATUS wifi_wps_status;$/;"	m	struct:WIFI
 wps_status	Status.h	/^typedef enum wps_status {$/;"	g
 ~ButtonController	ButtonController.cpp	/^ButtonController::~ButtonController()$/;"	f	class:ButtonController
-~Holder	map_iterator_factoryPattern.cpp	/^		~Holder() {$/;"	f	class:Holder
+~ButtonStatus	ButtonStatus.cpp	/^ButtonStatus::~ButtonStatus()$/;"	f	class:ButtonStatus
 ~HwController	HwController.cpp	/^HwController::~HwController()$/;"	f	class:HwController
 ~HwManager	HwManager.cpp	/^HwManager::~HwManager()$/;"	f	class:HwManager
 ~IPCHandler	IPCHandler.cpp	/^IPCHandler::~IPCHandler()$/;"	f	class:IPCHandler
+~NetworkStatus	NetworkStatus.cpp	/^NetworkStatus::~NetworkStatus()$/;"	f	class:NetworkStatus
 ~NetworkStatus	Status.h	/^NetworkStatus::~NetworkStatus()$/;"	f	class:NetworkStatus
 ~PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::~PowerUpHandler()$/;"	f	class:PowerUpHandler
 ~StatesHolder	StatesHolder.cpp	/^StatesHolder::~StatesHolder()$/;"	f	class:StatesHolder
 ~Status	Status.h	/^Status::~Status()$/;"	f	class:Status
+~SwStatus	SwStatus.cpp	/^SwStatus::~SwStatus()$/;"	f	class:SwStatus
 ~Watchdog	Watchdog.cpp	/^Watchdog::~Watchdog()$/;"	f	class:Watchdog
 ~WifiController	WifiController.cpp	/^WifiController::~WifiController()$/;"	f	class:WifiController
 ~WpsStatus	Status.h	/^WpsStatus::~WpsStatus()$/;"	f	class:WpsStatus

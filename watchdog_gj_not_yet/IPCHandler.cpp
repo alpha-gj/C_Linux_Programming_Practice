@@ -77,6 +77,10 @@ bool IPCHandler::GoNextState()
 
 int IPCHandler::run_parsing_command()
 {
+	while (!get_quit() && !get_reload()) {
+		printf("here is ipchandler\n");
+		sleep(1);
+	}
 	/*
 	int client_fd, ret;
 	IpcCommand cmd;

@@ -11,7 +11,7 @@ StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)
 	//TODO insert something that you want to detect, such as TWT, button, network status, lightsensor(day,night mode)
 
 	map_sw_status.insert(make_pair("NetworkStatus", new NetworkStatus()));
-	
+	map_sw_status.insert(make_pair("ButtonStatus", new ButtonStatus()));
 }
 
 StatesHolder::~StatesHolder()
@@ -62,6 +62,7 @@ StatesHolder *StatesHolder::CreateStatesHolder()
 {
 	if (holder == NULL)  {
 		holder = new StatesHolder();
+		holder->init();
 	}
 	if (holder) {
 		++referCount;
@@ -86,6 +87,7 @@ int StatesHolder::ReleaseStatesHolder()
 		}
 
 		if (referCount == 0) {
+			holder->deinit();
 			delete holder;
 			holder = NULL;
 			fprintf(stderr, "%s: %s[%d] holder is deleted\n", __FILE__, __FUNCTION__, __LINE__);

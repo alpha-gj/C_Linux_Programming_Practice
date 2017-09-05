@@ -5,6 +5,7 @@
 #include "sys/socket.h"
 #include "todo.h"
 #include "command.h"
+#include "Common.h"
 #include "StatesHolder.h"
 
 class IPCHandler
