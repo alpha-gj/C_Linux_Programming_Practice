@@ -5,6 +5,59 @@ using namespace std;
 StatesHolder *StatesHolder::holder = NULL;
 int StatesHolder::referCount = 0;
 
+
+StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)
+{
+	//TODO insert something that you want to detect, such as TWT, button, network status, lightsensor(day,night mode)
+
+	map_sw_status.insert(make_pair("NetworkStatus", new NetworkStatus()));
+	
+}
+
+StatesHolder::~StatesHolder()
+{
+	map<string, SwStatus *>::iterator in_map_sw_status;
+
+	for (in_map_sw_status = map_sw_status.begin(); 
+		 in_map_sw_status != map_sw_status.end();
+		 in_map_sw_status++) {
+		delete in_map_sw_status->second;
+		in_map_sw_status->second = NULL;
+	}
+}
+
+int StatesHolder::init()
+{
+	map<string, SwStatus *>::iterator in_map_sw_status;
+	SwStatus *sw_status = NULL;
+
+	for (in_map_sw_status = map_sw_status.begin(); 
+		 in_map_sw_status != map_sw_status.end();
+		 in_map_sw_status++) {
+		sw_status = in_map_sw_status->second;
+		sw_status->init();
+	}
+
+	//TODO need to check
+	return 0;
+}
+
+int StatesHolder::deinit()
+{
+	map<string, SwStatus *>::iterator in_map_sw_status;
+	SwStatus *sw_status = NULL;
+
+	for (in_map_sw_status = map_sw_status.begin(); 
+		 in_map_sw_status != map_sw_status.end();
+		 in_map_sw_status++) {
+		sw_status = in_map_sw_status->second;
+		sw_status->deinit();
+	}
+
+	//TODO need to check
+	return 0;
+}
+
 StatesHolder *StatesHolder::CreateStatesHolder()
 {
 	if (holder == NULL)  {
@@ -45,16 +98,82 @@ int StatesHolder::ReleaseStatesHolder()
 	return ret;
 }
 
-StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)
+SwStatus *StatesHolder::ReturnSwStatusObjectByType(const char* sw_status_name)
 {
-	cout << "*** StatesHolder constructer without pra is running ... ***" << endl;
-	//insert something that you want to detect, such as TWT, button, network status, lightsensor(day,night mode)
-	
+	map<string, SwStatus *>::iterator in_map_sw_status;
+	SwStatus *sw_status = NULL;
+	string s_sw_status_name(sw_status_name);
+
+	in_map_sw_status = map_sw_status.find(s_sw_status_name);
+
+	if (in_map_sw_status != map_sw_status.end()) {
+		/* Get object address */
+		sw_status = in_map_sw_status->second;
+	} else {
+		/* No result */
+	}
+	return sw_status;
 }
 
-StatesHolder::~StatesHolder()
+
+int StatesHolder::init_status_detect_by_type(const char* status_name)
 {
-	cout << "*** StatesHolder destructer is running ... ***" << endl;
+	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
+
+	if (sw_status == NULL)
+		return -1;
+	else
+		return sw_status->init();
+}
+
+int StatesHolder::deinit_status_detect_by_type(const char* status_name)
+{
+	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
+
+	if (sw_status == NULL)
+		return -1;
+	else
+		return sw_status->deinit();
+}
+
+int StatesHolder::run_status_detect_by_type(const char* status_name)
+{
+	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
+
+	if (sw_status == NULL)
+		return -1;
+	else
+		return sw_status->run_status_detect();
+}
+
+int StatesHolder::pause_status_detect_by_type(const char* status_name)
+{
+	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
+
+	if (sw_status == NULL)
+		return -1;
+	else
+		return sw_status->pause_status_detect();
+}
+
+int StatesHolder::continue_status_detect_by_type(const char* status_name)
+{
+	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
+
+	if (sw_status == NULL)
+		return -1;
+	else
+		return sw_status->continue_status_detect();
+}
+
+int StatesHolder::get_status_detect_flag_by_type(const char* status_name)
+{
+	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
+
+	if (sw_status == NULL)
+		return -1;
+	else
+		return sw_status->get_status_detect_flag();
 }
 
 void StatesHolder::SetMainStates(MAINSTATES s)

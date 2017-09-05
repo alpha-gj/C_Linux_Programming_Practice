@@ -6,68 +6,39 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 AEC_RESET	Variable.h	39;"	d
 AR	Makefile	/^AR        = $(CROSS_COMPILE)ar$/;"	m
-AR	watchdog_gj/Makefile	/^AR        = $(CROSS_COMPILE)ar$/;"	m
 AS	Makefile	/^AS        = $(CROSS_COMPILE)as$/;"	m
-AS	watchdog_gj/Makefile	/^AS        = $(CROSS_COMPILE)as$/;"	m
 ASSOCIATED	Status.h	/^	ASSOCIATED,$/;"	e	enum:network_status
-ASSOCIATED	watchdog_gj/Status.h	/^	ASSOCIATED,$/;"	e	enum:network_status
 BLINK_PERIOD	Variable.h	21;"	d
 BREATHING_PERIOD	Variable.h	20;"	d
 BUTTON	ButtonController.h	/^typedef struct BUTTON$/;"	s
 BUTTON	NetworkStatus.h	/^typedef struct BUTTON$/;"	s
 BUTTON	Watchdog.cpp	48;"	d	file:
-BUTTON	watchdog_gj/ButtonController.h	/^typedef struct BUTTON$/;"	s
 BUTTON_GPIO_NUM	Variable.h	25;"	d
 BUTTON_POLLING_TIME	Variable.h	1;"	d
 BUTTON_SETTING	ButtonController.h	/^} BUTTON_SETTING;$/;"	t	typeref:struct:BUTTON
 BUTTON_SETTING	NetworkStatus.h	/^} BUTTON_SETTING;$/;"	t	typeref:struct:BUTTON
-BUTTON_SETTING	watchdog_gj/ButtonController.h	/^} BUTTON_SETTING;$/;"	t	typeref:struct:BUTTON
 ButtonController	ButtonController.cpp	/^ButtonController::ButtonController()$/;"	f	class:ButtonController
 ButtonController	ButtonController.h	/^class ButtonController : public HwController$/;"	c
 ButtonController	NetworkStatus.h	/^class ButtonController : public HwController$/;"	c
-ButtonController	watchdog_gj/ButtonController.cpp	/^ButtonController::ButtonController()$/;"	f	class:ButtonController
-ButtonController	watchdog_gj/ButtonController.cpp	/^~ButtonController::ButtonController()$/;"	f	class:~ButtonController
-ButtonController	watchdog_gj/ButtonController.h	/^class ButtonController : public HWController$/;"	c
-CALLING_OUT	StateHolder/StatesHolder_ralink.h	/^	CALLING_OUT,$/;"	e	enum:TWTSTATES
-CALL_FROM_OUTSIDE	StateHolder/StatesHolder_ralink.h	/^	CALL_FROM_OUTSIDE,$/;"	e	enum:TWTSTATES
-CALL_OFF	StateHolder/StatesHolder_ralink.h	/^	CALL_OFF,$/;"	e	enum:TWTSTATES
 CALL_OUT_TONE	Variable.h	41;"	d
 CC	Makefile	/^CC        = $(CROSS_COMPILE)gcc$/;"	m
-CC	watchdog_gj/Makefile	/^CC        = $(CROSS_COMPILE)gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS    = $(PLATFORM_CFLAGS) -Wall -W -D$(subst -,_,$(PJ_MODEL))$/;"	m
-CFLAGS	watchdog_gj/Makefile	/^CFLAGS    = $(PLATFORM_CFLAGS) -Wall -W -D$(subst -,_,$(PJ_MODEL)) #-DDEBUG_FPRINTF$/;"	m
 CPP	Makefile	/^CPP       = $(CROSS_COMPILE)gcc -E$/;"	m
-CPP	watchdog_gj/Makefile	/^CPP       = $(CROSS_COMPILE)gcc -E$/;"	m
 CPPFLAGS	Makefile	/^CPPFLAGS  = $(PLATFORM_CPPFLAGS) -D_REENTRANT -D_LINUX -I$(PREFIX)\/include -I$(PREFIX)\/include\/ahal\\$/;"	m
-CPPFLAGS	watchdog_gj/Makefile	/^CPPFLAGS  = $(PLATFORM_CPPFLAGS) -D_REENTRANT -D_LINUX -I$(PREFIX)\/include \\$/;"	m
 CROSS_COMPILE	Makefile	/^CROSS_COMPILE = $(PJ_TARGET)-$/;"	m
-CROSS_COMPILE	watchdog_gj/Makefile	/^CROSS_COMPILE = $(PJ_TARGET)-$/;"	m
 CXX	Makefile	/^CXX       = $(CROSS_COMPILE)g++$/;"	m
-CXX	watchdog_gj/Makefile	/^CXX       = $(CROSS_COMPILE)g++$/;"	m
 CXXFLAGS	Makefile	/^CXXFLAGS  = $(CFLAGS)$/;"	m
-CXXFLAGS	watchdog_gj/Makefile	/^CXXFLAGS  = $(CFLAGS)$/;"	m
 CheckStatus	Status.h	/^		virtual bool CheckStatus() {$/;"	f	class:NetworkStatus
 CheckStatus	Status.h	/^		virtual bool CheckStatus() {$/;"	f	class:WpsStatus
-CheckStatus	watchdog_gj/Status.h	/^		virtual bool CheckStatus() {$/;"	f	class:NetworkStatus
-CheckStatus	watchdog_gj/Status.h	/^		virtual bool CheckStatus() {$/;"	f	class:WpsStatus
 CreateAllStatus	map_iterator_factoryPattern.cpp	/^		bool CreateAllStatus() {$/;"	f	class:Holder
-CreateAllStatus	watchdog_gj/map_iterator_factoryPattern.cpp	/^		bool CreateAllStatus() {$/;"	f	class:Holder
 CreateHandlerByStates	Watchdog.cpp	/^IPCHandler *Watchdog::CreateHandlerByStates()$/;"	f	class:Watchdog
-CreateHandlerByStates	watchdog_gj/Watchdog.cpp	/^IPCHandler *Watchdog::CreateHandlerByStates()$/;"	f	class:Watchdog
 CreateHwManager	HwManager.cpp	/^HwManager *HwManager::CreateHwManager()$/;"	f	class:HwManager
-CreateStatesHolder	StateHolder/StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
 CreateStatesHolder	StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
-CreateStatesHolder	watchdog_gj/StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
 DAEMON	Makefile	/^DAEMON = Watchdog$/;"	m
-DAEMON	watchdog_gj/Makefile	/^DAEMON = Jobber$/;"	m
 DAY_TO_NIGHT_SEC	HwController.h	21;"	d
-DAY_TO_NIGHT_SEC	watchdog_gj/HWController.h	21;"	d
 DEASSOCIATED	Status.h	/^	DEASSOCIATED,$/;"	e	enum:network_status
-DEASSOCIATED	watchdog_gj/Status.h	/^	DEASSOCIATED,$/;"	e	enum:network_status
 DEPENDS	Makefile	/^DEPENDS := $(DEPENDS:%.cpp=%.d)$/;"	m
 DEPENDS	Makefile	/^DEPENDS := $(SRCS:%.c=%.d)$/;"	m
-DEPENDS	watchdog_gj/Makefile	/^DEPENDS := $(DEPENDS:%.cpp=%.d)$/;"	m
-DEPENDS	watchdog_gj/Makefile	/^DEPENDS := $(SRCS:%.c=%.d)$/;"	m
 DoWps	WifiController.h	/^	AHAL_CST_BOOL DoWps;$/;"	m	struct:WIFI
 ENTER_NORMAL_COUNT	Variable.h	6;"	d
 ENTER_REBOOT_COUNT	Variable.h	7;"	d
@@ -77,101 +48,50 @@ ENTER_STANDBY_COUNT	Variable.h	8;"	d
 ENTER_TWT_COUNT	Variable.h	5;"	d
 ENTER_WPS_COUNT	Variable.h	11;"	d
 FAIL	Status.h	/^	FAIL,$/;"	e	enum:wps_status
-FAIL	watchdog_gj/Status.h	/^	FAIL,$/;"	e	enum:wps_status
-GENERIC_LED	StateHolder/StatesHolder_ralink.h	/^	GENERIC_LED,$/;"	e	enum:MAINSTATES
 GPIO_READ_FAIL_COUNT	Variable.h	13;"	d
 GetMainHandlerState	PowerUpHandler.cpp	/^MAINSTATES PowerUpHandler::GetMainHandlerState()$/;"	f	class:PowerUpHandler
-GetMainHandlerState	watchdog_gj/PowerUpHandler.cpp	/^MAINSTATES PowerUpHandler::GetMainHandlerState()$/;"	f	class:PowerUpHandler
-GetMainStates	StateHolder/StatesHolder.cpp	/^MAINSTATES StatesHolder::GetMainStates()$/;"	f	class:StatesHolder
 GetMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetMainStates()$/;"	f	class:StatesHolder
-GetMainStates	watchdog_gj/StatesHolder.cpp	/^MAINSTATES StatesHolder::GetMainStates()$/;"	f	class:StatesHolder
-GetOldMainStates	StateHolder/StatesHolder.cpp	/^MAINSTATES StatesHolder::GetOldMainStates()$/;"	f	class:StatesHolder
 GetOldMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetOldMainStates()$/;"	f	class:StatesHolder
-GetOldMainStates	watchdog_gj/StatesHolder.cpp	/^MAINSTATES StatesHolder::GetOldMainStates()$/;"	f	class:StatesHolder
 GetStatus	Status.h	/^		virtual int GetStatus() {$/;"	f	class:NetworkStatus
 GetStatus	Status.h	/^		virtual int GetStatus() {$/;"	f	class:WpsStatus
-GetStatus	watchdog_gj/Status.h	/^		virtual int GetStatus() {$/;"	f	class:NetworkStatus
-GetStatus	watchdog_gj/Status.h	/^		virtual int GetStatus() {$/;"	f	class:WpsStatus
 GetStatusBySelect	map_iterator_factoryPattern.cpp	/^		int GetStatusBySelect(const char* status) {$/;"	f	class:Holder
-GetStatusBySelect	watchdog_gj/map_iterator_factoryPattern.cpp	/^		int GetStatusBySelect(const char* status) {$/;"	f	class:Holder
 GoNextState	IPCHandler.cpp	/^bool IPCHandler::GoNextState()$/;"	f	class:IPCHandler
-GoNextState	watchdog_gj/IPCHandler.cpp	/^bool IPCHandler::GoNextState()$/;"	f	class:IPCHandler
 Holder	map_iterator_factoryPattern.cpp	/^		Holder() {$/;"	f	class:Holder
 Holder	map_iterator_factoryPattern.cpp	/^class Holder$/;"	c	file:
-Holder	watchdog_gj/map_iterator_factoryPattern.cpp	/^		Holder() {$/;"	f	class:Holder
-Holder	watchdog_gj/map_iterator_factoryPattern.cpp	/^class Holder$/;"	c	file:
 HwController	HwController.cpp	/^HwController::HwController()$/;"	f	class:HwController
 HwController	HwController.h	/^class HwController$/;"	c
-HwController	watchdog_gj/HWController.h	/^class HwController$/;"	c
 HwManager	HwManager.cpp	/^HwManager::HwManager()$/;"	f	class:HwManager
 HwManager	HwManager.h	/^class HwManager$/;"	c
 IDLE	Status.h	/^	IDLE = 0,$/;"	e	enum:wps_status
-IDLE	watchdog_gj/Status.h	/^	IDLE = 0,$/;"	e	enum:wps_status
 IPCHandler	IPCHandler.cpp	/^IPCHandler::IPCHandler():holder(NULL)$/;"	f	class:IPCHandler
 IPCHandler	IPCHandler.h	/^class IPCHandler$/;"	c
-IPCHandler	watchdog_gj/IPCHandler.cpp	/^IPCHandler::IPCHandler():holder(NULL)$/;"	f	class:IPCHandler
-IPCHandler	watchdog_gj/IPCHandler.h	/^class IPCHandler$/;"	c
 IR_AUTO_BY_LIGHT	Common.h	/^	IR_AUTO_BY_LIGHT,$/;"	e	enum:IR_CONTORLLER
-IR_AUTO_BY_LIGHT	watchdog_gj/Common.h	/^	IR_AUTO_BY_LIGHT,$/;"	e	enum:IR_CONTORLLER
 IR_CONTORLLER	Common.h	/^enum IR_CONTORLLER {$/;"	g
-IR_CONTORLLER	watchdog_gj/Common.h	/^enum IR_CONTORLLER {$/;"	g
 IR_MANUAL	Common.h	/^	IR_MANUAL,$/;"	e	enum:IR_CONTORLLER
-IR_MANUAL	watchdog_gj/Common.h	/^	IR_MANUAL,$/;"	e	enum:IR_CONTORLLER
 IR_OFF_ALWAYS_DAY	Common.h	/^	IR_OFF_ALWAYS_DAY,$/;"	e	enum:IR_CONTORLLER
-IR_OFF_ALWAYS_DAY	watchdog_gj/Common.h	/^	IR_OFF_ALWAYS_DAY,$/;"	e	enum:IR_CONTORLLER
 IR_ON_ALWAYS_NIGHT	Common.h	/^	IR_ON_ALWAYS_NIGHT,$/;"	e	enum:IR_CONTORLLER
-IR_ON_ALWAYS_NIGHT	watchdog_gj/Common.h	/^	IR_ON_ALWAYS_NIGHT,$/;"	e	enum:IR_CONTORLLER
 LD	Makefile	/^LD        = $(CROSS_COMPILE)ld$/;"	m
-LD	watchdog_gj/Makefile	/^LD        = $(CROSS_COMPILE)ld$/;"	m
 LDFLAGS	Makefile	/^LDFLAGS   = $(PLATFORM_LDFLAGS) -s -Wl,-rpath-link=$(PJ_RPATH)$/;"	m
-LDFLAGS	watchdog_gj/Makefile	/^LDFLAGS   = $(PLATFORM_LDFLAGS) -s -Wl,-rpath-link=$(PJ_RPATH)$/;"	m
 LDLIBS	Makefile	/^LDLIBS    = $(PLATFORM_LDLIBS) -lpthread -lcam -ltinydb -lsensor -lMulCast -lwlan -lusb-1.0 -lasound -lahal -laudio\\$/;"	m
-LDLIBS	watchdog_gj/Makefile	/^LDLIBS    = $(PLATFORM_LDLIBS) -lcam -ltinydb -lsensor -lMulCast -lwlan -lmxcam -lusb-1.0 -lmxuvc -lasound -lgeo_cmd -lpools \\$/;"	m
-LIGHTER_DAEMON	watchdog_gj/Makefile	/^LIGHTER_DAEMON = Lighter$/;"	m
 LIGHT_MODE	Common.h	/^enum LIGHT_MODE {$/;"	g
-LIGHT_MODE	watchdog_gj/Common.h	/^enum LIGHT_MODE {$/;"	g
 LOADLIBES	Makefile	/^LOADLIBES = $(PLATFORM_LOADLIBES) -L$(PREFIX)\/lib$/;"	m
-LOADLIBES	watchdog_gj/Makefile	/^LOADLIBES = $(PLATFORM_LOADLIBES) -L$(PREFIX)\/lib$/;"	m
 LOAD_CALL_OUT_TONE	Variable.h	42;"	d
-MAINSTATES	StateHolder/StatesHolder.h	/^enum MAINSTATES {$/;"	g
-MAINSTATES	StateHolder/StatesHolder_ralink.h	/^enum MAINSTATES {$/;"	g
 MAINSTATES	StatesHolder.h	/^enum MAINSTATES {$/;"	g
-MAINSTATES	watchdog_gj/StatesHolder.h	/^enum MAINSTATES {$/;"	g
-MAINSTATES_COUNT	StateHolder/StatesHolder.h	/^	MAINSTATES_COUNT,$/;"	e	enum:MAINSTATES
-MAINSTATES_COUNT	StateHolder/StatesHolder_ralink.h	/^	MAINSTATES_COUNT,$/;"	e	enum:MAINSTATES
 MAINSTATES_COUNT	StatesHolder.h	/^	MAINSTATES_COUNT,$/;"	e	enum:MAINSTATES
-MAINSTATES_COUNT	watchdog_gj/StatesHolder.h	/^	MAINSTATES_COUNT,$/;"	e	enum:MAINSTATES
 MAX_GEO_INIT_RETRY	Variable.h	24;"	d
 MAX_GPIO_NUM	Variable.h	26;"	d
-METATOOL	watchdog_gj/Makefile	/^METATOOL = MetaValue$/;"	m
 NAME_CALL_OUT_TONE	Variable.h	40;"	d
 NETWORK_RESTART_TIMEOUT	Variable.h	16;"	d
 NETWORK_STATUS	Status.h	/^} NETWORK_STATUS;$/;"	t	typeref:enum:network_status
-NETWORK_STATUS	watchdog_gj/Status.h	/^} NETWORK_STATUS;$/;"	t	typeref:enum:network_status
-NFCSTATES	StateHolder/StatesHolder_ralink.h	/^enum NFCSTATES {$/;"	g
-NFC_DAEMON	watchdog_gj/Makefile	/^NFC_DAEMON = nfcdog$/;"	m
-NFC_OFF	StateHolder/StatesHolder_ralink.h	/^	NFC_OFF,$/;"	e	enum:NFCSTATES
-NFC_SUCCESS	StateHolder/StatesHolder_ralink.h	/^	NFC_SUCCESS,$/;"	e	enum:NFCSTATES
-NFC_WORKING	StateHolder/StatesHolder_ralink.h	/^	NFC_WORKING,$/;"	e	enum:NFCSTATES
 NIGHT_TO_DAY_SEC	HwController.h	22;"	d
-NIGHT_TO_DAY_SEC	watchdog_gj/HWController.h	22;"	d
 NM	Makefile	/^NM        = $(CROSS_COMPILE)nm$/;"	m
-NM	watchdog_gj/Makefile	/^NM        = $(CROSS_COMPILE)nm$/;"	m
-NORMAL	StateHolder/StatesHolder_ralink.h	/^	NORMAL,$/;"	e	enum:MAINSTATES
 NetworkStatus	Status.h	/^NetworkStatus::NetworkStatus()$/;"	f	class:NetworkStatus
 NetworkStatus	Status.h	/^class NetworkStatus : public Status$/;"	c
-NetworkStatus	watchdog_gj/Status.h	/^NetworkStatus::NetworkStatus()$/;"	f	class:NetworkStatus
-NetworkStatus	watchdog_gj/Status.h	/^class NetworkStatus : public Status$/;"	c
 OBJCOPY	Makefile	/^OBJCOPY   = $(CROSS_COMPILE)objcopy$/;"	m
-OBJCOPY	watchdog_gj/Makefile	/^OBJCOPY   = $(CROSS_COMPILE)objcopy$/;"	m
 OBJDUMP	Makefile	/^OBJDUMP   = $(CROSS_COMPILE)objdump$/;"	m
-OBJDUMP	watchdog_gj/Makefile	/^OBJDUMP   = $(CROSS_COMPILE)objdump$/;"	m
 OK	Status.h	/^	OK,$/;"	e	enum:wps_status
-OK	watchdog_gj/Status.h	/^	OK,$/;"	e	enum:wps_status
 OPTIONS	Makefile	/^OPTIONS = $(SRCS) $(CPPFLAGS) $(LDLIBS)$/;"	m
-OPTIONS	watchdog_gj/Makefile	/^OPTIONS = $(SRCS) $(CPPFLAGS) $(LDLIBS)$/;"	m
 PAIR	Status.h	/^	PAIR,$/;"	e	enum:wps_status
-PAIR	watchdog_gj/Status.h	/^	PAIR,$/;"	e	enum:wps_status
 PLAY_BOOTINGUP_TONE	Variable.h	29;"	d
 PLAY_BOOTINGUP_VOICE	Variable.h	30;"	d
 PLAY_CALL_OUT_TONE	Variable.h	43;"	d
@@ -183,317 +103,148 @@ PLAY_TWT_BEGIN_TONE	Variable.h	37;"	d
 PLAY_TWT_END_TONE	Variable.h	38;"	d
 PLAY_TWT_START_TONE	Variable.h	36;"	d
 POLLING_TIMEOUT	Variable.h	2;"	d
-POWERUP	StateHolder/StatesHolder.h	/^	POWERUP,$/;"	e	enum:MAINSTATES
-POWERUP	StateHolder/StatesHolder_ralink.h	/^	POWERUP,$/;"	e	enum:MAINSTATES
 POWERUP	StatesHolder.h	/^	POWERUP,$/;"	e	enum:MAINSTATES
-POWERUP	watchdog_gj/StatesHolder.h	/^	POWERUP,$/;"	e	enum:MAINSTATES
-POWERUPWITHBUTTON	StateHolder/StatesHolder_ralink.h	/^	POWERUPWITHBUTTON,$/;"	e	enum:MAINSTATES
 PREFIX	Makefile	/^PREFIX = $(PJ_PREFIX)$/;"	m
-PREFIX	watchdog_gj/Makefile	/^PREFIX = $(PJ_PREFIX)$/;"	m
-PRIVACY	StateHolder/StatesHolder_ralink.h	/^	PRIVACY,$/;"	e	enum:MAINSTATES
 PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::PowerUpHandler()$/;"	f	class:PowerUpHandler
 PowerUpHandler	PowerUpHandler.h	/^class PowerUpHandler : public IPCHandler$/;"	c
-PowerUpHandler	watchdog_gj/PowerUpHandler.cpp	/^PowerUpHandler::PowerUpHandler()$/;"	f	class:PowerUpHandler
-PowerUpHandler	watchdog_gj/PowerUpHandler.h	/^class PowerUpHandler : public IPCHandler$/;"	c
 QUICK_FLICKER_PERIOD	Variable.h	22;"	d
-QUIET	StateHolder/StatesHolder_ralink.h	/^	QUIET,$/;"	e	enum:MAINSTATES
 RANLIB	Makefile	/^RANLIB    = $(CROSS_COMPILE)ranlib$/;"	m
-RANLIB	watchdog_gj/Makefile	/^RANLIB    = $(CROSS_COMPILE)ranlib$/;"	m
 READELF	Makefile	/^READELF   = $(CROSS_COMPILE)readelf$/;"	m
-READELF	watchdog_gj/Makefile	/^READELF   = $(CROSS_COMPILE)readelf$/;"	m
-REBOOT	StateHolder/StatesHolder_ralink.h	/^	REBOOT,$/;"	e	enum:MAINSTATES
-REPORT	StateHolder/StatesHolder_ralink.h	/^	REPORT,$/;"	e	enum:MAINSTATES
-RESET	StateHolder/StatesHolder_ralink.h	/^	RESET,$/;"	e	enum:MAINSTATES
 ReleaseAllStatus	map_iterator_factoryPattern.cpp	/^		bool ReleaseAllStatus() {$/;"	f	class:Holder
-ReleaseAllStatus	watchdog_gj/map_iterator_factoryPattern.cpp	/^		bool ReleaseAllStatus() {$/;"	f	class:Holder
 ReleaseHwManager	HwManager.cpp	/^int HwManager::ReleaseHwManager()$/;"	f	class:HwManager
-ReleaseStatesHolder	StateHolder/StatesHolder.cpp	/^int StatesHolder::ReleaseStatesHolder()$/;"	f	class:StatesHolder
 ReleaseStatesHolder	StatesHolder.cpp	/^int StatesHolder::ReleaseStatesHolder()$/;"	f	class:StatesHolder
-ReleaseStatesHolder	watchdog_gj/StatesHolder.cpp	/^int StatesHolder::ReleaseStatesHolder()$/;"	f	class:StatesHolder
 ReturnHwControllerObjectByType	HwManager.cpp	/^HwController *HwManager::ReturnHwControllerObjectByType(const char* hw_name)$/;"	f	class:HwManager
 SCAN	Status.h	/^	SCAN,$/;"	e	enum:wps_status
-SCAN	watchdog_gj/Status.h	/^	SCAN,$/;"	e	enum:wps_status
-SCRIPTS	watchdog_gj/Makefile	/^SCRIPTS = light sniff geo_restart.sh$/;"	m
-SETUP	StateHolder/StatesHolder_ralink.h	/^	SETUP,$/;"	e	enum:MAINSTATES
 SETUP_CONNECT_FAIL_VOICE	Variable.h	31;"	d
 SIZE	Makefile	/^SIZE      = $(CROSS_COMPILE)size$/;"	m
-SIZE	watchdog_gj/Makefile	/^SIZE      = $(CROSS_COMPILE)size$/;"	m
 SOLID_PERIOD	Variable.h	19;"	d
 SRCS	Makefile	/^SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp IPCHandler.cpp Common.cpp \\$/;"	m
-SRCS	watchdog_gj/Makefile	/^SRCS = $(DAEMON).cpp IPCHandler.cpp StatesHolder.cpp PowerUpHandler.cpp PoweUpWithButtonHandler.cpp NormalHandler.cpp \\$/;"	m
 STRINGS	Makefile	/^STRINGS   = $(CROSS_COMPILE)strings$/;"	m
-STRINGS	watchdog_gj/Makefile	/^STRINGS   = $(CROSS_COMPILE)strings$/;"	m
 STRIP	Makefile	/^STRIP     = $(CROSS_COMPILE)strip$/;"	m
-STRIP	watchdog_gj/Makefile	/^STRIP     = $(CROSS_COMPILE)strip$/;"	m
-SetMainStates	StateHolder/StatesHolder.cpp	/^void StatesHolder::SetMainStates(MAINSTATES s)$/;"	f	class:StatesHolder
 SetMainStates	StatesHolder.cpp	/^void StatesHolder::SetMainStates(MAINSTATES s)$/;"	f	class:StatesHolder
-SetMainStates	watchdog_gj/StatesHolder.cpp	/^void StatesHolder::SetMainStates(MAINSTATES s)$/;"	f	class:StatesHolder
-StatesHolder	StateHolder/StatesHolder.cpp	/^StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)$/;"	f	class:StatesHolder
-StatesHolder	StateHolder/StatesHolder.h	/^class StatesHolder$/;"	c
-StatesHolder	StateHolder/StatesHolder_ralink.h	/^class StatesHolder$/;"	c
-StatesHolder	StateHolder/WPSSTATUS.h	/^class StatesHolder$/;"	c
 StatesHolder	StatesHolder.cpp	/^StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)$/;"	f	class:StatesHolder
 StatesHolder	StatesHolder.h	/^class StatesHolder$/;"	c
-StatesHolder	watchdog_gj/StatesHolder.cpp	/^StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)$/;"	f	class:StatesHolder
-StatesHolder	watchdog_gj/StatesHolder.h	/^class StatesHolder$/;"	c
 Status	Status.h	/^Status::Status()$/;"	f	class:Status
 Status	Status.h	/^class Status $/;"	c
-Status	watchdog_gj/Status.h	/^Status::Status()$/;"	f	class:Status
-Status	watchdog_gj/Status.h	/^class Status $/;"	c
-StatusHolder	StateHolder/StatusHolder.h	/^class StatusHolder$/;"	c
 SwStatus	SwStatus.h	/^class SwStatus$/;"	c
-SwitchAttenuation	watchdog_gj/Makefile	/^SwitchAttenuation = SwitchAttenuation$/;"	m
-TALKING	StateHolder/StatesHolder_ralink.h	/^	TALKING,$/;"	e	enum:TWTSTATES
 TARGETS	Makefile	/^TARGETS = $(DAEMON)$/;"	m
-TARGETS	watchdog_gj/Makefile	/^TARGETS = $(DAEMON) $(NFC_DAEMON) $(LIGHTER_DAEMON) $(METATOOL) $(THERMAL_DAEMON) $(SwitchAttenuation)$/;"	m
-THERMAL_DAEMON	watchdog_gj/Makefile	/^THERMAL_DAEMON = Thermal$/;"	m
 TIME_BASE	Variable.h	3;"	d
 TIME_INTERVAL	HwController.h	20;"	d
-TIME_INTERVAL	watchdog_gj/HWController.h	20;"	d
-TROUBLE_SHOOTING	StateHolder/StatesHolder_ralink.h	/^	TROUBLE_SHOOTING,$/;"	e	enum:MAINSTATES
-TWT	StateHolder/StatesHolder_ralink.h	/^	TWT,$/;"	e	enum:MAINSTATES
-TWTSTATES	StateHolder/StatesHolder_ralink.h	/^enum TWTSTATES {$/;"	g
-TWT_QUIET	StateHolder/StatesHolder_ralink.h	/^	TWT_QUIET,$/;"	e	enum:MAINSTATES
 UNDER_ALWAYS_DAY_MODE	Common.h	/^	UNDER_ALWAYS_DAY_MODE,$/;"	e	enum:LIGHT_MODE
-UNDER_ALWAYS_DAY_MODE	watchdog_gj/Common.h	/^	UNDER_ALWAYS_DAY_MODE,$/;"	e	enum:LIGHT_MODE
 UNDER_ALWAYS_NIGHT_MODE	Common.h	/^	UNDER_ALWAYS_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
-UNDER_ALWAYS_NIGHT_MODE	watchdog_gj/Common.h	/^	UNDER_ALWAYS_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
 UNDER_DAY_MODE	Common.h	/^	UNDER_DAY_MODE,$/;"	e	enum:LIGHT_MODE
-UNDER_DAY_MODE	watchdog_gj/Common.h	/^	UNDER_DAY_MODE,$/;"	e	enum:LIGHT_MODE
 UNDER_NIGHT_MODE	Common.h	/^	UNDER_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
-UNDER_NIGHT_MODE	watchdog_gj/Common.h	/^	UNDER_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
 WAIT_CALL_OUT_COUNT	Variable.h	12;"	d
 WAIT_CONNECT_TO_DEVICE	Variable.h	15;"	d
 WAIT_HEART_BEAT_COUNT	Variable.h	4;"	d
 WAIT_WPS_STATE_COUNT	Variable.h	14;"	d
+WIFI	Watchdog.cpp	49;"	d	file:
 WIFI	WifiController.h	/^typedef struct WIFI$/;"	s
 WIFI_SETTING	WifiController.h	/^} WIFI_SETTING;$/;"	t	typeref:struct:WIFI
-WPSSTATES	StateHolder/StatesHolder_ralink.h	/^enum WPSSTATES {$/;"	g
-WPSSTATES	StateHolder/WPSSTATUS.h	/^enum WPSSTATES {$/;"	g
-WPSSTATES_COUNT	StateHolder/StatesHolder_ralink.h	/^	WPSSTATES_COUNT,$/;"	e	enum:WPSSTATES
-WPSSTATES_COUNT	StateHolder/WPSSTATUS.h	/^	WPSSTATES_COUNT,$/;"	e	enum:WPSSTATES
 WPS_BEGIN_TONE	Variable.h	32;"	d
-WPS_FAIL	StateHolder/StatesHolder_ralink.h	/^	WPS_FAIL,$/;"	e	enum:WPSSTATES
-WPS_FAIL	StateHolder/WPSSTATUS.h	/^	WPS_FAIL,$/;"	e	enum:WPSSTATES
-WPS_OFF	StateHolder/StatesHolder_ralink.h	/^	WPS_OFF,$/;"	e	enum:WPSSTATES
-WPS_OFF	StateHolder/WPSSTATUS.h	/^	WPS_OFF,$/;"	e	enum:WPSSTATES
-WPS_OK	StateHolder/StatesHolder_ralink.h	/^	WPS_OK,$/;"	e	enum:WPSSTATES
-WPS_OK	StateHolder/WPSSTATUS.h	/^	WPS_OK,$/;"	e	enum:WPSSTATES
-WPS_PAIRING	StateHolder/StatesHolder_ralink.h	/^	WPS_PAIRING,$/;"	e	enum:WPSSTATES
-WPS_PAIRING	StateHolder/WPSSTATUS.h	/^	WPS_PAIRING,$/;"	e	enum:WPSSTATES
 WPS_PBC_SCAN_COUNT	Variable.h	17;"	d
 WPS_STATUS	Status.h	/^} WPS_STATUS;$/;"	t	typeref:enum:wps_status
-WPS_STATUS	watchdog_gj/Status.h	/^} WPS_STATUS;$/;"	t	typeref:enum:wps_status
 Watchdog	Watchdog.cpp	/^Watchdog::Watchdog():hw_manager(NULL),holder(NULL)$/;"	f	class:Watchdog
 Watchdog	Watchdog.h	/^class Watchdog$/;"	c
-Watchdog	watchdog_gj/Watchdog.cpp	/^Watchdog::Watchdog():holder(NULL)$/;"	f	class:Watchdog
-Watchdog	watchdog_gj/Watchdog.h	/^class Watchdog$/;"	c
 WifiController	WifiController.cpp	/^WifiController::WifiController()$/;"	f	class:WifiController
 WifiController	WifiController.h	/^class WifiController : public HwController$/;"	c
 WpsStatus	Status.h	/^WpsStatus::WpsStatus()$/;"	f	class:WpsStatus
 WpsStatus	Status.h	/^class WpsStatus : public Status$/;"	c
-WpsStatus	watchdog_gj/Status.h	/^WpsStatus::WpsStatus()$/;"	f	class:WpsStatus
-WpsStatus	watchdog_gj/Status.h	/^class WpsStatus : public Status$/;"	c
 _BUTTONCONTROLLER_H_	ButtonController.h	2;"	d
 _BUTTONCONTROLLER_H_	NetworkStatus.h	2;"	d
-_BUTTONCONTROLLER_H_	watchdog_gj/ButtonController.h	2;"	d
 _COMMON_H_	Common.h	2;"	d
-_COMMON_H_	watchdog_gj/Common.h	2;"	d
 _HWCONTROLLER_H_	HwController.h	2;"	d
-_HWCONTROLLER_H_	watchdog_gj/HWController.h	2;"	d
 _HWMANAGER_H_	HwManager.h	2;"	d
 _IPCHANDLER_H_	IPCHandler.h	2;"	d
-_IPCHANDLER_H_	watchdog_gj/IPCHandler.h	2;"	d
 _POWERUPHANDLER_H_	PowerUpHandler.h	2;"	d
-_POWERUPHANDLER_H_	watchdog_gj/PowerUpHandler.h	2;"	d
-_STATESHOLDER_H_	StateHolder/StatesHolder.h	2;"	d
-_STATESHOLDER_H_	StateHolder/StatesHolder_ralink.h	2;"	d
 _STATESHOLDER_H_	StatesHolder.h	2;"	d
-_STATESHOLDER_H_	watchdog_gj/StatesHolder.h	2;"	d
-_STATUSHOLDER_H_	StateHolder/StatusHolder.h	2;"	d
 _SWSTATUS_H_	SwStatus.h	2;"	d
 _WIFICONTROLLER_H_	WifiController.h	2;"	d
-_WPSSTATUS_H_	StateHolder/WPSSTATUS.h	2;"	d
-a	StateHolder/StatusHolder.h	/^	StatusHolder()a;$/;"	m	class:StatusHolder
-associated	StateHolder/StatesHolder_ralink.h	/^	bool associated;$/;"	m	struct:net_states
-buttonOn	StateHolder/StatesHolder_ralink.h	/^	bool buttonOn;$/;"	m	struct:button_states
-buttonOnTime	StateHolder/StatesHolder_ralink.h	/^	struct timeval buttonOnTime;$/;"	m	struct:button_states	typeref:struct:button_states::timeval
-buttonStates	StateHolder/StatesHolder_ralink.h	/^	button_states buttonStates;$/;"	m	class:StatesHolder
-buttonStatesLock	StateHolder/StatesHolder_ralink.h	/^	pthread_mutex_t buttonStatesLock;$/;"	m	class:StatesHolder
-button_states	StateHolder/StatesHolder_ralink.h	/^struct button_states {$/;"	s
 check_associate	PowerUpHandler.cpp	/^void PowerUpHandler::check_associate()$/;"	f	class:PowerUpHandler
-check_associate	watchdog_gj/PowerUpHandler.cpp	/^void PowerUpHandler::check_associate()$/;"	f	class:PowerUpHandler
-controller	watchdog_gj/HWController.h	/^		static HwController *controller;$/;"	m	class:HwController
-controller	watchdog_gj/Watchdog.h	/^		HwController *controller;$/;"	m	class:Watchdog
 deinit	ButtonController.cpp	/^int ButtonController::deinit()$/;"	f	class:ButtonController
 deinit	HwManager.cpp	/^int HwManager::deinit()$/;"	f	class:HwManager
 deinit	Watchdog.cpp	/^int Watchdog::deinit()$/;"	f	class:Watchdog
 deinit	WifiController.cpp	/^int WifiController::deinit()$/;"	f	class:WifiController
-deinit	watchdog_gj/ButtonController.cpp	/^int ButtonController::deinit()$/;"	f	class:ButtonController
 deinit_hw_info_by_type	HwManager.cpp	/^int HwManager::deinit_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
 diff_curr_uptime_count	Common.cpp	/^long diff_curr_uptime_count(struct timeval t)$/;"	f
-diff_curr_uptime_count	watchdog_gj/Common.cpp	/^long diff_curr_uptime_count(struct timeval t)$/;"	f
+do_wifi_wps	WifiController.cpp	/^int WifiController::do_wifi_wps(void *hw_struct)$/;"	f	class:WifiController
 get_hw_info	ButtonController.cpp	/^int ButtonController::get_hw_info(void *hw_struct)$/;"	f	class:ButtonController
 get_hw_info	WifiController.cpp	/^int WifiController::get_hw_info(void *hw_struct)$/;"	f	class:WifiController
-get_hw_info_by_struct	watchdog_gj/ButtonController.cpp	/^int get_hw_info_by_struct(void hw_struct)$/;"	f
 get_hw_info_by_type	HwManager.cpp	/^int HwManager::get_hw_info_by_type(const char* hw_name, void* hw_struct)$/;"	f	class:HwManager
 get_quit	Common.cpp	/^bool get_quit()$/;"	f
-get_quit	watchdog_gj/Common.cpp	/^bool get_quit()$/;"	f
 get_reload	Common.cpp	/^bool get_reload()$/;"	f
-get_reload	watchdog_gj/Common.cpp	/^bool get_reload()$/;"	f
 get_uptime	Common.cpp	/^struct timeval get_uptime()$/;"	f
-get_uptime	watchdog_gj/Common.cpp	/^struct timeval get_uptime()$/;"	f
+get_wifi_associated_status	WifiController.cpp	/^int WifiController::get_wifi_associated_status(void *hw_struct)$/;"	f	class:WifiController
+get_wifi_radio_status	WifiController.cpp	/^int WifiController::get_wifi_radio_status(void *hw_struct)$/;"	f	class:WifiController
+get_wifi_wps_status	WifiController.cpp	/^int WifiController::get_wifi_wps_status(void *hw_struct) $/;"	f	class:WifiController
 handle_factory_reset	IPCHandler.cpp	/^int IPCHandler::handle_factory_reset()$/;"	f	class:IPCHandler
-handle_factory_reset	watchdog_gj/IPCHandler.cpp	/^int IPCHandler::handle_factory_reset()$/;"	f	class:IPCHandler
 handle_ipc_depend_on_status	PowerUpHandler.cpp	/^int PowerUpHandler::handle_ipc_depend_on_status(IpcCommand cmd)$/;"	f	class:PowerUpHandler
-handle_ipc_depend_on_status	watchdog_gj/PowerUpHandler.cpp	/^int PowerUpHandler::handle_ipc_depend_on_status(IpcCommand cmd)$/;"	f	class:PowerUpHandler
 handle_network_states	IPCHandler.cpp	/^int IPCHandler::handle_network_states()$/;"	f	class:IPCHandler
-handle_network_states	watchdog_gj/IPCHandler.cpp	/^int IPCHandler::handle_network_states()$/;"	f	class:IPCHandler
 handle_select_time_out	IPCHandler.cpp	/^int IPCHandler::handle_select_time_out()$/;"	f	class:IPCHandler
-handle_select_time_out	watchdog_gj/IPCHandler.cpp	/^int IPCHandler::handle_select_time_out()$/;"	f	class:IPCHandler
 holder	IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
-holder	StateHolder/StatesHolder.h	/^	static StatesHolder *holder;$/;"	m	class:StatesHolder
-holder	StateHolder/WPSSTATUS.h	/^	static StatesHolder *holder;$/;"	m	class:StatesHolder
 holder	StatesHolder.h	/^		static StatesHolder *holder;$/;"	m	class:StatesHolder
 holder	Watchdog.h	/^		StatesHolder *holder;$/;"	m	class:Watchdog
-holder	watchdog_gj/IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
-holder	watchdog_gj/StatesHolder.h	/^	static StatesHolder *holder;$/;"	m	class:StatesHolder
-holder	watchdog_gj/Watchdog.h	/^		StatesHolder *holder;$/;"	m	class:Watchdog
 hw_manager	HwManager.h	/^		static HwManager *hw_manager;$/;"	m	class:HwManager
 hw_manager	SwStatus.h	/^		HwManger *hw_manager;$/;"	m	class:SwStatus
 hw_manager	Watchdog.h	/^		HwManager *hw_manager;$/;"	m	class:Watchdog
 id	ButtonController.h	/^	AHAL_BTN_ID id;$/;"	m	struct:BUTTON
 id	NetworkStatus.h	/^	AHAL_BTN_ID id;$/;"	m	struct:BUTTON
-in_map_hw_controller	watchdog_gj/HWController.h	/^		map<const char*, HwController *>::iterator in_map_hw_controller;$/;"	m	class:HwController
-in_map_hw_controller	watchdog_gj/Watchdog.h	/^		map<const char*, HwController *>::iterator in_map_hw_controller;$/;"	m	class:Watchdog
 in_map_status	map_iterator_factoryPattern.cpp	/^		map<const char*, Status *>::iterator in_map_status;$/;"	m	class:Holder	file:
-in_map_status	watchdog_gj/map_iterator_factoryPattern.cpp	/^		map<const char*, Status *>::iterator in_map_status;$/;"	m	class:Holder	file:
 init	ButtonController.cpp	/^int ButtonController::init()$/;"	f	class:ButtonController
 init	HwManager.cpp	/^int HwManager::init()$/;"	f	class:HwManager
 init	IPCHandler.cpp	/^int IPCHandler::init()$/;"	f	class:IPCHandler
 init	PowerUpHandler.cpp	/^int PowerUpHandler::init()$/;"	f	class:PowerUpHandler
 init	Watchdog.cpp	/^int Watchdog::init()$/;"	f	class:Watchdog
 init	WifiController.cpp	/^int WifiController::init()$/;"	f	class:WifiController
-init	watchdog_gj/ButtonController.cpp	/^int ButtonController::init()$/;"	f	class:ButtonController
-init	watchdog_gj/IPCHandler.cpp	/^int IPCHandler::init()$/;"	f	class:IPCHandler
-init	watchdog_gj/PowerUpHandler.cpp	/^int PowerUpHandler::init()$/;"	f	class:PowerUpHandler
 initSignal	Watchdog.cpp	/^bool initSignal()$/;"	f
-initSignal	watchdog_gj/Watchdog.cpp	/^bool initSignal()$/;"	f
 init_hw_info_by_type	HwManager.cpp	/^int HwManager::init_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
 ipc_daemon	IPCHandler.h	/^	IpcDaemon ipc_daemon;$/;"	m	class:IPCHandler
 ipc_fd	IPCHandler.h	/^	int ipc_fd;$/;"	m	class:IPCHandler
 isAssociated	WifiController.h	/^	AHAL_CST_BOOL isAssociated;$/;"	m	struct:WIFI
 isContinusDetect	SwStatus.h	/^		bool isContinusDetect;$/;"	m	class:SwStatus
 is_quit	Common.cpp	/^bool is_quit = false;$/;"	v
-is_quit	watchdog_gj/Common.cpp	/^bool is_quit = false;$/;"	v
 is_reload	Common.cpp	/^bool is_reload = false;$/;"	v
-is_reload	watchdog_gj/Common.cpp	/^bool is_reload = false;$/;"	v
-lastColor1	StateHolder/StatesHolder_ralink.h	/^	Color lastColor1;$/;"	m	class:StatesHolder
-loseConnectionNeedWait	StateHolder/StatesHolder_ralink.h	/^	bool loseConnectionNeedWait;$/;"	m	struct:net_states
 main	Watchdog.cpp	/^int main(int \/*argc*\/, const char* argv[])$/;"	f
 main	map_iterator_factoryPattern.cpp	/^int main()$/;"	f
-main	watchdog_gj/Watchdog.cpp	/^int main(int \/*argc*\/, const char *argv[])$/;"	f
-main	watchdog_gj/map_iterator_factoryPattern.cpp	/^int main()$/;"	f
-mainStates	StateHolder/StatesHolder.h	/^	MAINSTATES mainStates;$/;"	m	class:StatesHolder
-mainStates	StateHolder/StatesHolder_ralink.h	/^	MAINSTATES mainStates;$/;"	m	class:StatesHolder
-mainStates	StateHolder/WPSSTATUS.h	/^	MAINSTATES mainStates;$/;"	m	class:StatesHolder
 mainStates	StatesHolder.h	/^		MAINSTATES mainStates;$/;"	m	class:StatesHolder
-mainStates	watchdog_gj/StatesHolder.h	/^	MAINSTATES mainStates;$/;"	m	class:StatesHolder
-mainStatesLock	StateHolder/StatesHolder_ralink.h	/^	pthread_mutex_t mainStatesLock;$/;"	m	class:StatesHolder
 map_hw_controller	HwManager.h	/^		map<string, HwController *> map_hw_controller;$/;"	m	class:HwManager
-map_hw_controller	watchdog_gj/HWController.h	/^		map<const char*, HwController *> map_hw_controller;$/;"	m	class:HwController
-map_hw_controller	watchdog_gj/Watchdog.h	/^		map<const char*, HwController *> map_hw_controller;$/;"	m	class:Watchdog
 map_status	map_iterator_factoryPattern.cpp	/^		map<const char*, Status *> map_status;$/;"	m	class:Holder	file:
-map_status	watchdog_gj/map_iterator_factoryPattern.cpp	/^		map<const char*, Status *> map_status;$/;"	m	class:Holder	file:
-needHandleACK	StateHolder/StatesHolder_ralink.h	/^	bool needHandleACK;$/;"	m	struct:net_states
-needHandleAssociated	StateHolder/StatesHolder_ralink.h	/^	bool needHandleAssociated;$/;"	m	struct:net_states
-net	StateHolder/StatesHolder_ralink.h	/^	net_states net;$/;"	m	class:StatesHolder
-net_states	StateHolder/StatesHolder_ralink.h	/^struct net_states {$/;"	s
 network_status	Status.h	/^typedef enum network_status {$/;"	g
-network_status	watchdog_gj/Status.h	/^typedef enum network_status {$/;"	g
-nfcStates	StateHolder/StatesHolder_ralink.h	/^	NFCSTATES nfcStates;$/;"	m	class:StatesHolder
-nfcStatesLock	StateHolder/StatesHolder_ralink.h	/^	pthread_mutex_t nfcStatesLock;$/;"	m	class:StatesHolder
-oldMainStates	StateHolder/StatesHolder.h	/^	MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
-oldMainStates	StateHolder/StatesHolder_ralink.h	/^	MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
-oldMainStates	StateHolder/WPSSTATUS.h	/^	MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
 oldMainStates	StatesHolder.h	/^		MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
-oldMainStates	watchdog_gj/StatesHolder.h	/^	MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
-panelACK	StateHolder/StatesHolder_ralink.h	/^	bool panelACK;$/;"	m	struct:net_states
 referCount	HwManager.cpp	/^int HwManager::referCount = 0;$/;"	m	class:HwManager	file:
 referCount	HwManager.h	/^		static int referCount;$/;"	m	class:HwManager
-referCount	StateHolder/StatesHolder.cpp	/^int StatesHolder::referCount = 0;$/;"	m	class:StatesHolder	file:
-referCount	StateHolder/StatesHolder.h	/^	static int referCount;$/;"	m	class:StatesHolder
-referCount	StateHolder/WPSSTATUS.h	/^	static int referCount;$/;"	m	class:StatesHolder
 referCount	StatesHolder.cpp	/^int StatesHolder::referCount = 0;$/;"	m	class:StatesHolder	file:
 referCount	StatesHolder.h	/^		static int referCount;$/;"	m	class:StatesHolder
-referCount	watchdog_gj/HWController.h	/^		static int referCount;$/;"	m	class:HwController
-referCount	watchdog_gj/StatesHolder.cpp	/^int StatesHolder::referCount = 0;$/;"	m	class:StatesHolder	file:
-referCount	watchdog_gj/StatesHolder.h	/^	static int referCount;$/;"	m	class:StatesHolder
 release	IPCHandler.cpp	/^int IPCHandler::release()$/;"	f	class:IPCHandler
 release	PowerUpHandler.cpp	/^int PowerUpHandler::release()$/;"	f	class:PowerUpHandler
-release	watchdog_gj/IPCHandler.cpp	/^int IPCHandler::release()$/;"	f	class:IPCHandler
-release	watchdog_gj/PowerUpHandler.cpp	/^int PowerUpHandler::release()$/;"	f	class:PowerUpHandler
 requestExitHandler	Watchdog.cpp	/^void requestExitHandler(int sigNum)$/;"	f
-requestExitHandler	watchdog_gj/Watchdog.cpp	/^void requestExitHandler(int sigNum)$/;"	f
 requestReloadHandler	Watchdog.cpp	/^void requestReloadHandler(int sigNum)$/;"	f
-requestReloadHandler	watchdog_gj/Watchdog.cpp	/^void requestReloadHandler(int sigNum)$/;"	f
-reserve	StateHolder/StatesHolder_ralink.h	/^	char reserve[3];$/;"	m	struct:button_states
 run	Watchdog.cpp	/^int Watchdog::run()$/;"	f	class:Watchdog
-run	watchdog_gj/Watchdog.cpp	/^int Watchdog::run()$/;"	f	class:Watchdog
-run_hw_info_detect	watchdog_gj/ButtonController.cpp	/^int run_hw_info_detect()$/;"	f
 run_parsing_command	IPCHandler.cpp	/^int IPCHandler::run_parsing_command()$/;"	f	class:IPCHandler
-run_parsing_command	watchdog_gj/IPCHandler.cpp	/^int IPCHandler::run_parsing_command()$/;"	f	class:IPCHandler
 send_ipccmd	Common.cpp	/^void send_ipccmd(const char *path, int ipc)$/;"	f
-send_ipccmd	watchdog_gj/Common.cpp	/^void send_ipccmd(const char *path, int ipc)$/;"	f
 set_hw_info	ButtonController.cpp	/^int ButtonController::set_hw_info(void *) $/;"	f	class:ButtonController
 set_hw_info	WifiController.cpp	/^int WifiController::set_hw_info(void *hw_struct) $/;"	f	class:WifiController
 set_hw_info_by_type	HwManager.cpp	/^int HwManager::set_hw_info_by_type(const char* hw_name, void* hw_struct)$/;"	f	class:HwManager
-set_hw_info_pass_struct	watchdog_gj/ButtonController.cpp	/^int set_hw_info_pass_struct(void hw_struct) $/;"	f
 set_quit	Common.cpp	/^void set_quit(bool b)$/;"	f
-set_quit	watchdog_gj/Common.cpp	/^void set_quit(bool b)$/;"	f
 set_reload	Common.cpp	/^void set_reload(bool b)$/;"	f
-set_reload	watchdog_gj/Common.cpp	/^void set_reload(bool b)$/;"	f
-standbySetting	StateHolder/StatesHolder_ralink.h	/^	standby_setting standbySetting;$/;"	m	class:StatesHolder
 start_thread	Common.cpp	/^int start_thread(void *callback, pthread_t & pid, void *pass)$/;"	f
-start_thread	watchdog_gj/Common.cpp	/^int start_thread(void *callback, pthread_t & pid, void *pass)$/;"	f
 start_thread_join	Common.cpp	/^int start_thread_join(void *callback, pthread_t & pid, void *pass)$/;"	f
-start_thread_join	watchdog_gj/Common.cpp	/^int start_thread_join(void *callback, pthread_t & pid, void *pass)$/;"	f
 status	ButtonController.h	/^	AHAL_BTN_STATUS status;$/;"	m	struct:BUTTON
 status	NetworkStatus.h	/^	AHAL_BTN_STATUS status;$/;"	m	struct:BUTTON
 status	Status.h	/^		int status;$/;"	m	class:Status
-status	watchdog_gj/ButtonController.h	/^	AHAL_BTN_STATUS status;$/;"	m	struct:BUTTON
-status	watchdog_gj/Status.h	/^		int status;$/;"	m	class:Status
 status_getter	map_iterator_factoryPattern.cpp	/^		Status *status_getter;$/;"	m	class:Holder	file:
-status_getter	watchdog_gj/map_iterator_factoryPattern.cpp	/^		Status *status_getter;$/;"	m	class:Holder	file:
-statusholder	StateHolder/StatusHolder.h	/^	static StatusHolder *statusholder;$/;"	m	class:StatusHolder
-twtBeginEndSetting	StateHolder/StatesHolder_ralink.h	/^	twt_beginend_setting twtBeginEndSetting;$/;"	m	class:StatesHolder
-twtEnable	StateHolder/StatesHolder_ralink.h	/^	bool twtEnable;$/;"	m	class:StatesHolder
-twtStates	StateHolder/StatesHolder_ralink.h	/^	TWTSTATES twtStates;$/;"	m	class:StatesHolder
-twtStatesLock	StateHolder/StatesHolder_ralink.h	/^	pthread_mutex_t twtStatesLock;$/;"	m	class:StatesHolder
 wifi_radio_info	WifiController.h	/^	AHAL_WIFI_RADIO_INFO wifi_radio_info;$/;"	m	struct:WIFI
 wifi_wps_status	WifiController.h	/^	AHAL_WIFI_WPS_STATUS wifi_wps_status;$/;"	m	struct:WIFI
-wpsStates	StateHolder/StatesHolder_ralink.h	/^	WPSSTATES wpsStates;$/;"	m	class:StatesHolder
-wpsStatesLock	StateHolder/StatesHolder_ralink.h	/^	pthread_mutex_t wpsStatesLock;$/;"	m	class:StatesHolder
 wps_status	Status.h	/^typedef enum wps_status {$/;"	g
-wps_status	watchdog_gj/Status.h	/^typedef enum wps_status {$/;"	g
 ~ButtonController	ButtonController.cpp	/^ButtonController::~ButtonController()$/;"	f	class:ButtonController
 ~Holder	map_iterator_factoryPattern.cpp	/^		~Holder() {$/;"	f	class:Holder
-~Holder	watchdog_gj/map_iterator_factoryPattern.cpp	/^		~Holder() {$/;"	f	class:Holder
 ~HwController	HwController.cpp	/^HwController::~HwController()$/;"	f	class:HwController
 ~HwManager	HwManager.cpp	/^HwManager::~HwManager()$/;"	f	class:HwManager
 ~IPCHandler	IPCHandler.cpp	/^IPCHandler::~IPCHandler()$/;"	f	class:IPCHandler
-~IPCHandler	watchdog_gj/IPCHandler.cpp	/^IPCHandler::~IPCHandler()$/;"	f	class:IPCHandler
 ~NetworkStatus	Status.h	/^NetworkStatus::~NetworkStatus()$/;"	f	class:NetworkStatus
-~NetworkStatus	watchdog_gj/Status.h	/^NetworkStatus::~NetworkStatus()$/;"	f	class:NetworkStatus
 ~PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::~PowerUpHandler()$/;"	f	class:PowerUpHandler
-~PowerUpHandler	watchdog_gj/PowerUpHandler.cpp	/^PowerUpHandler::~PowerUpHandler()$/;"	f	class:PowerUpHandler
-~StatesHolder	StateHolder/StatesHolder.cpp	/^StatesHolder::~StatesHolder()$/;"	f	class:StatesHolder
 ~StatesHolder	StatesHolder.cpp	/^StatesHolder::~StatesHolder()$/;"	f	class:StatesHolder
-~StatesHolder	watchdog_gj/StatesHolder.cpp	/^StatesHolder::~StatesHolder()$/;"	f	class:StatesHolder
 ~Status	Status.h	/^Status::~Status()$/;"	f	class:Status
-~Status	watchdog_gj/Status.h	/^Status::~Status()$/;"	f	class:Status
 ~Watchdog	Watchdog.cpp	/^Watchdog::~Watchdog()$/;"	f	class:Watchdog
-~Watchdog	watchdog_gj/Watchdog.cpp	/^Watchdog::~Watchdog()$/;"	f	class:Watchdog
 ~WifiController	WifiController.cpp	/^WifiController::~WifiController()$/;"	f	class:WifiController
 ~WpsStatus	Status.h	/^WpsStatus::~WpsStatus()$/;"	f	class:WpsStatus
-~WpsStatus	watchdog_gj/Status.h	/^WpsStatus::~WpsStatus()$/;"	f	class:WpsStatus

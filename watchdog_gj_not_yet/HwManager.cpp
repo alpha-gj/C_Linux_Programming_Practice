@@ -105,13 +105,13 @@ int HwManager::ReleaseHwManager()
 }
 
 
-HwController *HwManager::ReturnHwControllerObjectByType(const char* hw_name)
+HwController *HwManager::ReturnHwControllerObjectByType(const char* hw_controller_name)
 {
 	map<string, HwController *>::iterator in_map_hw_controller;
 	HwController *hw_controller = NULL;
-	string s_hw_name(hw_name);
+	string s_hw_controller_name(hw_controller_name);
 
-	in_map_hw_controller= map_hw_controller.find(s_hw_name);
+	in_map_hw_controller= map_hw_controller.find(s_hw_controller_name);
 
 	if (in_map_hw_controller != map_hw_controller.end()) {
 		/* Get object address */

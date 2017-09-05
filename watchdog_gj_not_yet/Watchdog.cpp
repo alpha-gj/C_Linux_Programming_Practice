@@ -87,6 +87,9 @@ int Watchdog::run()
 	};
 	hw_manager->set_hw_info_by_type("WIFI", &wifi_setting);
 
+	hw_manager->get_hw_info_by_type("WIFI", &wifi_setting);
+	printf("rssi1 is %d\n", wifi_setting.wifi_radio_info.rssi1);
+
 	/* Check WPS & Associated Status*/
 	do {
 		hw_manager->get_hw_info_by_type("WIFI", &wifi_setting);
@@ -109,7 +112,6 @@ int Watchdog::run()
 			printf("no associated\n");
 
 		printf("rssi1 is %d\n", wifi_setting.wifi_radio_info.rssi1);
-		printf("rssi2 is %d\n", wifi_setting.wifi_radio_info.rssi2);
 		
 		count--;
 		sleep(1);

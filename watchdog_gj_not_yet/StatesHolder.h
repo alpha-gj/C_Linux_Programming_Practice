@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include "SwStatus.h"
+#include "NetworkStatus.h"
 
 //TODO They can include State.h? 
 enum MAINSTATES {
@@ -22,6 +24,18 @@ class StatesHolder
 		/* Follow Singleton Pattern */
 		static StatesHolder *holder;
 		static int referCount;
+		/* For init & deinit SwStatus objects */
+		int init();
+		int deinit();
+
+		/* 
+			NOTE: Don't use const char* as primary key of STL map.
+			It doesn't comapre "xxx", rather it comapres 0x12345678 
+			by using find(...) of STL map. Please use string to replace it.
+    	*/
+		/* Access Status object from MAP */
+		map<string, SwStatus *> map_sw_status;
+		SwStatus *ReturnSwStatusObjectByType(const char* sw_status_name);
 
 		//pthread_mutex_t mainStatesLock;
 		MAINSTATES mainStates;
@@ -31,6 +45,14 @@ class StatesHolder
 		/* Follow Singleton Pattern */
 		static StatesHolder *CreateStatesHolder();
 		static int ReleaseStatesHolder();
+		
+		/* Operate SwStatus object from API */
+		int init_status_detect_by_type(const char* status_name);
+		int deinit_status_detect_by_type(const char* status_name);
+		int run_status_detect_by_type(const char* status_name);
+		int pause_status_detect_by_type(const char* status_name);
+		int continue_status_detect_by_type(const char* status_name);
+		int get_status_detect_flag_by_type(const char* status_name);
 
 		void SetMainStates(MAINSTATES s);
 		MAINSTATES GetMainStates();
