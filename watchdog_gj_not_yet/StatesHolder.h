@@ -54,7 +54,7 @@ class StatesHolder
 		int run_status_detect_by_type(const char* status_name);
 		int pause_status_detect_by_type(const char* status_name);
 		int continue_status_detect_by_type(const char* status_name);
-		int get_status_detect_flag_by_type(const char* status_name);
+		int get_pause_detect_flag_by_type(const char* status_name);
 
 		void SetMainStates(MAINSTATES s);
 		MAINSTATES GetMainStates();

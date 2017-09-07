@@ -2,10 +2,12 @@
 
 PowerUpHandler::PowerUpHandler()
 {
+	/* Do nothing */
 }
 
 PowerUpHandler::~PowerUpHandler()
 {
+	/* Do nothing */
 }
 
 int PowerUpHandler::init()

@@ -4,18 +4,16 @@
 
 class PowerUpHandler : public IPCHandler
 {
-public:
-	PowerUpHandler ();
-	virtual ~PowerUpHandler ();
-	virtual int init();
-	virtual int release();
-	virtual int handle_ipc_depend_on_status(IpcCommand cmd);
-	virtual MAINSTATES GetMainHandlerState();
+	private:
+		void check_associate();
 
-private:
-
-private:
-	void check_associate();
+	public:
+		PowerUpHandler ();
+		virtual ~PowerUpHandler ();
+		virtual int init();
+		virtual int release();
+		virtual int handle_ipc_depend_on_status(IpcCommand cmd);
+		virtual MAINSTATES GetMainHandlerState();
 };
 
 #endif

@@ -168,14 +168,14 @@ int StatesHolder::continue_status_detect_by_type(const char* status_name)
 		return sw_status->continue_status_detect();
 }
 
-int StatesHolder::get_status_detect_flag_by_type(const char* status_name)
+int StatesHolder::get_pause_detect_flag_by_type(const char* status_name)
 {
 	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
 
 	if (sw_status == NULL)
 		return -1;
 	else
-		return sw_status->get_status_detect_flag();
+		return sw_status->get_pause_detect_flag();
 }
 
 void StatesHolder::SetMainStates(MAINSTATES s)

@@ -9,21 +9,29 @@
 
 using namespace std;
 
+typedef enum {
+	RESET_READY,
+	RESET_STANDBY,
+	RESET_LAUNCH,
+} RESET_BUTTON_STATE;
+
 class ButtonStatus : public SwStatus
 {
 	private:
-		pthread_t reset_button_status_pid;
 		static void *run_reset_button_status_detect_thread(void *args = NULL);
+		pthread_t reset_button_status_pid;
+		static bool isPauseDetect;
+		static RESET_BUTTON_STATE return_button_state_by_press_count(int press_count);
 
 	public:
 		ButtonStatus();
 		virtual ~ButtonStatus();
-		virtual int init();								/* To check or not according to DB value  */
+		virtual int init();								
 		virtual int deinit();
-		virtual int run_status_detect();				/* TODO Need pthread?  Pass struct of data type for checking HW info */
+		virtual int run_status_detect();	
 		virtual int pause_status_detect();
 		virtual int continue_status_detect();
-		virtual int get_status_detect_flag();
+		virtual bool get_pause_detect_flag();
 };
 
 #endif

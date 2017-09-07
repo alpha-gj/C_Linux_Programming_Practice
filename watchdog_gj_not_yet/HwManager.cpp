@@ -13,6 +13,7 @@ HwManager::HwManager()
 	/* New parts of HwController */
 	map_hw_controller.insert(make_pair("BUTTON", new ButtonController()));
 	map_hw_controller.insert(make_pair("WIFI", new WifiController()));
+	map_hw_controller.insert(make_pair("LED", new LEDController()));
 }
 
 HwManager::~HwManager()

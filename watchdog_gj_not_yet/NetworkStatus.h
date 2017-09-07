@@ -17,7 +17,7 @@ class NetworkStatus : public SwStatus
 		virtual int run_status_detect();				/* TODO Need pthread?  Pass struct of data type for checking HW info */
 		virtual int pause_status_detect();
 		virtual int continue_status_detect();
-		virtual int get_status_detect_flag();
+		virtual bool get_pause_detect_flag();
 };
 
 #endif

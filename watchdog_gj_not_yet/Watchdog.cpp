@@ -14,7 +14,6 @@ Watchdog::Watchdog():hw_manager(NULL),holder(NULL)
 		if (!holder) {
 			fprintf(stderr, "%s: %s[%d] can not alloc holder\n", __FILE__, __FUNCTION__, __LINE__);
 		}
-
 }
 
 Watchdog::~Watchdog()
@@ -45,8 +44,9 @@ int Watchdog::deinit()
 
 int Watchdog::run()
 {
-#define BUTTON true
+#define BUTTON false
 #define WIFI false
+#define LED false
 
 #if 0
 	while(!get_quit() && !get_reload()) {
@@ -118,9 +118,37 @@ int Watchdog::run()
 	};
 
 #endif
+
+#if 0
+#elif LED
+	LED_SETTING led_setting {
+		.id = AHAL_LED_ID_POWER,
+		.color = AHAL_LED_COLOR_ON_A
+	};
+
+	hw_manager->set_hw_info_by_type("LED", &led_setting);
+	sleep(1);
+	led_setting.color = AHAL_LED_COLOR_ON_B;
+	hw_manager->set_hw_info_by_type("LED", &led_setting);
+	sleep(1);
+	led_setting.color = AHAL_LED_COLOR_ON;
+	hw_manager->set_hw_info_by_type("LED", &led_setting);
+	sleep(1);
+	led_setting.id = AHAL_LED_ID_WIFI_24G;
+	led_setting.color = AHAL_LED_COLOR_ON_A;
+	sleep(1);
+	hw_manager->set_hw_info_by_type("LED", &led_setting);
+	led_setting.color = AHAL_LED_COLOR_ON_B;
+	sleep(1);
+	hw_manager->set_hw_info_by_type("LED", &led_setting);
+	led_setting.color = AHAL_LED_COLOR_ON;
+	sleep(1);
+	hw_manager->set_hw_info_by_type("LED", &led_setting);
+#endif
+
+#if 0
 	fprintf(stderr, "run ButtonStatus detect thread\n");
 	holder->run_status_detect_by_type("ButtonStatus");
-
 	IPCHandler *handler = CreateHandlerByStates();
 	if (handler) {
 		handler->run_parsing_command();
@@ -130,6 +158,7 @@ int Watchdog::run()
 		INFO("BUG@%d", __LINE__);
 		sleep(1);
 	}
+#endif
 
 	return 0;
 }

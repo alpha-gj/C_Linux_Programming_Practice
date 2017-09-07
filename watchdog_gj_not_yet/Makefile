@@ -2,12 +2,13 @@ DAEMON = Watchdog
 TARGETS = $(DAEMON)
 
 SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp SwStatus.cpp IPCHandler.cpp Common.cpp \
-	   ButtonController.cpp WifiController.cpp\
+	   ButtonController.cpp WifiController.cpp LEDController.cpp\
 	   NetworkStatus.cpp ButtonStatus.cpp\
 	   PowerUpHandler.cpp
 
 
 PREFIX = $(PJ_PREFIX)
+PREFIX_SBINDIR := $(PREFIX)/sbin
 CROSS_COMPILE = $(PJ_TARGET)-
 
 CFLAGS    = $(PLATFORM_CFLAGS) -Wall -W -D$(subst -,_,$(PJ_MODEL))
@@ -69,6 +70,6 @@ ifneq ($(MAKECMDGOALS),clean)
 endif
 
 $(DAEMON): $(DAEMON).o HwManager.o HwController.o StatesHolder.o SwStatus.o IPCHandler.o  Common.o \
-	   ButtonController.o WifiController.o\
+	   ButtonController.o WifiController.o LEDController.o\
 	   NetworkStatus.o ButtonStatus.o\
 	   PowerUpHandler.o

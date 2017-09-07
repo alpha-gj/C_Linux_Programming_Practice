@@ -21,7 +21,6 @@ class SwStatus
 {
 	protected:
 		HwManager *hw_manager;
-		bool isContinusDetect;
 
 	public:
 		SwStatus();
@@ -31,7 +30,7 @@ class SwStatus
 		virtual int run_status_detect() = 0;				/* TODO Need pthread?  Pass struct of data type for checking HW info */
 		virtual int pause_status_detect() = 0;
 		virtual int continue_status_detect() = 0;
-		virtual int get_status_detect_flag() = 0;
+		virtual bool get_pause_detect_flag() = 0;
 };
 
 #endif

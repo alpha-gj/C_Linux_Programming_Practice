@@ -9,6 +9,7 @@
 #include "HwController.h"
 #include "ButtonController.h"
 #include "WifiController.h"
+#include "LEDController.h"
 
 class HwManager
 {

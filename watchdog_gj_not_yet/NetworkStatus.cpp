@@ -38,7 +38,7 @@ int NetworkStatus::continue_status_detect()
 	return(int)AHAL_RET_NOT_SUPPORT;
 }
 
-int NetworkStatus::get_status_detect_flag()
+bool NetworkStatus::get_pause_detect_flag()
 {
 	return(int)AHAL_RET_NOT_SUPPORT;
 }
