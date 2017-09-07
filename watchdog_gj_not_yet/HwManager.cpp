@@ -14,6 +14,10 @@ HwManager::HwManager()
 	map_hw_controller.insert(make_pair("BUTTON", new ButtonController()));
 	map_hw_controller.insert(make_pair("WIFI", new WifiController()));
 	map_hw_controller.insert(make_pair("LED", new LEDController()));
+	map_hw_controller.insert(make_pair("IRLED", new IRLEDController()));
+	map_hw_controller.insert(make_pair("ICR", new ICRController()));
+	map_hw_controller.insert(make_pair("LIGHTSENSOR", new LightSensorController()));
+	//FIXME map_hw_controller.insert(make_pair("AUDIO", new AudioController()));
 }
 
 HwManager::~HwManager()

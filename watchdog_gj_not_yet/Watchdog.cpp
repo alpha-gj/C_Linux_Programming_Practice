@@ -47,6 +47,9 @@ int Watchdog::run()
 #define BUTTON false
 #define WIFI false
 #define LED false
+#define IRLED false
+#define ICR false
+#define LIGHT_SENSOR true
 
 #if 0
 	while(!get_quit() && !get_reload()) {
@@ -144,6 +147,71 @@ int Watchdog::run()
 	led_setting.color = AHAL_LED_COLOR_ON;
 	sleep(1);
 	hw_manager->set_hw_info_by_type("LED", &led_setting);
+#endif
+
+#if 0
+#elif IRLED
+	IRLED_SETTING irled_setting {
+		.id = AHAL_PWM_ID_IR_LED,
+		.value_type = AHAL_PWM_PERCENT,
+		.value = PWD_PERCENTAGE
+	};
+	hw_manager->set_hw_info_by_type("IRLED", &irled_setting);
+	sleep(2);
+	printf("80\n");
+	irled_setting.value = 80;
+	hw_manager->set_hw_info_by_type("IRLED", &irled_setting);
+	sleep(2);
+	printf("60\n");
+	irled_setting.value = 60;
+	hw_manager->set_hw_info_by_type("IRLED", &irled_setting);
+	sleep(2);
+	printf("40\n");
+	irled_setting.value = 40;
+	hw_manager->set_hw_info_by_type("IRLED", &irled_setting);
+	sleep(2);
+	printf("20\n");
+	irled_setting.value = 20;
+	hw_manager->set_hw_info_by_type("IRLED", &irled_setting);
+	sleep(2);
+	printf("0\n");
+	irled_setting.value = 0;
+	hw_manager->set_hw_info_by_type("IRLED", &irled_setting);
+#endif
+
+#if 0
+#elif ICR
+	ICR_SETTING icr_setting {
+		.state = AHAL_CST_STATE_ON			// NightMode
+	};
+	hw_manager->set_hw_info_by_type("ICR", &icr_setting);
+	sleep(5);
+	icr_setting.state = AHAL_CST_STATE_OFF; // DayMode
+	hw_manager->set_hw_info_by_type("ICR", &icr_setting);
+#endif
+
+#if 0
+#elif ICR
+	ICR_SETTING icr_setting {
+		.state = AHAL_CST_STATE_ON
+	};
+	hw_manager->set_hw_info_by_type("ICR", &icr_setting);
+	sleep(5);
+	icr_setting.state = AHAL_CST_STATE_OFF;
+	hw_manager->set_hw_info_by_type("ICR", &icr_setting);
+#endif
+
+#if 0
+#elif LIGHT_SENSOR
+	LIGHT_SENSOR_SETTING light_sensor_setting {
+		.value = 0
+	};
+	//FIXME just init and uninit again, or will occur i2c error
+	for (int i = 0; i < 5; i++) {
+		hw_manager->get_hw_info_by_type("LIGHTSENSOR", &light_sensor_setting);
+		printf("LightSensor's lux is %d\n", light_sensor_setting.value);
+		sleep(1);
+	}
 #endif
 
 #if 0
