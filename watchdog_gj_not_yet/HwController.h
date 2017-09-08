@@ -15,6 +15,8 @@
 #include "AHAL_Icr.h"
 #include "AHAL_Led.h"
 #include "AHAL_Wifi.h"
+#include "AHAL_Audio.h"
+
 
 /* HW define parameters */
 #define TIME_INTERVAL		500000

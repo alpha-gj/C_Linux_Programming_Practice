@@ -6,13 +6,13 @@
 #include <map>
 #include "pib/pib.h"
 #include "tinydb/tinydb.h"
-#include "HwController.h"
 #include "ButtonController.h"
 #include "WifiController.h"
 #include "LEDController.h"
 #include "IRLEDController.h"
 #include "ICRController.h"
 #include "LightSensorController.h"
+#include "AudioController.h"
 
 class HwManager
 {

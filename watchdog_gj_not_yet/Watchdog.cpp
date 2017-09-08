@@ -49,7 +49,7 @@ int Watchdog::run()
 #define LED false
 #define IRLED false
 #define ICR false
-#define LIGHT_SENSOR true
+#define LIGHT_SENSOR false
 
 #if 0
 	while(!get_quit() && !get_reload()) {

@@ -17,7 +17,7 @@ HwManager::HwManager()
 	map_hw_controller.insert(make_pair("IRLED", new IRLEDController()));
 	map_hw_controller.insert(make_pair("ICR", new ICRController()));
 	map_hw_controller.insert(make_pair("LIGHTSENSOR", new LightSensorController()));
-	//FIXME map_hw_controller.insert(make_pair("AUDIO", new AudioController()));
+	map_hw_controller.insert(make_pair("AUDIO", new AudioController()));
 }
 
 HwManager::~HwManager()
