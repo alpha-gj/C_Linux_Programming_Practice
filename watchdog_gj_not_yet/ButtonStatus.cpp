@@ -76,17 +76,14 @@ void *ButtonStatus::run_reset_button_status_detect_thread(void *args)
 		pt_hw_manager->get_hw_info_by_type("BUTTON", &button_setting);
 
 		/* Pause detect condition */
-		if (isPauseDetect ||
-		    (state == RESET_LAUNCH && button_setting.status == AHAL_BTN_STATUS_PRESSED)) {
-			printf("continue\n");
+		if (isPauseDetect) {
 			sleep(1);
 			continue;
-		} else {
-			/* Do Nothing */
-		}
+		} 
 
 		/* Check Button Status and count it */
 		if (button_setting.status == AHAL_BTN_STATUS_PRESSED) {
+			printf("count is %d\n", press_count);
 			press_count++;
 		} else if (button_setting.status == AHAL_BTN_STATUS_RELEASE) {
 			press_count = 0;
@@ -99,17 +96,27 @@ void *ButtonStatus::run_reset_button_status_detect_thread(void *args)
 		}
 
 		/* Check Button State */
-		state = return_button_state_by_press_count(press_count);
+		if(state != RESET_LAUNCH) {
+			state = return_button_state_by_press_count(press_count);
+		}
 		switch (state) {
 			case RESET_READY:
 				break;
 			case RESET_STANDBY:
+				INFO("Set Reset LED");
+				fprintf(stderr, "Set Reset LED!\n");
+				send_ipccmd(WATCHDOG_SOCKET_NAME, CMD_DET_FACTORY_BUTTON);
+				state = RESET_LAUNCH;
+				break;
 			case RESET_LAUNCH:
-				INFO("Enter RESET");
-				/*
-				   TODO Task should belong to xxxHandler.cpp
-				   dog->set_reset_behavior_by_state(state);
-				 */
+				if (button_setting.status == AHAL_BTN_STATUS_RELEASE) {
+					INFO("Do RESET");
+					fprintf(stderr, "Do Reset!\n");
+					isPauseDetect = true;
+					send_ipccmd(WATCHDOG_SOCKET_NAME, CMD_FACTORY_RESET_ACT);
+				} else if (button_setting.status == AHAL_BTN_STATUS_PRESSED) {
+					fprintf(stderr, "You can Release button to do Reset right now!\n");
+				}
 				break;
 			default:
 				INFO("BUG@%s %d", __FUNCTION__,  __LINE__);
@@ -118,15 +125,25 @@ void *ButtonStatus::run_reset_button_status_detect_thread(void *args)
 
 		sleep(1);
 	}
+
 	fprintf(stderr, "%s done\n", __func__);
 	pthread_exit(0);
+}
+
+int ButtonStatus::set_status_info(void *) 
+{
+	return(int)AHAL_RET_NOT_SUPPORT;
+}
+int ButtonStatus::get_status_info(void *)
+{
+	return(int)AHAL_RET_NOT_SUPPORT;
 }
 
 RESET_BUTTON_STATE ButtonStatus::return_button_state_by_press_count(int press_count)
 {
 	PIB pib;
 	if (press_count >= pib.get_reset_button_press_count()) {
-		return RESET_LAUNCH;
+		return RESET_STANDBY;
 	}
 	else {
 		return RESET_READY;

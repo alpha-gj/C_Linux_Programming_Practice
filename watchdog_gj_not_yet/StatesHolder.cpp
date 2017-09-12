@@ -9,9 +9,10 @@ int StatesHolder::referCount = 0;
 StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)
 {
 	//TODO insert something that you want to detect, such as TWT, button, network status, lightsensor(day,night mode)
-
-	map_sw_status.insert(make_pair("NetworkStatus", new NetworkStatus()));
+	//map_sw_status.insert(make_pair("NetworkStatus", new NetworkStatus()));
 	map_sw_status.insert(make_pair("ButtonStatus", new ButtonStatus()));
+	//map_sw_status.insert(make_pair("LightSensorStatus", new LightSensorStatus()));
+	map_sw_status.insert(make_pair("LEDStatus", new LEDStatus()));
 }
 
 StatesHolder::~StatesHolder()
@@ -117,13 +118,12 @@ SwStatus *StatesHolder::ReturnSwStatusObjectByType(const char* sw_status_name)
 	return sw_status;
 }
 
-
 int StatesHolder::init_status_detect_by_type(const char* status_name)
 {
 	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
 
 	if (sw_status == NULL)
-		return -1;
+		return -1; //TODO need to verify, not find out or function is not supported
 	else
 		return sw_status->init();
 }
@@ -133,7 +133,7 @@ int StatesHolder::deinit_status_detect_by_type(const char* status_name)
 	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
 
 	if (sw_status == NULL)
-		return -1;
+		return -1; //TODO need to verify, not find out or function is not supported
 	else
 		return sw_status->deinit();
 }
@@ -143,7 +143,7 @@ int StatesHolder::run_status_detect_by_type(const char* status_name)
 	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
 
 	if (sw_status == NULL)
-		return -1;
+		return -1; //TODO need to verify, not find out or function is not supported
 	else
 		return sw_status->run_status_detect();
 }
@@ -153,7 +153,7 @@ int StatesHolder::pause_status_detect_by_type(const char* status_name)
 	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
 
 	if (sw_status == NULL)
-		return -1;
+		return -1; //TODO need to verify, not find out or function is not supported
 	else
 		return sw_status->pause_status_detect();
 }
@@ -163,7 +163,7 @@ int StatesHolder::continue_status_detect_by_type(const char* status_name)
 	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
 
 	if (sw_status == NULL)
-		return -1;
+		return -1; //TODO need to verify, not find out or function is not supported
 	else
 		return sw_status->continue_status_detect();
 }
@@ -173,9 +173,27 @@ int StatesHolder::get_pause_detect_flag_by_type(const char* status_name)
 	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
 
 	if (sw_status == NULL)
-		return -1;
+		return -1; //TODO need to verify, not find out or function is not supported
 	else
 		return sw_status->get_pause_detect_flag();
+}
+
+int StatesHolder::set_status_info_by_type(const char* status_name, void* status_struct)
+{
+	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
+	if (sw_status == NULL)
+		return -1; //TODO need to verify, not find out or function is not supported
+	else
+		return sw_status->set_status_info(status_struct);
+}
+
+int StatesHolder::get_status_info_by_type(const char* status_name, void* status_struct)
+{
+	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
+	if (sw_status == NULL)
+		return -1; //TODO need to verify, not find out or function is not supported
+	else
+		return sw_status->get_status_info(status_struct);
 }
 
 void StatesHolder::SetMainStates(MAINSTATES s)

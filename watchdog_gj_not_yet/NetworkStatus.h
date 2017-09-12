@@ -18,6 +18,8 @@ class NetworkStatus : public SwStatus
 		virtual int pause_status_detect();
 		virtual int continue_status_detect();
 		virtual bool get_pause_detect_flag();
+		virtual int set_status_info(void *status_struct = NULL);
+		virtual int get_status_info(void *status_struct = NULL);
 };
 
 #endif

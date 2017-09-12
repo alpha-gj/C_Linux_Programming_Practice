@@ -79,6 +79,7 @@ int Watchdog::run()
 		printf("RESET RELEASE!!!!!!!!!!!\n");
 	else
 		printf("RESET UNKNOW\n");
+
 #endif
 
 #if 0
@@ -214,9 +215,14 @@ int Watchdog::run()
 	}
 #endif
 
-#if 0
+#if 1
 	fprintf(stderr, "run ButtonStatus detect thread\n");
 	holder->run_status_detect_by_type("ButtonStatus");
+	fprintf(stderr, "run LightSensorStatus detect thread\n");
+	holder->run_status_detect_by_type("LightSensorStatus");
+	fprintf(stderr, "run LEDStatus detect thread\n");
+	holder->run_status_detect_by_type("LEDStatus");
+
 	IPCHandler *handler = CreateHandlerByStates();
 	if (handler) {
 		handler->run_parsing_command();

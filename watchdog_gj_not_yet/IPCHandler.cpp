@@ -77,34 +77,32 @@ bool IPCHandler::GoNextState()
 
 int IPCHandler::run_parsing_command()
 {
-	while (!get_quit() && !get_reload()) {
-		printf("here is ipchandler\n");
-		sleep(1);
-	}
-	/*
 	int client_fd, ret;
 	IpcCommand cmd;
 	while (!get_quit() && !get_reload() && !GoNextState()) {
 		//INFO("%d %d", get_quit(), get_reload());
 		ret = ipc_daemon.wait_cmd_timeout(&cmd, sizeof(cmd), client_fd, 0, POLLING_TIMEOUT);
+		//ret = ipc_daemon.wait_cmd_timeout(&cmd, sizeof(cmd), client_fd, 0, 1000000);
 		if (ret > 0) {
 			IpcResponse res = { 0, 0, 0, "" };	// always response with success.
 			INFO("\033[1;33m[watchDog]: received command[%d]\033[0m", cmd.id);
 			switch (cmd.id) {
-				case CMD_FACTORY_RESET_ACT:
-					res.result = handle_factory_reset();
+				case CMD_DET_FACTORY_BUTTON:
+					printf("DET_FACTORY_BUTTON\n");
+					res.result = handle_detect_factory_button();
 					break;
+				case CMD_FACTORY_RESET_ACT: 
+					printf("FACTORY_RESET_ACT\n");
+					//res.result = handle_factory_reset();
+					res.result = 0;
+					break;
+				/*
 				case CMD_FIRMWARE_UPGRADE_START: {
 													 Color green(LED_GREEN, BLINK, FIXED_VALUE_FOR_INTERACTIVE, BLINK_PERIOD);
 													 Color yellow(LED_YELLOW, BLINK, FIXED_VALUE_FOR_INTERACTIVE, BLINK_PERIOD);
 													 led.setBlink(green, yellow);
 													 res.result = 0;
 												 } break;
-				case CMD_FIRMWARE_UPGRADE_DONE: {
-													Color color(LED_OFF, OFF);
-													led.setColor(color);
-													res.result = 0;
-												} break;
 				case CMD_ENTER_DAY_MODE:
 				case CMD_ENTER_NIGHT_MODE:
 				case CMD_STANDBY_LED_UPDATE: {
@@ -113,46 +111,41 @@ int IPCHandler::run_parsing_command()
 												 led.setColor(n);
 												 res.result = 0;
 											 } break;
-				case CMD_DEVICE_CONNECT:
-											 holder->SetPanelACK(true);
-											 res.result = 0;
-											 break;
-				case CMD_DEVICE_DISCONNECT:
-											 holder->SetPanelACK(false);
-											 res.result = 0;
-											 break;
-				case CMD_ASSOCIATED:
-				case CMD_LINK_UP:
-											 holder->SetAssociated(true);
-											 res.result = 0;
-											 break;
-				case CMD_DEASSOCIATED:
-				case CMD_LINK_DOWN:
-											 holder->SetAssociated(false);
-											 res.result = 0;
-											 break;
-				case CMD_SET_ACTIVE:
-											 res.result = 0;
-											 break;
-				case CMD_DET_BUTTON:
-											 res.value = holder->GetButtonStates().buttonOn;
-											 break;
 				default:
 											 res.result = handle_ipc_depend_on_status(cmd);
 											 break;
+				 */
 			}
+
 			ipc_daemon.reply_cmd(client_fd, &res, sizeof(res));
 		} else if (ret == 0) {
-			handle_select_time_out();
-			handle_network_states();
+			/* Do Nothing */		
 		}
 	}
-	*/
 	return 0;
+}
+
+int IPCHandler::handle_detect_factory_button()
+{
+	LED_STATUS_SETTING led_status_setting;
+
+	/* Should Get First */ 
+	printf("Get_status_info_by_type\n");
+	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
+	
+	printf("Set_status_info_by_type\n");
+	led_status_setting.pled_state = PLED_RESET;
+	holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+
+	return 0;
+
 }
 
 int IPCHandler::handle_factory_reset()
 {
+	system
+		("( /etc/rc.d/init.d/services.sh stop; factoryReset > /dev/null 2> /dev/null; /sbin/reboot ) &");
+	
 	return 0;
 }
 

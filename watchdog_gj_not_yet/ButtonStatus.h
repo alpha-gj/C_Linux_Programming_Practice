@@ -18,7 +18,7 @@ typedef enum {
 class ButtonStatus : public SwStatus
 {
 	private:
-		static void *run_reset_button_status_detect_thread(void *args = NULL);
+		static void *run_reset_button_status_detect_thread(void *args);
 		pthread_t reset_button_status_pid;
 		static bool isPauseDetect;
 		static RESET_BUTTON_STATE return_button_state_by_press_count(int press_count);
@@ -32,6 +32,8 @@ class ButtonStatus : public SwStatus
 		virtual int pause_status_detect();
 		virtual int continue_status_detect();
 		virtual bool get_pause_detect_flag();
+		virtual int set_status_info(void* status_struct);
+		virtual int get_status_info(void* status_struct);
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "tinydb/tinydb.h"
+#include "command.h"
 #include "HwManager.h"
 
 /* AHAL LIBS */
@@ -31,6 +32,8 @@ class SwStatus
 		virtual int pause_status_detect() = 0;
 		virtual int continue_status_detect() = 0;
 		virtual bool get_pause_detect_flag() = 0;
+		virtual int set_status_info(void* status_struct) = 0;
+		virtual int get_status_info(void* status_struct) = 0;
 };
 
 #endif

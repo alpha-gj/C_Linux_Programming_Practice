@@ -43,3 +43,12 @@ bool NetworkStatus::get_pause_detect_flag()
 	return(int)AHAL_RET_NOT_SUPPORT;
 }
 
+int NetworkStatus::set_status_info(void *) 
+{
+	return(int)AHAL_RET_NOT_SUPPORT;
+}
+
+int NetworkStatus::get_status_info(void *) 
+{ 
+	return(int)AHAL_RET_NOT_SUPPORT;
+}

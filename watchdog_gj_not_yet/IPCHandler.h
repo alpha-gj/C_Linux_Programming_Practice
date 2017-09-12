@@ -7,6 +7,7 @@
 #include "command.h"
 #include "Common.h"
 #include "StatesHolder.h"
+#include "HwManager.h"
 
 class IPCHandler
 {
@@ -24,7 +25,9 @@ public:
 
 protected:
 	IpcDaemon ipc_daemon;
-	virtual int handle_factory_reset();
+	int handle_factory_reset();
+	int handle_detect_factory_button();
+	
 	int ipc_fd;
 
 protected:
