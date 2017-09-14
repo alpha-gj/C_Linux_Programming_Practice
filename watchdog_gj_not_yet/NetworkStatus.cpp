@@ -85,9 +85,12 @@ void *NetworkStatus::run_network_status_thread(void *args)
 		do {
 			/* Wireless Enable isn't 1 or deassociated that should't do led state by rssi */
 			pt_hw_manager->get_hw_info_by_type("WIFI", &wifi_setting);
-			if (db.getByte("Enable") != 1 || wifi_setting.isAssociated != AHAL_CST_TRUE) {
+			if (db.getByte("Enable") != 1				   || 
+				wifi_setting.isAssociated != AHAL_CST_TRUE ||
+				return_link_state() == LINK_IS_OFF) {
 				signal_stage = FIRST_STAGE;
 				wled_state = WLED_WEAK;
+				old_wled_state = wled_state;
 				break;
 			} else {
 				/* Do Nothing */
@@ -116,7 +119,7 @@ void *NetworkStatus::run_network_status_thread(void *args)
 						break;
 					case WLED_WEAK:
 					default:
-						/* Daemon of associ_check will handle it */
+						/* TODO: Daemon of associ_check will handle it */
 						break;
 				}
 				holder->set_status_info_by_type("LEDStatus", &led_status_setting);
@@ -124,15 +127,17 @@ void *NetworkStatus::run_network_status_thread(void *args)
 				StatesHolder::ReleaseStatesHolder();
 				holder = NULL;
 			}
-
 			/* Finsh first stage and then always do second stage until deassociated */
-			if (signal_stage == FIRST_STAGE) {
+			if (signal_stage == FIRST_STAGE)
 				signal_stage = SECOND_STAGE;
-			}
 
 		} while (false);
 
-		sleep(1);
+
+		if (signal_stage == FIRST_STAGE)
+			sleep(1);
+		else if (signal_stage == SECOND_STAGE)
+			sleep(5);
 	};
 
 	db.release();
@@ -166,9 +171,7 @@ WIFI_LED_STATE NetworkStatus::return_wled_state_by_rssi(int rssi, SIGNAL_STAGE s
 			needReset = true;
 			break;
 		case SECOND_STAGE:
-			//FIXME 
-			wled_state = return_wled_state_from_first_stage(rssi);
-			//wled_state = return_wled_state_from_second_stage(rssi, needReset);
+			wled_state = return_wled_state_from_second_stage(rssi, needReset);
 			needReset = false;
 			break;
 		default:
@@ -195,10 +198,10 @@ WIFI_LED_STATE NetworkStatus::return_wled_state_from_first_stage(int rssi)
 		/* Compare rssi with RSSI_UB_DEF to get wled_state */
 		if (rssi >= RSSI_UB_DEF) {
 			wled_state = WLED_STRONG;
-			fprintf(logfp, YELLOW "Signal is strong in Fisrt Stage" NONE "\n");
+			fprintf(logfp, YELLOW "Signal is strong at Stage 1" NONE "\n");
 		} else {
 			wled_state = WLED_NORMAL;
-			fprintf(logfp, YELLOW "Signal is normal in Second Stage" NONE "\n");
+			fprintf(logfp, YELLOW "Signal is normal at Stage 2" NONE "\n");
 		}
 
 	} while (false);
@@ -212,13 +215,91 @@ WIFI_LED_STATE NetworkStatus::return_wled_state_from_first_stage(int rssi)
 WIFI_LED_STATE NetworkStatus::return_wled_state_from_second_stage(int rssi, bool isReset)
 {
 	WIFI_LED_STATE wled_state = WLED_OFF;
-	//TODO
+	static bool dontShowLog = false;
+	static int n = 0;
+	static unsigned int t = 0;
+	static float array_rssi[10] = {}, mu = 0, sigma = 0;
+	if (isReset == true) {
+		/* Reset variable */
+		dontShowLog = false;
+		n = 0,
+		t = 0;
+		memset(&array_rssi, 0x00, sizeof(array_rssi));
+		mu = 0, sigma = 0;
+	}
+
+	if (!dontShowLog) {
+		FILE *logfp = NULL;
+
+		do {
+			logfp = fopen("/dev/console", "w+");
+			if (logfp == NULL) {
+				printf("Open /dev/console fail: %s\n", strerror(errno));
+				break;
+			}
+			fprintf(logfp, YELLOW "Enter Stage 2" NONE "\n");
+		} while (false);
+
+		if (logfp != NULL)
+			fclose(logfp);
+		dontShowLog = true;
+	}
+
+	array_rssi[n] = rssi;
+	t++;
+	/*
+	   test code
+	   for(unsigned int a = 0; a < t && a < 10; a++) {
+	   printf("rssi[%d] = %d\n", a, (int)rssi[a]);
+	   }
+	 */
+	standard_deviation(array_rssi, t, &mu, &sigma);
+	printf("Mu = %.2f \tSigma = %.2f\tVibration = %.2f\n", mu, sigma, mu - sigma);
+	if (mu >= (RSSI_UB_DEF + 5) && (mu - sigma) >= RSSI_LB_DEF) {
+		wled_state = WLED_STRONG;
+		fprintf(stderr, "Signal is strong at Stage 2\n");
+	} else {
+		wled_state = WLED_NORMAL;
+		fprintf(stderr, "Signal is normal at Stage 2\n");
+	}
+	n++;
+	n %= 10;
+	if (t == UINT_MAX) t = 10;
+
 	return wled_state;
 }
 
-/* FIXME I think it need to put powerhandler */
+void NetworkStatus::standard_deviation(float data[], unsigned int t, float *mu, float *sigma)
+{
+	float mean=0.0, sum_deviation=0.0;
+	int i;
+	int n = (t > 10) ? 10:t;
+
+	for (i = 0; i < n; ++i) 
+		mean+=data[i];
+
+	mean = mean/n;
+	*mu = mean;
+
+	for (i = 0; i < n; ++i)
+		sum_deviation+=(data[i]-mean)*(data[i]-mean);
+
+	*sigma = sqrt(sum_deviation/n);           
+}
+
 LINK_STATE NetworkStatus::return_link_state()
 {
+/* FIXME Need to check this project has ethernet or not */
+#if 1
+	IF_INFO if_info;
+	if (does_wifi_associated(NULL) &&
+			get_active_interface(PLATFORM_DEV_BR, &if_info) &&
+			if_info.ipaddr.s_addr != 0) {
+		return LINK_IS_ON;
+	} else {
+		return LINK_IS_OFF;
+	}	
+#else 
 	if (probe_link()) {
 		return LINK_IS_ON;
 	} else {
@@ -231,4 +312,5 @@ LINK_STATE NetworkStatus::return_link_state()
 			return LINK_IS_OFF;
 		}	
 	}
+#endif
 }

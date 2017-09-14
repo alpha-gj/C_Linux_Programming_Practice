@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "ipc/ipc_cmd.h"
 #include "sys/socket.h"
+#include "wlan/wlan.h"
 #include "todo.h"
 #include "command.h"
 #include "Common.h"
@@ -27,6 +28,8 @@ protected:
 	int handle_factory_reset();
 	int handle_detect_factory_button();
 	int handle_stream_count(bool isActive);
+	int handle_associated();
+	int handle_deassociated();
 };
 
 #endif

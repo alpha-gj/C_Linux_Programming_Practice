@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <math.h>
+#include <limits.h>
 #include "Common.h"
 #include "StatesHolder.h"
 #include "SwStatus.h"
@@ -43,6 +44,7 @@ class NetworkStatus : public SwStatus
 		static WIFI_LED_STATE return_wled_state_by_rssi(int rssi, SIGNAL_STAGE signal_stage);
 		static WIFI_LED_STATE return_wled_state_from_first_stage(int rssi);
 		static WIFI_LED_STATE return_wled_state_from_second_stage(int rssi, bool isReset);
+		static void standard_deviation(float data[], unsigned int t, float *mu, float *sigma);
 
 	public:
 		NetworkStatus();

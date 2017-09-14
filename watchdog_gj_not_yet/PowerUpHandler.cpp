@@ -65,11 +65,11 @@ void PowerUpHandler::check_associate()
 	}
 	*/
 }
-
-/* FIXME for this to setMainStates */
 /*
-void watchdog::set_led_state_by_link() 
+POWER_LED_STATE IPCHandler::set_pled_state_by_link_state() 
 {
+	POWER_LED_STATE pled_state = PLED_BOOTING;
+	probe_link()
 	if(get_stream_count() > 0) {
 		set_pled_state(PLED_ACTIVE);
 	} else if(check_associate()) {
@@ -83,5 +83,7 @@ void watchdog::set_led_state_by_link()
 		set_pled_state(PLED_DISASSOCIATED);
 		#endif
 	}
+	return ;
 }
 */
+/* FIXME for this to setMainStates */

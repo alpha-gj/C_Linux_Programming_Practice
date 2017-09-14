@@ -216,10 +216,9 @@ int Watchdog::run()
 #endif
 
 #if 1
-	/*
 	fprintf(stderr, "run LightSensorStatus detect thread\n");
 	holder->run_status_detect_by_type("LightSensorStatus");
-	*/
+
 	fprintf(stderr, "run ButtonStatus detect thread\n");
 	holder->run_status_detect_by_type("ButtonStatus");
 

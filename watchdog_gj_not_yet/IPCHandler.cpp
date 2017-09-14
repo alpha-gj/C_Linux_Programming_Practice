@@ -99,11 +99,18 @@ int IPCHandler::run_parsing_command()
 					res.result = 0;
 					break;
 				case CMD_SET_ACTIVE:
-					if(cmd.action == 0) { //streaming
-						handle_stream_count(true);
-					} else {
-						handle_stream_count(false);
+					if(cmd.action == 0) { /* streaming is active */
+						res.result = handle_stream_count(true);
+					} else {			  /* streaming is inactive */
+						res.result = handle_stream_count(false);
 					}
+					break;
+				case CMD_ASSOCIATED:
+					res.result = handle_associated();
+					break;
+				case CMD_DEASSOCIATED:
+					/* associ_check will handle this behavior, such as enable AP Mode or not */
+					res.result = handle_deassociated();
 					break;
 				/*
 				case CMD_FIRMWARE_UPGRADE_START: {
@@ -184,6 +191,38 @@ int IPCHandler::handle_stream_count(bool isActive)
 	} else {
 		INFO("BUG@%d", __LINE__);
 	}
+	return 0;
 }
 
 
+int IPCHandler::handle_associated() 
+{
+	/* pled state is PLED_CLIENT_MODE */
+	LED_STATUS_SETTING led_status_setting;
+	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
+	if(led_status_setting.pled_state != PLED_CLIENT_MODE && (led_status_setting.pled_state = PLED_CLIENT_MODE)) {
+		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+	}
+
+	/* wled state follow NetworkStatus. So, wled state does nothing here */
+	return 0;
+}
+
+int IPCHandler::handle_deassociated()
+{
+	/* pled state is PLED_BT_MODE(default) or PLED_AP_MODE */
+	LED_STATUS_SETTING led_status_setting;
+
+	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
+	if(led_status_setting.pled_state != PLED_BT_MODE  && (led_status_setting.pled_state = PLED_BT_MODE)) {
+		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+	}
+
+	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
+	/* wled_state get WLED_WEAK by using led_status in IPCHandler */
+	if(led_status_setting.wled_state != WLED_WEAK && (led_status_setting.wled_state = WLED_WEAK)) {
+		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+	}
+
+	return 0;
+}
