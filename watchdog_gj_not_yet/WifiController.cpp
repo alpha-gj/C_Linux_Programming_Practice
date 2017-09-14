@@ -64,6 +64,8 @@ int WifiController::do_wifi_wps(void *hw_struct)
 	WIFI_SETTING *wifi_setting = (WIFI_SETTING *) hw_struct;
 	
 	ret = AHAL_WIFI_StartWPS(AHAL_WIFI_WPS_TYPE_ENROLLEE);
+
+	/* Just do once WPS and then disable it */
 	wifi_setting->DoWps = (AHAL_CST_BOOL)false;
 
 	return ret;
@@ -95,8 +97,6 @@ int WifiController::get_wifi_associated_status(void *hw_struct)
 	WIFI_SETTING *wifi_setting = (WIFI_SETTING *) hw_struct;
 
 	wifi_setting->isAssociated = (AHAL_CST_BOOL)does_wifi_associated(NULL);
-
-	//TODO Always return SUCCESS
 	ret = AHAL_RET_SUCCESS;
 
 	return ret;

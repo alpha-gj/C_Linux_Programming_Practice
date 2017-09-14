@@ -7,6 +7,11 @@
 
 using namespace std;
 
+/* TODO HW define parameters */
+#define TIME_INTERVAL		500000
+#define DAY_TO_NIGHT_SEC	3 * (1000000/TIME_INTERVAL)
+#define NIGHT_TO_DAY_SEC	7 * (1000000/TIME_INTERVAL)
+
 typedef struct LIGHT_SENSOR
 {	
 	AHAL_INT32 value;

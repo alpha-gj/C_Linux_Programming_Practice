@@ -2,11 +2,10 @@
 #include "LEDStatus.h"
 
 bool LEDStatus::isPauseDetect = false;
-LED_STATUS_SETTING LEDStatus::led_status_setting {
+LED_STATUS_SETTING LEDStatus::s_led_status_setting {
 	.pled_state = PLED_BOOTING,
 	.wled_state = WLED_OFF
 };
- 
 
 LEDStatus::LEDStatus():led_status_pid(0)
 {
@@ -69,13 +68,11 @@ void *LEDStatus::run_led_status_thread(void *args)
 {
 #if 1
 	HwManager *pt_hw_manager = (HwManager *) args;
-	LED_SETTING led_setting {
-		.id = (AHAL_LED_ID)-1,
-		.color = (AHAL_LED_COLOR)-1
-	};
-	bool on = false;
+	LED_SETTING led_setting;
+	bool pled_on = false;
 
 	while (!get_quit() && !get_reload()) {
+		//FIXME Debug message
 		printf("led_setting.id is %d, led_setting.color is %d\n", led_setting.id, led_setting.color);
 		
 		/* Pause detect condition */
@@ -85,16 +82,18 @@ void *LEDStatus::run_led_status_thread(void *args)
 		}
 
 		/* Check LED State */
-		on = !on;
-		switch(led_status_setting.pled_state) {
+		pled_on = !pled_on;
+		switch (s_led_status_setting.pled_state) {
 			case PLED_BOOTING:
-				//solid red
+			case PLED_FWUPDATE:
+			case PLED_DISASSOCIATED:
+				/* Solid Red */
 					led_setting.id = AHAL_LED_ID_POWER;
 					led_setting.color = AHAL_LED_COLOR_ON_A;
 				break;
 			case PLED_RESET:
-				//blink red
-				if(on) {
+				/* Blinking Red */
+				if(pled_on) {
 					led_setting.id = AHAL_LED_ID_POWER;
 					led_setting.color = AHAL_LED_COLOR_ON_A;
 				} else {
@@ -102,51 +101,48 @@ void *LEDStatus::run_led_status_thread(void *args)
 					led_setting.color = AHAL_LED_COLOR_OFF;
 				}
 				break;
-				/*
 			case PLED_CLIENT_MODE:
-				//solid green
-				if(p->SilentLED) {
-					ctrl->set_led(AHAL_LED_ID_POWER, AHAL_LED_COLOR_OFF);
+				/* Solid Green */
+				if(false) { //FIXME
+					led_setting.id = AHAL_LED_ID_POWER;
+					led_setting.color = AHAL_LED_COLOR_OFF;
 				} else {
-					ctrl->set_led(AHAL_LED_ID_POWER, AHAL_LED_COLOR_ON_B);
+					led_setting.id = AHAL_LED_ID_POWER;
+					led_setting.color = AHAL_LED_COLOR_ON_B;
 				}
 				break;
+			case PLED_WPS:
 			case PLED_ACTIVE:
-				if(p->SilentLED) {
-					ctrl->set_led(AHAL_LED_ID_POWER, AHAL_LED_COLOR_OFF);
+				/* Blinking Green */
+				if(false) { //FIXME
+					led_setting.id = AHAL_LED_ID_POWER;
+					led_setting.color = AHAL_LED_COLOR_OFF;
 					break;
 				} 
-			case PLED_WPS:
-				//blink green
-				if(on) {
-					ctrl->set_led(AHAL_LED_ID_POWER, AHAL_LED_COLOR_ON_B);
+				if(pled_on) {
+					led_setting.id = AHAL_LED_ID_POWER;
+					led_setting.color = AHAL_LED_COLOR_ON_B;
 				} else {
-					ctrl->set_led(AHAL_LED_ID_POWER, AHAL_LED_COLOR_OFF);
+					led_setting.id = AHAL_LED_ID_POWER;
+					led_setting.color = AHAL_LED_COLOR_OFF;
 				}
-				break;
-			case PLED_FWUPDATE:
-				//solid red
-				ctrl->set_led(AHAL_LED_ID_POWER, AHAL_LED_COLOR_ON_A);
 				break;
 			case PLED_BT_MODE:
 			case PLED_AP_MODE:
-				//blink orange
-				if(on) {
-					ctrl->set_led(AHAL_LED_ID_POWER, AHAL_LED_COLOR_ON);
+				/* Blinking Orange */
+				if(pled_on) {
+					led_setting.id = AHAL_LED_ID_POWER;
+					led_setting.color = AHAL_LED_COLOR_ON;
 				} else {
-					ctrl->set_led(AHAL_LED_ID_POWER, AHAL_LED_COLOR_OFF);
+					led_setting.id = AHAL_LED_ID_POWER;
+					led_setting.color = AHAL_LED_COLOR_OFF;
 				}
 				break;
-			case PLED_DISASSOCIATED:
-				//solid red
-				ctrl->set_led(AHAL_LED_ID_POWER, AHAL_LED_COLOR_ON_A);
-				break;
-				*/
 			default:
 				INFO("BUG@%s %d", __FUNCTION__,  __LINE__);
 				break;
 		}
-		
+
 		pt_hw_manager->set_hw_info_by_type("LED", &led_setting);
 
 		sleep(1);
@@ -161,8 +157,8 @@ int LEDStatus::set_status_info(void* status_struct)
 {
 	LED_STATUS_SETTING *temp_led_status_setting = (LED_STATUS_SETTING *) status_struct;
 
-	led_status_setting.pled_state = temp_led_status_setting->pled_state;
-	led_status_setting.wled_state = temp_led_status_setting->wled_state;
+	s_led_status_setting.pled_state = temp_led_status_setting->pled_state;
+	s_led_status_setting.wled_state = temp_led_status_setting->wled_state;
 
 	return(int)AHAL_RET_SUCCESS;
 }
@@ -171,8 +167,8 @@ int LEDStatus::get_status_info(void* status_struct)
 {
 	LED_STATUS_SETTING *temp_led_status_setting = (LED_STATUS_SETTING *) status_struct;
 
-	temp_led_status_setting->pled_state = led_status_setting.pled_state;
-	temp_led_status_setting->wled_state = led_status_setting.wled_state;
+	temp_led_status_setting->pled_state = s_led_status_setting.pled_state;
+	temp_led_status_setting->wled_state = s_led_status_setting.wled_state;
 
 	return(int)AHAL_RET_SUCCESS;
 }

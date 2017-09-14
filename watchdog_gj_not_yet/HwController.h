@@ -17,19 +17,6 @@
 #include "AHAL_Wifi.h"
 #include "AHAL_Audio.h"
 
-
-/* HW define parameters */
-#define TIME_INTERVAL		500000
-#define DAY_TO_NIGHT_SEC	3 * (1000000/TIME_INTERVAL)
-#define NIGHT_TO_DAY_SEC	7 * (1000000/TIME_INTERVAL)
-
-/* HW COMPENTs */
-//TODO
-
-/* FIXME Please put these define variables as below that should be in SPEC_DEFIN.h for project that be included in holder.h */
-//#define RSSI_UB_DEF			(-73)
-//#define RSSI_LB_DEF			(-85)
-
 class HwController
 {
 	protected:

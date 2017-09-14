@@ -36,10 +36,10 @@ typedef struct LED_STATUS {
 class LEDStatus : public SwStatus
 {
 	private:
-		static void *run_led_status_thread(void *args);
 		pthread_t led_status_pid;
+		static void *run_led_status_thread(void *args);
 		static bool isPauseDetect;
-		static LED_STATUS_SETTING led_status_setting;
+		static LED_STATUS_SETTING s_led_status_setting;
 
 	public:
 		LEDStatus();

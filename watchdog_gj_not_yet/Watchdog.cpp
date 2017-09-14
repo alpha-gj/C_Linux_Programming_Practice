@@ -216,12 +216,19 @@ int Watchdog::run()
 #endif
 
 #if 1
+	/*
 	fprintf(stderr, "run ButtonStatus detect thread\n");
 	holder->run_status_detect_by_type("ButtonStatus");
+
 	fprintf(stderr, "run LightSensorStatus detect thread\n");
 	holder->run_status_detect_by_type("LightSensorStatus");
+	*/
+
 	fprintf(stderr, "run LEDStatus detect thread\n");
 	holder->run_status_detect_by_type("LEDStatus");
+
+	fprintf(stderr, "run NetworkStatus detect thread\n");
+	holder->run_status_detect_by_type("NetworkStatus");
 
 	IPCHandler *handler = CreateHandlerByStates();
 	if (handler) {

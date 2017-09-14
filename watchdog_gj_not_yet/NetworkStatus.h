@@ -3,27 +3,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <math.h>
+#include "Common.h"
 #include "SwStatus.h"
+#include "LEDStatus.h"
+#include "wlan/wlan.h"
+#include "if_info/if_info.h"
 
 using namespace std;
 
+/* Follow spec. definition */
+#define RSSI_UB_DEF			(-73)
+#define RSSI_LB_DEF			(-85)
+
+typedef enum {
+	FIRST_STAGE,
+	SECOND_STAGE,
+} SIGNAL_STAGE;
+
+typedef enum {
+	LINK_IS_OFF,
+	LINK_IS_ON,
+} LINK_STATE;
+
+/* TODO It should add other items for NEWTWORK_STATUS? */
+typedef struct NETWORK_STATUS {
+	LINK_STATE link_state;
+} NETWORK_STATUS_SETTING;
+
 class NetworkStatus : public SwStatus
 {
+	private:
+		pthread_t network_status_pid;
+		static void *run_network_status_thread(void *args);
+		static bool isPauseDetect;
+		static NETWORK_STATUS_SETTING s_network_status_setting;
+		static LINK_STATE return_link_state();
+		static WIFI_LED_STATE return_wled_state_by_rssi(int rssi, SIGNAL_STAGE signal_stage);
+		static WIFI_LED_STATE return_wled_state_from_first_stage(int rssi);
+		static WIFI_LED_STATE return_wled_state_from_second_stage(int rssi, bool isReset);
+
 	public:
 		NetworkStatus();
 		virtual ~NetworkStatus();
-		virtual int init();								/* To check or not according to DB value  */
+		virtual int init();
 		virtual int deinit();
-		virtual int run_status_detect();				/* TODO Need pthread?  Pass struct of data type for checking HW info */
+		virtual int run_status_detect();				
 		virtual int pause_status_detect();
 		virtual int continue_status_detect();
 		virtual bool get_pause_detect_flag();
 		virtual int set_status_info(void *status_struct = NULL);
-		virtual int get_status_info(void *status_struct = NULL);
+		virtual int get_status_info(void *status_struct);
 };
 
 #endif
-	
-
-
-

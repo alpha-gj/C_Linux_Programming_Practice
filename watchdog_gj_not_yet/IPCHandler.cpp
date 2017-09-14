@@ -88,13 +88,22 @@ int IPCHandler::run_parsing_command()
 			INFO("\033[1;33m[watchDog]: received command[%d]\033[0m", cmd.id);
 			switch (cmd.id) {
 				case CMD_DET_FACTORY_BUTTON:
+					/* TODO INFO */
 					printf("DET_FACTORY_BUTTON\n");
 					res.result = handle_detect_factory_button();
 					break;
 				case CMD_FACTORY_RESET_ACT: 
+					/* TODO INFO */
 					printf("FACTORY_RESET_ACT\n");
 					//res.result = handle_factory_reset();
 					res.result = 0;
+					break;
+				case CMD_SET_ACTIVE:
+					if(cmd.action == 0) { //streaming
+						handle_stream_count(true);
+					} else {
+						handle_stream_count(false);
+					}
 					break;
 				/*
 				case CMD_FIRMWARE_UPGRADE_START: {
@@ -129,33 +138,52 @@ int IPCHandler::handle_detect_factory_button()
 {
 	LED_STATUS_SETTING led_status_setting;
 
-	/* Should Get First */ 
-	printf("Get_status_info_by_type\n");
+	/* It should get current LED_state First */ 
 	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
 	
-	printf("Set_status_info_by_type\n");
-	led_status_setting.pled_state = PLED_RESET;
-	holder->set_status_info_by_type("LEDStatus", &led_status_setting);
-
+	/* Set only one of settings that you want to do */
+	if(led_status_setting.pled_state != PLED_RESET && (led_status_setting.pled_state = PLED_ACTIVE)) {
+		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+	}
 	return 0;
-
 }
 
 int IPCHandler::handle_factory_reset()
 {
-	system
-		("( /etc/rc.d/init.d/services.sh stop; factoryReset > /dev/null 2> /dev/null; /sbin/reboot ) &");
+	system("( /etc/rc.d/init.d/services.sh stop; factoryReset > /dev/null 2> /dev/null; /sbin/reboot ) &");
 	
 	return 0;
 }
 
-int IPCHandler::handle_select_time_out()
+int IPCHandler::handle_stream_count(bool isActive)
 {
-	return 0;
+	static unsigned count = 0;
+	
+	if (isActive) {
+		count++;
+	} else if (!isActive && count > 0) {
+		count--;
+	} else {
+		INFO("BUG@%d", __LINE__);
+	}
+	
+	fprintf(stderr, "%s: %s[%d] Live View count is %d\n", __FILE__, __FUNCTION__, __LINE__, count);
+
+	/* Set LED State by count */
+	LED_STATUS_SETTING led_status_setting;
+	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
+	if (count > 0) {
+		/* TODO It should need to check this status is same or not, It will set it when they are not same. */
+		if(led_status_setting.pled_state != PLED_ACTIVE && (led_status_setting.pled_state = PLED_ACTIVE)) {
+			holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+		}
+	} else if (count == 0) {
+		/* FIXME Need to check Network status first by NetworkStatus thead */
+		led_status_setting.pled_state = PLED_CLIENT_MODE;
+		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+	} else {
+		INFO("BUG@%d", __LINE__);
+	}
 }
 
-int IPCHandler::handle_network_states()
-{
-	return 0;
-}
 

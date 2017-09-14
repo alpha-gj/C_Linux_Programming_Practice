@@ -12,9 +12,9 @@ typedef struct WIFI
 {	
 	/* RUN FUNCTION */
 	AHAL_CST_BOOL DoWps;
-	AHAL_CST_BOOL isAssociated;
 
 	/* GET INFO */
+	AHAL_CST_BOOL isAssociated;
 	AHAL_WIFI_RADIO_INFO wifi_radio_info;
 	AHAL_WIFI_WPS_STATUS wifi_wps_status;
 } WIFI_SETTING;

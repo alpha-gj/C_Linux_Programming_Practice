@@ -65,3 +65,23 @@ void PowerUpHandler::check_associate()
 	}
 	*/
 }
+
+/* FIXME for this to setMainStates */
+/*
+void watchdog::set_led_state_by_link() 
+{
+	if(get_stream_count() > 0) {
+		set_pled_state(PLED_ACTIVE);
+	} else if(check_associate()) {
+		set_pled_state(PLED_CLIENT_MODE);
+	} else if(system("pidof bluetoothd") == 0) {
+		set_pled_state(PLED_BT_MODE);
+	} else {
+		#ifndef WIFI_STA
+		set_pled_state(PLED_AP_MODE);
+		#else
+		set_pled_state(PLED_DISASSOCIATED);
+		#endif
+	}
+}
+*/

@@ -8,11 +8,12 @@ int StatesHolder::referCount = 0;
 
 StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)
 {
-	//TODO insert something that you want to detect, such as TWT, button, network status, lightsensor(day,night mode)
-	//map_sw_status.insert(make_pair("NetworkStatus", new NetworkStatus()));
+	/* Insert something that you want to detect, such as TWT, button, network status, lightsensor(day,night mode) */
+	map_sw_status.insert(make_pair("NetworkStatus", new NetworkStatus()));
 	map_sw_status.insert(make_pair("ButtonStatus", new ButtonStatus()));
-	//map_sw_status.insert(make_pair("LightSensorStatus", new LightSensorStatus()));
+	map_sw_status.insert(make_pair("LightSensorStatus", new LightSensorStatus()));
 	map_sw_status.insert(make_pair("LEDStatus", new LEDStatus()));
+	map_sw_status.insert(make_pair("NetworkStatus", new NetworkStatus()));
 }
 
 StatesHolder::~StatesHolder()

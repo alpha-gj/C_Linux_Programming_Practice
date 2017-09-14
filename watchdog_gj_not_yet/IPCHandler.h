@@ -16,22 +16,17 @@ public:
 	virtual ~IPCHandler ();
 	virtual int init() = 0;
 	virtual int release() = 0;
-	virtual int handle_select_time_out();
-	virtual int handle_network_states();
 	virtual int run_parsing_command();
 	virtual bool GoNextState();
 	virtual MAINSTATES GetMainHandlerState() = 0;
 
-
 protected:
 	IpcDaemon ipc_daemon;
+	StatesHolder *holder;
+	int ipc_fd;
 	int handle_factory_reset();
 	int handle_detect_factory_button();
-	
-	int ipc_fd;
-
-protected:
-	StatesHolder *holder;
+	int handle_stream_count(bool isActive);
 };
 
 #endif

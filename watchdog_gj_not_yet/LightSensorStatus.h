@@ -17,8 +17,8 @@ typedef enum {
 class LightSensorStatus : public SwStatus
 {
 	private:
-		static void *run_light_sensor_status_detect_thread(void *args);
 		pthread_t light_sensor_status_pid;
+		static void *run_light_sensor_status_detect_thread(void *args);
 		static bool isPauseDetect;
 
 	public:

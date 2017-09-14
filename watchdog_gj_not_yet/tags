@@ -32,7 +32,7 @@ CreateHandlerByStates	Watchdog.cpp	/^IPCHandler *Watchdog::CreateHandlerByStates
 CreateHwManager	HwManager.cpp	/^HwManager *HwManager::CreateHwManager()$/;"	f	class:HwManager
 CreateStatesHolder	StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
 DAEMON	Makefile	/^DAEMON = Watchdog$/;"	m
-DAY_TO_NIGHT_SEC	HwController.h	23;"	d
+DAY_TO_NIGHT_SEC	LightSensorController.h	12;"	d
 DEASSOCIATED	Status.h	/^	DEASSOCIATED,$/;"	e	enum:network_status
 DEPENDS	Makefile	/^DEPENDS := $(DEPENDS:%.cpp=%.d)$/;"	m
 DEPENDS	Makefile	/^DEPENDS := $(SRCS:%.c=%.d)$/;"	m
@@ -45,6 +45,7 @@ ENTER_STANDBY_COUNT	Variable.h	8;"	d
 ENTER_TWT_COUNT	Variable.h	5;"	d
 ENTER_WPS_COUNT	Variable.h	11;"	d
 FAIL	Status.h	/^	FAIL,$/;"	e	enum:wps_status
+FIRST_STAGE	NetworkStatus.h	/^	FIRST_STAGE,$/;"	e	enum:__anon5
 GPIO_READ_FAIL_COUNT	Variable.h	13;"	d
 GetMainHandlerState	PowerUpHandler.cpp	/^MAINSTATES PowerUpHandler::GetMainHandlerState()$/;"	f	class:PowerUpHandler
 GetMainHandlerState	ResetHandler.cpp	/^MAINSTATES ResetHandler::GetMainHandlerState()$/;"	f	class:ResetHandler
@@ -86,6 +87,7 @@ LEDStatus	LEDStatus.cpp	/^LEDStatus::LEDStatus():led_status_pid(0)$/;"	f	class:L
 LEDStatus	LEDStatus.h	/^class LEDStatus : public SwStatus$/;"	c
 LED_SETTING	LEDController.h	/^} LED_SETTING;$/;"	t	typeref:struct:LED
 LED_STATUS	LEDStatus.h	/^typedef struct LED_STATUS {$/;"	s
+LED_STATUS_SETTING	LEDStatus.h	/^} LED_STATUS_SETTING;$/;"	t	typeref:struct:LED_STATUS
 LIGHT_MODE	Common.h	/^enum LIGHT_MODE {$/;"	g
 LIGHT_OFF	LightSensorStatus.h	/^	LIGHT_OFF,$/;"	e	enum:__anon4
 LIGHT_ON	LightSensorStatus.h	/^	LIGHT_ON,$/;"	e	enum:__anon4
@@ -93,6 +95,9 @@ LIGHT_SENSOR	LightSensorController.h	/^typedef struct LIGHT_SENSOR$/;"	s
 LIGHT_SENSOR	Watchdog.cpp	52;"	d	file:
 LIGHT_SENSOR_SETTING	LightSensorController.h	/^} LIGHT_SENSOR_SETTING;$/;"	t	typeref:struct:LIGHT_SENSOR
 LIGHT_SENSOR_STATE	LightSensorStatus.h	/^} LIGHT_SENSOR_STATE;$/;"	t	typeref:enum:__anon4
+LINK_IS_OFF	NetworkStatus.h	/^	LINK_IS_OFF,$/;"	e	enum:__anon6
+LINK_IS_ON	NetworkStatus.h	/^	LINK_IS_ON,$/;"	e	enum:__anon6
+LINK_STATE	NetworkStatus.h	/^} LINK_STATE;$/;"	t	typeref:enum:__anon6
 LOADLIBES	Makefile	/^LOADLIBES = $(PLATFORM_LOADLIBES) -L$(PREFIX)\/lib$/;"	m
 LightSensorController	LightSensorController.cpp	/^LightSensorController::LightSensorController()$/;"	f	class:LightSensorController
 LightSensorController	LightSensorController.h	/^class LightSensorController : public HwController$/;"	c
@@ -101,10 +106,12 @@ LightSensorStatus	LightSensorStatus.h	/^class LightSensorStatus : public SwStatu
 MAINSTATES	StatesHolder.h	/^enum MAINSTATES {$/;"	g
 MAINSTATES_COUNT	StatesHolder.h	/^	MAINSTATES_COUNT,$/;"	e	enum:MAINSTATES
 NETWORK_RESTART_TIMEOUT	Variable.h	16;"	d
+NETWORK_STATUS	NetworkStatus.h	/^typedef struct NETWORK_STATUS {$/;"	s
 NETWORK_STATUS	Status.h	/^} NETWORK_STATUS;$/;"	t	typeref:enum:network_status
-NIGHT_TO_DAY_SEC	HwController.h	24;"	d
+NETWORK_STATUS_SETTING	NetworkStatus.h	/^} NETWORK_STATUS_SETTING;$/;"	t	typeref:struct:NETWORK_STATUS
+NIGHT_TO_DAY_SEC	LightSensorController.h	13;"	d
 NM	Makefile	/^NM        = $(CROSS_COMPILE)nm$/;"	m
-NetworkStatus	NetworkStatus.cpp	/^NetworkStatus::NetworkStatus()$/;"	f	class:NetworkStatus
+NetworkStatus	NetworkStatus.cpp	/^NetworkStatus::NetworkStatus():network_status_pid(0)$/;"	f	class:NetworkStatus
 NetworkStatus	NetworkStatus.h	/^class NetworkStatus : public SwStatus$/;"	c
 NetworkStatus	Status.h	/^NetworkStatus::NetworkStatus()$/;"	f	class:NetworkStatus
 NetworkStatus	Status.h	/^class NetworkStatus : public Status$/;"	c
@@ -124,7 +131,6 @@ PLED_RESET	LEDStatus.h	/^	PLED_RESET,$/;"	e	enum:__anon2
 PLED_WPS	LEDStatus.h	/^	PLED_WPS,$/;"	e	enum:__anon2
 POLLING_TIMEOUT	Variable.h	2;"	d
 POWERUP	StatesHolder.h	/^	POWERUP,$/;"	e	enum:MAINSTATES
-POWER_LED_STATE	LEDStatus.h	/^	POWER_LED_STATE;$/;"	m	struct:LED_STATUS
 POWER_LED_STATE	LEDStatus.h	/^} POWER_LED_STATE;$/;"	t	typeref:enum:__anon2
 PREFIX	Makefile	/^PREFIX = $(PJ_PREFIX)$/;"	m
 PREFIX_SBINDIR	Makefile	/^PREFIX_SBINDIR := $(PREFIX)\/sbin$/;"	m
@@ -138,6 +144,8 @@ RESET_BUTTON_STATE	ButtonStatus.h	/^} RESET_BUTTON_STATE;$/;"	t	typeref:enum:__a
 RESET_LAUNCH	ButtonStatus.h	/^	RESET_LAUNCH,$/;"	e	enum:__anon1
 RESET_READY	ButtonStatus.h	/^	RESET_READY,$/;"	e	enum:__anon1
 RESET_STANDBY	ButtonStatus.h	/^	RESET_STANDBY,$/;"	e	enum:__anon1
+RSSI_LB_DEF	NetworkStatus.h	17;"	d
+RSSI_UB_DEF	NetworkStatus.h	16;"	d
 ReleaseHwManager	HwManager.cpp	/^int HwManager::ReleaseHwManager()$/;"	f	class:HwManager
 ReleaseStatesHolder	StatesHolder.cpp	/^int StatesHolder::ReleaseStatesHolder()$/;"	f	class:StatesHolder
 ResetHandler	ResetHandler.cpp	/^ResetHandler::ResetHandler()$/;"	f	class:ResetHandler
@@ -145,6 +153,8 @@ ResetHandler	ResetHandler.h	/^class ResetHandler : public IPCHandler$/;"	c
 ReturnHwControllerObjectByType	HwManager.cpp	/^HwController *HwManager::ReturnHwControllerObjectByType(const char* hw_controller_name)$/;"	f	class:HwManager
 ReturnSwStatusObjectByType	StatesHolder.cpp	/^SwStatus *StatesHolder::ReturnSwStatusObjectByType(const char* sw_status_name)$/;"	f	class:StatesHolder
 SCAN	Status.h	/^	SCAN,$/;"	e	enum:wps_status
+SECOND_STAGE	NetworkStatus.h	/^	SECOND_STAGE,$/;"	e	enum:__anon5
+SIGNAL_STAGE	NetworkStatus.h	/^} SIGNAL_STAGE;$/;"	t	typeref:enum:__anon5
 SIZE	Makefile	/^SIZE      = $(CROSS_COMPILE)size$/;"	m
 SRCS	Makefile	/^SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp SwStatus.cpp IPCHandler.cpp Common.cpp \\$/;"	m
 STRINGS	Makefile	/^STRINGS   = $(CROSS_COMPILE)strings$/;"	m
@@ -158,7 +168,7 @@ SwStatus	SwStatus.cpp	/^SwStatus::SwStatus():hw_manager(HwManager::CreateHwManag
 SwStatus	SwStatus.h	/^class SwStatus$/;"	c
 TARGETS	Makefile	/^TARGETS = $(DAEMON)$/;"	m
 TIME_BASE	Variable.h	3;"	d
-TIME_INTERVAL	HwController.h	22;"	d
+TIME_INTERVAL	LightSensorController.h	11;"	d
 UNDER_ALWAYS_DAY_MODE	Common.h	/^	UNDER_ALWAYS_DAY_MODE,$/;"	e	enum:LIGHT_MODE
 UNDER_ALWAYS_NIGHT_MODE	Common.h	/^	UNDER_ALWAYS_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
 UNDER_DAY_MODE	Common.h	/^	UNDER_DAY_MODE,$/;"	e	enum:LIGHT_MODE
@@ -169,7 +179,6 @@ WAIT_HEART_BEAT_COUNT	Variable.h	4;"	d
 WAIT_WPS_STATE_COUNT	Variable.h	14;"	d
 WIFI	Watchdog.cpp	48;"	d	file:
 WIFI	WifiController.h	/^typedef struct WIFI$/;"	s
-WIFI_LED_STATE	LEDStatus.h	/^	WIFI_LED_STATE;$/;"	m	struct:LED_STATUS
 WIFI_LED_STATE	LEDStatus.h	/^} WIFI_LED_STATE;$/;"	t	typeref:enum:__anon3
 WIFI_SETTING	WifiController.h	/^} WIFI_SETTING;$/;"	t	typeref:struct:WIFI
 WLED_NORMAL	LEDStatus.h	/^	WLED_NORMAL,$/;"	e	enum:__anon3
@@ -246,7 +255,7 @@ get_reload	Common.cpp	/^bool get_reload()$/;"	f
 get_status_info	ButtonStatus.cpp	/^int ButtonStatus::get_status_info(void *)$/;"	f	class:ButtonStatus
 get_status_info	LEDStatus.cpp	/^int LEDStatus::get_status_info(void* status_struct)$/;"	f	class:LEDStatus
 get_status_info	LightSensorStatus.cpp	/^int LightSensorStatus::get_status_info(void *)$/;"	f	class:LightSensorStatus
-get_status_info	NetworkStatus.cpp	/^int NetworkStatus::get_status_info(void *) $/;"	f	class:NetworkStatus
+get_status_info	NetworkStatus.cpp	/^int NetworkStatus::get_status_info(void * status_struct) $/;"	f	class:NetworkStatus
 get_status_info_by_type	StatesHolder.cpp	/^int StatesHolder::get_status_info_by_type(const char* status_name, void* status_struct)$/;"	f	class:StatesHolder
 get_uptime	Common.cpp	/^struct timeval get_uptime()$/;"	f
 get_wifi_associated_status	WifiController.cpp	/^int WifiController::get_wifi_associated_status(void *hw_struct)$/;"	f	class:WifiController
@@ -256,8 +265,7 @@ handle_detect_factory_button	IPCHandler.cpp	/^int IPCHandler::handle_detect_fact
 handle_factory_reset	IPCHandler.cpp	/^int IPCHandler::handle_factory_reset()$/;"	f	class:IPCHandler
 handle_ipc_depend_on_status	PowerUpHandler.cpp	/^int PowerUpHandler::handle_ipc_depend_on_status(IpcCommand cmd)$/;"	f	class:PowerUpHandler
 handle_ipc_depend_on_status	ResetHandler.cpp	/^int ResetHandler::handle_ipc_depend_on_status(IpcCommand \/*cmd*\/)$/;"	f	class:ResetHandler
-handle_network_states	IPCHandler.cpp	/^int IPCHandler::handle_network_states()$/;"	f	class:IPCHandler
-handle_select_time_out	IPCHandler.cpp	/^int IPCHandler::handle_select_time_out()$/;"	f	class:IPCHandler
+handle_stream_count	IPCHandler.cpp	/^int IPCHandler::handle_stream_count(bool isActive)$/;"	f	class:IPCHandler
 holder	IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
 holder	StatesHolder.h	/^		static StatesHolder *holder;$/;"	m	class:StatesHolder
 holder	Watchdog.h	/^		StatesHolder *holder;$/;"	m	class:Watchdog
@@ -296,21 +304,26 @@ isPauseDetect	LEDStatus.cpp	/^bool LEDStatus::isPauseDetect = false;$/;"	m	class
 isPauseDetect	LEDStatus.h	/^		static bool isPauseDetect;$/;"	m	class:LEDStatus
 isPauseDetect	LightSensorStatus.cpp	/^bool LightSensorStatus::isPauseDetect = false;$/;"	m	class:LightSensorStatus	file:
 isPauseDetect	LightSensorStatus.h	/^		static bool isPauseDetect;$/;"	m	class:LightSensorStatus
+isPauseDetect	NetworkStatus.cpp	/^bool NetworkStatus::isPauseDetect = false;$/;"	m	class:NetworkStatus	file:
+isPauseDetect	NetworkStatus.h	/^		static bool isPauseDetect;$/;"	m	class:NetworkStatus
 is_quit	Common.cpp	/^bool is_quit = false;$/;"	v
 is_reload	Common.cpp	/^bool is_reload = false;$/;"	v
 led_status_pid	LEDStatus.h	/^		pthread_t led_status_pid;$/;"	m	class:LEDStatus
 light_sensor_status_pid	LightSensorStatus.h	/^		pthread_t light_sensor_status_pid;$/;"	m	class:LightSensorStatus
+link_state	NetworkStatus.h	/^	LINK_STATE link_state;$/;"	m	struct:NETWORK_STATUS
 main	Watchdog.cpp	/^int main(int \/*argc*\/, const char* argv[])$/;"	f
 mainStates	StatesHolder.h	/^		MAINSTATES mainStates;$/;"	m	class:StatesHolder
 map_hw_controller	HwManager.h	/^		map<string, HwController *> map_hw_controller;$/;"	m	class:HwManager
 map_sw_status	StatesHolder.h	/^		map<string, SwStatus *> map_sw_status;$/;"	m	class:StatesHolder
 network_status	Status.h	/^typedef enum network_status {$/;"	g
+network_status_pid	NetworkStatus.h	/^		pthread_t network_status_pid;$/;"	m	class:NetworkStatus
 oldMainStates	StatesHolder.h	/^		MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
 pause_status_detect	ButtonStatus.cpp	/^int ButtonStatus::pause_status_detect() $/;"	f	class:ButtonStatus
 pause_status_detect	LEDStatus.cpp	/^int LEDStatus::pause_status_detect() $/;"	f	class:LEDStatus
 pause_status_detect	LightSensorStatus.cpp	/^int LightSensorStatus::pause_status_detect() $/;"	f	class:LightSensorStatus
 pause_status_detect	NetworkStatus.cpp	/^int NetworkStatus::pause_status_detect() $/;"	f	class:NetworkStatus
 pause_status_detect_by_type	StatesHolder.cpp	/^int StatesHolder::pause_status_detect_by_type(const char* status_name)$/;"	f	class:StatesHolder
+pled_state	LEDStatus.h	/^	POWER_LED_STATE pled_state;$/;"	m	struct:LED_STATUS
 referCount	HwManager.cpp	/^int HwManager::referCount = 0;$/;"	m	class:HwManager	file:
 referCount	HwManager.h	/^		static int referCount;$/;"	m	class:HwManager
 referCount	StatesHolder.cpp	/^int StatesHolder::referCount = 0;$/;"	m	class:StatesHolder	file:
@@ -322,9 +335,14 @@ requestExitHandler	Watchdog.cpp	/^void requestExitHandler(int sigNum)$/;"	f
 requestReloadHandler	Watchdog.cpp	/^void requestReloadHandler(int sigNum)$/;"	f
 reset_button_status_pid	ButtonStatus.h	/^		pthread_t reset_button_status_pid;$/;"	m	class:ButtonStatus
 return_button_state_by_press_count	ButtonStatus.cpp	/^RESET_BUTTON_STATE ButtonStatus::return_button_state_by_press_count(int press_count)$/;"	f	class:ButtonStatus
+return_link_state	NetworkStatus.cpp	/^LINK_STATE NetworkStatus::return_link_state()$/;"	f	class:NetworkStatus
+return_wled_state_by_rssi	NetworkStatus.cpp	/^WIFI_LED_STATE NetworkStatus::return_wled_state_by_rssi(int rssi, SIGNAL_STAGE signal_stage)$/;"	f	class:NetworkStatus
+return_wled_state_from_first_stage	NetworkStatus.cpp	/^WIFI_LED_STATE NetworkStatus::return_wled_state_from_first_stage(int rssi)$/;"	f	class:NetworkStatus
+return_wled_state_from_second_stage	NetworkStatus.cpp	/^WIFI_LED_STATE NetworkStatus::return_wled_state_from_second_stage(int rssi, bool isReset)$/;"	f	class:NetworkStatus
 run	Watchdog.cpp	/^int Watchdog::run()$/;"	f	class:Watchdog
 run_led_status_thread	LEDStatus.cpp	/^void *LEDStatus::run_led_status_thread(void *args)$/;"	f	class:LEDStatus
 run_light_sensor_status_detect_thread	LightSensorStatus.cpp	/^void *LightSensorStatus::run_light_sensor_status_detect_thread(void *args)$/;"	f	class:LightSensorStatus
+run_network_status_thread	NetworkStatus.cpp	/^void *NetworkStatus::run_network_status_thread(void *args)$/;"	f	class:NetworkStatus
 run_parsing_command	IPCHandler.cpp	/^int IPCHandler::run_parsing_command()$/;"	f	class:IPCHandler
 run_reset_button_status_detect_thread	ButtonStatus.cpp	/^void *ButtonStatus::run_reset_button_status_detect_thread(void *args)$/;"	f	class:ButtonStatus
 run_status_detect	ButtonStatus.cpp	/^int ButtonStatus::run_status_detect()$/;"	f	class:ButtonStatus
@@ -332,6 +350,8 @@ run_status_detect	LEDStatus.cpp	/^int LEDStatus::run_status_detect()$/;"	f	class
 run_status_detect	LightSensorStatus.cpp	/^int LightSensorStatus::run_status_detect()$/;"	f	class:LightSensorStatus
 run_status_detect	NetworkStatus.cpp	/^int NetworkStatus::run_status_detect()$/;"	f	class:NetworkStatus
 run_status_detect_by_type	StatesHolder.cpp	/^int StatesHolder::run_status_detect_by_type(const char* status_name)$/;"	f	class:StatesHolder
+s_led_status_setting	LEDStatus.h	/^		static LED_STATUS_SETTING s_led_status_setting;$/;"	m	class:LEDStatus
+s_network_status_setting	NetworkStatus.h	/^		static NETWORK_STATUS_SETTING s_network_status_setting;$/;"	m	class:NetworkStatus
 send_ipccmd	Common.cpp	/^void send_ipccmd(const char *path, int ipc)$/;"	f
 set_hw_info	AudioController.cpp	/^int AudioController::set_hw_info(void *) $/;"	f	class:AudioController
 set_hw_info	ButtonController.cpp	/^int ButtonController::set_hw_info(void *) $/;"	f	class:ButtonController
@@ -359,6 +379,7 @@ value	LightSensorController.h	/^	AHAL_INT32 value;$/;"	m	struct:LIGHT_SENSOR
 value_type	IRLEDController.h	/^	AHAL_PWM_VALUE_TYPE value_type; $/;"	m	struct:IRLED
 wifi_radio_info	WifiController.h	/^	AHAL_WIFI_RADIO_INFO wifi_radio_info;$/;"	m	struct:WIFI
 wifi_wps_status	WifiController.h	/^	AHAL_WIFI_WPS_STATUS wifi_wps_status;$/;"	m	struct:WIFI
+wled_state	LEDStatus.h	/^	WIFI_LED_STATE wled_state;$/;"	m	struct:LED_STATUS
 wps_status	Status.h	/^typedef enum wps_status {$/;"	g
 ~AudioController	AudioController.cpp	/^AudioController::~AudioController()$/;"	f	class:AudioController
 ~ButtonController	ButtonController.cpp	/^ButtonController::~ButtonController()$/;"	f	class:ButtonController
