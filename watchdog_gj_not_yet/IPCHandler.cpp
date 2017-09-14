@@ -142,7 +142,7 @@ int IPCHandler::handle_detect_factory_button()
 	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
 	
 	/* Set only one of settings that you want to do */
-	if(led_status_setting.pled_state != PLED_RESET && (led_status_setting.pled_state = PLED_ACTIVE)) {
+	if(led_status_setting.pled_state != PLED_RESET && (led_status_setting.pled_state = PLED_RESET)) {
 		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
 	}
 	return 0;

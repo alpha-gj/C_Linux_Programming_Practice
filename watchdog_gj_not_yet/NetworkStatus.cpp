@@ -65,13 +65,11 @@ bool NetworkStatus::get_pause_detect_flag()
 
 void *NetworkStatus::run_network_status_thread(void *args)
 {
-#if 1
 	HwManager *pt_hw_manager = (HwManager *) args;
 	WIFI_SETTING wifi_setting;
 	SIGNAL_STAGE signal_stage = FIRST_STAGE;
 	WIFI_LED_STATE wled_state = WLED_OFF;
 	WIFI_LED_STATE old_wled_state = WLED_OFF;
-	
 	TinyDB db;
 	db.init("Wireless");
 
@@ -95,29 +93,36 @@ void *NetworkStatus::run_network_status_thread(void *args)
 				/* Do Nothing */
 			}
 
-			/* Get wled_state */
+			/* Get wled_state and check wled needs to set again or not */
 			wled_state = return_wled_state_by_rssi(wifi_setting.wifi_radio_info.rssi1, signal_stage);
-			
-			/* Check it needs to set or not */
-			if (wled_state == old_wled_state)
+			if (wled_state == old_wled_state) {
 				break;
-			else
+			} else {
 				old_wled_state = wled_state;
+				/* Call holder to set wled status according to wled_state */
+				StatesHolder *holder = StatesHolder::CreateStatesHolder();
+				LED_STATUS_SETTING led_status_setting;
 
-			switch (wled_state) {
-				case WLED_OFF:
-					//SwStatus->LEDStatus
-					break;
-				case WLED_NORMAL:
-					//SwStatus->LEDStatus
-					break;
-				case WLED_STRONG:
-					//SwStatus->LEDStatus
-					break;
-				case WLED_WEAK:
-				default:
-					/* Daemon of associ_check will handle it */
-					break;
+				holder->get_status_info_by_type("LEDStatus", &led_status_setting);
+				switch (wled_state) {
+					case WLED_OFF:
+						led_status_setting.wled_state = WLED_OFF;
+						break;
+					case WLED_NORMAL: 
+						led_status_setting.wled_state = WLED_NORMAL;
+						break;
+					case WLED_STRONG:
+						led_status_setting.wled_state = WLED_STRONG;
+						break;
+					case WLED_WEAK:
+					default:
+						/* Daemon of associ_check will handle it */
+						break;
+				}
+				holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+
+				StatesHolder::ReleaseStatesHolder();
+				holder = NULL;
 			}
 
 			/* Finsh first stage and then always do second stage until deassociated */
@@ -133,7 +138,6 @@ void *NetworkStatus::run_network_status_thread(void *args)
 	db.release();
 	fprintf(stderr, "%s done\n", __func__);
 	pthread_exit(0);
-#endif
 }
 
 int NetworkStatus::set_status_info(void *) 
@@ -162,7 +166,9 @@ WIFI_LED_STATE NetworkStatus::return_wled_state_by_rssi(int rssi, SIGNAL_STAGE s
 			needReset = true;
 			break;
 		case SECOND_STAGE:
-			wled_state = return_wled_state_from_second_stage(rssi, needReset);
+			//FIXME 
+			wled_state = return_wled_state_from_first_stage(rssi);
+			//wled_state = return_wled_state_from_second_stage(rssi, needReset);
 			needReset = false;
 			break;
 		default:

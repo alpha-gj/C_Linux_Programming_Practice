@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <math.h>
 #include "Common.h"
+#include "StatesHolder.h"
 #include "SwStatus.h"
 #include "LEDStatus.h"
 #include "wlan/wlan.h"

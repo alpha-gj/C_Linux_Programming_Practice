@@ -40,8 +40,10 @@ class LEDStatus : public SwStatus
 		static void *run_led_status_thread(void *args);
 		static bool isPauseDetect;
 		static LED_STATUS_SETTING s_led_status_setting;
+		static int set_pled_status_by_state(POWER_LED_STATE pled_state, LED_SETTING *led_setting);
+		static int set_wled_status_by_state(WIFI_LED_STATE wled_state, LED_SETTING *led_setting);
 
-	public:
+		public:
 		LEDStatus();
 		virtual ~LEDStatus();
 		virtual int init();								
@@ -52,12 +54,6 @@ class LEDStatus : public SwStatus
 		virtual bool get_pause_detect_flag();
 		virtual int set_status_info(void* status_struct);
 		virtual int get_status_info(void* status_struct);
-/* TODO
-		void set_pled_state(POWER_LED_STATE p);
-		POWER_LED_STATE get_pled_state();
-		void set_wled_state(WPS_LED_STATE p);
-		WPS_LED_STATE get_wled_state();
-*/
 };
 
 #endif
