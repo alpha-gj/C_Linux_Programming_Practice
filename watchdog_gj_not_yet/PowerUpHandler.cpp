@@ -15,14 +15,13 @@ int PowerUpHandler::init()
 	if (IPCHandler::init()) {
 		return -1;
 	} else {
-		//Color white(LED_WHITE, SOLID, FIXED_VALUE_FOR_INTERACTIVE, SOLID_PERIOD);
-		//led.setColor(white);
-		//check_ethernet
-		//check_associate();
-		//if has ip -> SetMainStates(CONNECTED);
-		//if no steup -> SetMainStates(SETUP);
-		//if has setup, no connect -> SetMainStates(DISCONNECTED);
-		return 0;
+		/* TODO Let's get it smiple */
+		printf("hello power up\n");
+		ICR_SETTING icr_setting {
+			.state = AHAL_CST_STATE_ON
+		};
+		hw_manager->set_hw_info_by_type("ICR", &icr_setting);
+		check_associate(); /* For PowerUp state */
 	}
 }
 
@@ -50,20 +49,17 @@ MAINSTATES PowerUpHandler::GetMainHandlerState()
 
 void PowerUpHandler::check_associate()
 {
-	/*
-	if (probe_link()) {
-		holder->SetAssociated(true);
+	LED_STATUS_SETTING led_status_setting;
+	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
+
+	IF_INFO if_info;
+	if (does_wifi_associated(NULL) && get_active_interface(PLATFORM_DEV_BR, &if_info) && if_info.ipaddr.s_addr != 0) {
+		if (led_status_setting.pled_state != PLED_CLIENT_MODE  && (led_status_setting.pled_state = PLED_CLIENT_MODE))
+			holder->set_status_info_by_type("LEDStatus", &led_status_setting);
 	} else {
-		IF_INFO if_info;
-		if (does_wifi_associated((char *)PLATFORM_DEV_WLAN) &&
-				get_active_interface(PLATFORM_DEV_BR, &if_info) &&
-				if_info.ipaddr.s_addr != 0) {
-			holder->SetAssociated(true);
-		} else {
-			holder->SetAssociated(false);
-		}
-	}
-	*/
+		if (led_status_setting.pled_state != PLED_BT_MODE  && (led_status_setting.pled_state = PLED_BT_MODE))
+			holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+	}	
 }
 /*
 POWER_LED_STATE IPCHandler::set_pled_state_by_link_state() 

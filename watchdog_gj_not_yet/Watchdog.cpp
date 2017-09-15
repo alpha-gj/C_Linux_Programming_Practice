@@ -205,6 +205,8 @@ int Watchdog::run()
 #endif
 
 #if 1
+	
+
 	fprintf(stderr, "run LightSensorStatus detect thread\n");
 	holder->run_status_detect_by_type("LightSensorStatus");
 
@@ -219,7 +221,9 @@ int Watchdog::run()
 
 	IPCHandler *handler = CreateHandlerByStates();
 	if (handler) {
-		handler->run_parsing_command();
+		if(!handler->init()) {
+			handler->run_parsing_command();
+		}
 		delete handler;
 		handler = NULL;
 	} else {
