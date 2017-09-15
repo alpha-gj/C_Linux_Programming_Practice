@@ -7,8 +7,6 @@
 
 using namespace std;
 
-#define PWD_PERCENTAGE 100
-
 typedef struct ICR
 {	
 	AHAL_CST_STATE state;

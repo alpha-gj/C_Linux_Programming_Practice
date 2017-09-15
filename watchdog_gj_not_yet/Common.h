@@ -19,20 +19,6 @@
 #include "todo.h"
 #include "MulCast/MulCast.h"
 
-enum LIGHT_MODE {
-	UNDER_DAY_MODE,
-	UNDER_NIGHT_MODE,
-	UNDER_ALWAYS_DAY_MODE,
-	UNDER_ALWAYS_NIGHT_MODE,
-};
-
-enum IR_CONTORLLER {
-	IR_AUTO_BY_LIGHT,
-	IR_MANUAL,
-	IR_OFF_ALWAYS_DAY,
-	IR_ON_ALWAYS_NIGHT,
-};
-
 int start_thread(void *callback, pthread_t & pid, void *pass);
 int start_thread_join(void *callback, pthread_t & pid, void *pass);
 

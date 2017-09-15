@@ -84,11 +84,11 @@ void *LEDStatus::run_led_status_thread(void *args)
 		/* Set LED State */
 		set_pled_status_by_state(s_led_status_setting.pled_state, &led_setting);
 		pt_hw_manager->set_hw_info_by_type("LED", &led_setting);
-		printf("led_setting.id is %d, led_setting.color is %d\n", led_setting.id, led_setting.color);
+		//printf("led_setting.id is %d, led_setting.color is %d\n", led_setting.id, led_setting.color);
 
 		set_wled_status_by_state(s_led_status_setting.wled_state, &led_setting);
 		pt_hw_manager->set_hw_info_by_type("LED", &led_setting);
-		printf("led_setting.id is %d, led_setting.color is %d\n", led_setting.id, led_setting.color);
+		//printf("led_setting.id is %d, led_setting.color is %d\n", led_setting.id, led_setting.color);
 
 		sleep(1);
 	}

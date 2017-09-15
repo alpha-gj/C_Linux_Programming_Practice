@@ -1,0 +1,73 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BUFF_SIZE	tlpi/IO/fileIO/copy/copy.c	8;"	d	file:
+Boolean	tlpi/IO/fileIO/copy/tlpi_hdr.h	/^typedef enum { FALSE, TRUE } Boolean;$/;"	t	typeref:enum:__anon2
+Boolean	tlpi/example/tlpi_hdr.h	/^typedef enum { FALSE, TRUE } Boolean;$/;"	t	typeref:enum:__anon1
+Boolean	tlpi/process/fork_file_sharing/tlpi_hdr.h	/^typedef enum { FALSE, TRUE } Boolean;$/;"	t	typeref:enum:__anon3
+CC	c/example/Makefile	/^CC = g++$/;"	m
+CC	tlpi/IO/fileIO/copy/Makefile	/^CC = g++$/;"	m
+CC	tlpi/example/Makefile	/^CC = g++$/;"	m
+CC	tlpi/process/fork/Makefile	/^CC = g++$/;"	m
+CC	tlpi/process/fork_file_sharing/Makefile	/^CC = g++$/;"	m
+ERROR_FUNCTIONS_H	tlpi/IO/fileIO/copy/error_functions.h	12;"	d
+ERROR_FUNCTIONS_H	tlpi/example/error_functions.h	12;"	d
+ERROR_FUNCTIONS_H	tlpi/process/fork_file_sharing/error_functions.h	12;"	d
+FALSE	tlpi/IO/fileIO/copy/tlpi_hdr.h	/^typedef enum { FALSE, TRUE } Boolean;$/;"	e	enum:__anon2
+FALSE	tlpi/example/tlpi_hdr.h	/^typedef enum { FALSE, TRUE } Boolean;$/;"	e	enum:__anon1
+FALSE	tlpi/process/fork_file_sharing/tlpi_hdr.h	/^typedef enum { FALSE, TRUE } Boolean;$/;"	e	enum:__anon3
+GET_NUM_H	tlpi/IO/fileIO/copy/get_num.h	12;"	d
+GET_NUM_H	tlpi/example/get_num.h	12;"	d
+GET_NUM_H	tlpi/process/fork_file_sharing/get_num.h	12;"	d
+GN_ANY_BASE	tlpi/IO/fileIO/copy/get_num.h	18;"	d
+GN_ANY_BASE	tlpi/example/get_num.h	18;"	d
+GN_ANY_BASE	tlpi/process/fork_file_sharing/get_num.h	18;"	d
+GN_BASE_16	tlpi/IO/fileIO/copy/get_num.h	20;"	d
+GN_BASE_16	tlpi/example/get_num.h	20;"	d
+GN_BASE_16	tlpi/process/fork_file_sharing/get_num.h	20;"	d
+GN_BASE_8	tlpi/IO/fileIO/copy/get_num.h	19;"	d
+GN_BASE_8	tlpi/example/get_num.h	19;"	d
+GN_BASE_8	tlpi/process/fork_file_sharing/get_num.h	19;"	d
+GN_GT_0	tlpi/IO/fileIO/copy/get_num.h	15;"	d
+GN_GT_0	tlpi/example/get_num.h	15;"	d
+GN_GT_0	tlpi/process/fork_file_sharing/get_num.h	15;"	d
+GN_NONNEG	tlpi/IO/fileIO/copy/get_num.h	14;"	d
+GN_NONNEG	tlpi/example/get_num.h	14;"	d
+GN_NONNEG	tlpi/process/fork_file_sharing/get_num.h	14;"	d
+NORETURN	tlpi/IO/fileIO/copy/error_functions.h	22;"	d
+NORETURN	tlpi/IO/fileIO/copy/error_functions.h	24;"	d
+NORETURN	tlpi/example/error_functions.h	22;"	d
+NORETURN	tlpi/example/error_functions.h	24;"	d
+NORETURN	tlpi/process/fork_file_sharing/error_functions.h	22;"	d
+NORETURN	tlpi/process/fork_file_sharing/error_functions.h	24;"	d
+OBJS	c/example/Makefile	/^OBJS = $(shell find . -name *.c | cut -d\/ -f2 | cut -d. -f1).o $/;"	m
+OBJS	tlpi/IO/fileIO/copy/Makefile	/^OBJS = $(shell find . -name *.c | cut -d\/ -f2 | cut -d. -f1).o $/;"	m
+OBJS	tlpi/example/Makefile	/^OBJS = $(shell find . -name *.c | cut -d\/ -f2 | cut -d. -f1).o $/;"	m
+OBJS	tlpi/process/fork/Makefile	/^OBJS = $(shell find . -name *.c | cut -d\/ -f2 | cut -d. -f1).o $/;"	m
+OBJS	tlpi/process/fork_file_sharing/Makefile	/^OBJS = $(shell find . -name *.c | cut -d\/ -f2 | cut -d. -f1).o $/;"	m
+TLPI_HDR_H	tlpi/IO/fileIO/copy/tlpi_hdr.h	2;"	d
+TLPI_HDR_H	tlpi/example/tlpi_hdr.h	2;"	d
+TLPI_HDR_H	tlpi/process/fork_file_sharing/tlpi_hdr.h	2;"	d
+TRUE	tlpi/IO/fileIO/copy/tlpi_hdr.h	/^typedef enum { FALSE, TRUE } Boolean;$/;"	e	enum:__anon2
+TRUE	tlpi/example/tlpi_hdr.h	/^typedef enum { FALSE, TRUE } Boolean;$/;"	e	enum:__anon1
+TRUE	tlpi/process/fork_file_sharing/tlpi_hdr.h	/^typedef enum { FALSE, TRUE } Boolean;$/;"	e	enum:__anon3
+Target	c/example/Makefile	/^Target = $(shell find . -name *.c | cut -d\/ -f2 | cut -d. -f1) $/;"	m
+Target	tlpi/IO/fileIO/copy/Makefile	/^Target = $(shell find . -name *.c | cut -d\/ -f2 | cut -d. -f1) $/;"	m
+Target	tlpi/example/Makefile	/^Target = $(shell find . -name *.c | cut -d\/ -f2 | cut -d. -f1) $/;"	m
+Target	tlpi/process/fork/Makefile	/^Target = $(shell find . -name *.c | cut -d\/ -f2 | cut -d. -f1) $/;"	m
+Target	tlpi/process/fork_file_sharing/Makefile	/^Target = $(shell find . -name *.c | cut -d\/ -f2 | cut -d. -f1) $/;"	m
+idata	tlpi/process/fork/fork.c	/^static int idata = 111;$/;"	v	file:
+main	c/example/hello_world.c	/^int main(void)$/;"	f
+main	tlpi/IO/fileIO/copy/copy.c	/^int main(int argc, char *argv[])$/;"	f
+main	tlpi/example/hello_world.c	/^int main(void)$/;"	f
+main	tlpi/process/fork/fork.c	/^int main()$/;"	f
+main	tlpi/process/fork_file_sharing/fork_file_sharing.c	/^int main(int argc, char *argv[])$/;"	f
+max	tlpi/IO/fileIO/copy/tlpi_hdr.h	20;"	d
+max	tlpi/example/tlpi_hdr.h	20;"	d
+max	tlpi/process/fork_file_sharing/tlpi_hdr.h	20;"	d
+min	tlpi/IO/fileIO/copy/tlpi_hdr.h	19;"	d
+min	tlpi/example/tlpi_hdr.h	19;"	d
+min	tlpi/process/fork_file_sharing/tlpi_hdr.h	19;"	d

@@ -192,17 +192,6 @@ int Watchdog::run()
 #endif
 
 #if 0
-#elif ICR
-	ICR_SETTING icr_setting {
-		.state = AHAL_CST_STATE_ON
-	};
-	hw_manager->set_hw_info_by_type("ICR", &icr_setting);
-	sleep(5);
-	icr_setting.state = AHAL_CST_STATE_OFF;
-	hw_manager->set_hw_info_by_type("ICR", &icr_setting);
-#endif
-
-#if 0
 #elif LIGHT_SENSOR
 	LIGHT_SENSOR_SETTING light_sensor_setting {
 		.value = 0

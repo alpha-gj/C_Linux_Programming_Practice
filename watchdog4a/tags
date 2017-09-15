@@ -1,0 +1,208 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AEC_RESET	Variable.h	38;"	d
+AR	Makefile	/^AR        = $(CROSS_COMPILE)ar$/;"	m
+AS	Makefile	/^AS        = $(CROSS_COMPILE)as$/;"	m
+AUDIO_ALER_MAX_DB	Jobber.h	15;"	d
+BLINK_PERIOD	Variable.h	20;"	d
+BREATHING_PERIOD	Variable.h	19;"	d
+BUTTON_GPIO_NUM	Variable.h	24;"	d
+BUTTON_POLLING_TIME	Variable.h	1;"	d
+CALL_OUT_TONE	Variable.h	40;"	d
+CC	Makefile	/^CC        = $(CROSS_COMPILE)gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS    = $(PLATFORM_CFLAGS) -Wall -W -D$(subst -,_,$(PJ_MODEL)) #-DDEBUG_FPRINTF$/;"	m
+CPP	Makefile	/^CPP       = $(CROSS_COMPILE)gcc -E$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS  = $(PLATFORM_CPPFLAGS) -D_REENTRANT -D_LINUX -I$(PREFIX)\/include \\$/;"	m
+CROSS_COMPILE	Makefile	/^CROSS_COMPILE = $(PJ_TARGET)-$/;"	m
+CXX	Makefile	/^CXX       = $(CROSS_COMPILE)g++$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS  = $(CFLAGS)$/;"	m
+CreateHandlerByStates	Jobber.cpp	/^IPCHandler *Jobber::CreateHandlerByStates()$/;"	f	class:Jobber
+CreateStatesHolder	StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
+DAEMON	Makefile	/^DAEMON = Jobber$/;"	m
+DEPENDS	Makefile	/^DEPENDS := $(DEPENDS:%.cpp=%.d)$/;"	m
+DEPENDS	Makefile	/^DEPENDS := $(SRCS:%.c=%.d)$/;"	m
+ENTER_NORMAL_COUNT	Variable.h	6;"	d
+ENTER_REBOOT_COUNT	Variable.h	7;"	d
+ENTER_REPORT_COUNT	Variable.h	9;"	d
+ENTER_RESET_COUNT	Variable.h	10;"	d
+ENTER_STANDBY_COUNT	Variable.h	8;"	d
+ENTER_TWT_COUNT	Variable.h	5;"	d
+ENTER_WPS_COUNT	Variable.h	11;"	d
+GPIO_READ_FAIL_COUNT	Variable.h	13;"	d
+GetMainHandlerState	PowerUpHandler.cpp	/^MAINSTATES PowerUpHandler::GetMainHandlerState()$/;"	f	class:PowerUpHandler
+GetMainHandlerState	TwtHandler.cpp	/^MAINSTATES TwtHandler::GetMainHandlerState()$/;"	f	class:TwtHandler
+GetMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetMainStates()$/;"	f	class:StatesHolder
+GetOldMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetOldMainStates()$/;"	f	class:StatesHolder
+GoNextState	IPCHandler.cpp	/^bool IPCHandler::GoNextState()$/;"	f	class:IPCHandler
+IPCHandler	IPCHandler.cpp	/^IPCHandler::IPCHandler()$/;"	f	class:IPCHandler
+IPCHandler	IPCHandler.h	/^class IPCHandler$/;"	c
+IR_AUTO_BY_LIGHT	Common.h	/^	IR_AUTO_BY_LIGHT,$/;"	e	enum:IR_CONTORLLER
+IR_CONTORLLER	Common.h	/^enum IR_CONTORLLER {$/;"	g
+IR_MANUAL	Common.h	/^	IR_MANUAL,$/;"	e	enum:IR_CONTORLLER
+IR_OFF_ALWAYS_DAY	Common.h	/^	IR_OFF_ALWAYS_DAY,$/;"	e	enum:IR_CONTORLLER
+IR_ON_ALWAYS_NIGHT	Common.h	/^	IR_ON_ALWAYS_NIGHT,$/;"	e	enum:IR_CONTORLLER
+Jobber	Jobber.cpp	/^Jobber::Jobber()$/;"	f	class:Jobber
+Jobber	Jobber.h	/^class Jobber$/;"	c
+LD	Makefile	/^LD        = $(CROSS_COMPILE)ld$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS   = $(PLATFORM_LDFLAGS) -s -Wl,-rpath-link=$(PJ_RPATH)$/;"	m
+LDLIBS	Makefile	/^LDLIBS    = $(PLATFORM_LDLIBS) -lcam -ltinydb -lsensor -lMulCast$/;"	m
+LIGHT_MODE	Common.h	/^enum LIGHT_MODE {$/;"	g
+LOADLIBES	Makefile	/^LOADLIBES = $(PLATFORM_LOADLIBES) -L$(PREFIX)\/lib$/;"	m
+LOAD_CALL_OUT_TONE	Variable.h	41;"	d
+MAINSTATES	StatesHolder.h	/^enum MAINSTATES {$/;"	g
+MAINSTATES_COUNT	StatesHolder.h	/^	MAINSTATES_COUNT,$/;"	e	enum:MAINSTATES
+MAX_GEO_INIT_RETRY	Variable.h	23;"	d
+MAX_GPIO_NUM	Variable.h	25;"	d
+NAME_CALL_OUT_TONE	Variable.h	39;"	d
+NETWORK_RESTART_TIMEOUT	Variable.h	16;"	d
+NM	Makefile	/^NM        = $(CROSS_COMPILE)nm$/;"	m
+OBJCOPY	Makefile	/^OBJCOPY   = $(CROSS_COMPILE)objcopy$/;"	m
+OBJDUMP	Makefile	/^OBJDUMP   = $(CROSS_COMPILE)objdump$/;"	m
+OPTIONS	Makefile	/^OPTIONS = $(SRCS) $(CPPFLAGS) $(LDLIBS)$/;"	m
+PLAY_BOOTINGUP_TONE	Variable.h	28;"	d
+PLAY_BOOTINGUP_VOICE	Variable.h	29;"	d
+PLAY_CALL_OUT_TONE	Variable.h	42;"	d
+PLAY_FINALIZING_END_VOICE	Variable.h	34;"	d
+PLAY_INITIALING_START_VOICE	Variable.h	27;"	d
+PLAY_PAIRED_END_VOICE	Variable.h	32;"	d
+PLAY_PAIRING_START_VOICE	Variable.h	33;"	d
+PLAY_TWT_BEGIN_TONE	Variable.h	36;"	d
+PLAY_TWT_END_TONE	Variable.h	37;"	d
+PLAY_TWT_START_TONE	Variable.h	35;"	d
+POLLING_TIMEOUT	Variable.h	2;"	d
+POWERUP	StatesHolder.h	/^	POWERUP,$/;"	e	enum:MAINSTATES
+PREFIX	Makefile	/^PREFIX = $(PJ_PREFIX)$/;"	m
+PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::PowerUpHandler()$/;"	f	class:PowerUpHandler
+PowerUpHandler	PowerUpHandler.h	/^class PowerUpHandler : public IPCHandler$/;"	c
+QUICK_FLICKER_PERIOD	Variable.h	21;"	d
+RANLIB	Makefile	/^RANLIB    = $(CROSS_COMPILE)ranlib$/;"	m
+READELF	Makefile	/^READELF   = $(CROSS_COMPILE)readelf$/;"	m
+SETUP_CONNECT_FAIL_VOICE	Variable.h	30;"	d
+SIZE	Makefile	/^SIZE      = $(CROSS_COMPILE)size$/;"	m
+SOLID_PERIOD	Variable.h	18;"	d
+SRCS	Makefile	/^SRCS = $(DAEMON).cpp IPCHandler.cpp StatesHolder.cpp PowerUpHandler.cpp$/;"	m
+STRINGS	Makefile	/^STRINGS   = $(CROSS_COMPILE)strings$/;"	m
+STRIP	Makefile	/^STRIP     = $(CROSS_COMPILE)strip$/;"	m
+SetMainStates	StatesHolder.cpp	/^void StatesHolder::SetMainStates(MAINSTATES s)$/;"	f	class:StatesHolder
+StatesHolder	StatesHolder.cpp	/^StatesHolder::StatesHolder()$/;"	f	class:StatesHolder
+StatesHolder	StatesHolder.h	/^class StatesHolder$/;"	c
+SwitchAttenuation	Common.cpp	/^void SwitchAttenuation(bool on)$/;"	f
+TARGETS	Makefile	/^TARGETS = $(DAEMON)$/;"	m
+TIME_BASE	Variable.h	3;"	d
+TwtHandler	TwtHandler.cpp	/^TwtHandler::TwtHandler()$/;"	f	class:TwtHandler
+TwtHandler	TwtHandler.h	/^class TwtHandler : public IPCHandler$/;"	c
+UNDER_ALWAYS_DAY_MODE	Common.h	/^	UNDER_ALWAYS_DAY_MODE,$/;"	e	enum:LIGHT_MODE
+UNDER_ALWAYS_NIGHT_MODE	Common.h	/^	UNDER_ALWAYS_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
+UNDER_DAY_MODE	Common.h	/^	UNDER_DAY_MODE,$/;"	e	enum:LIGHT_MODE
+UNDER_NIGHT_MODE	Common.h	/^	UNDER_NIGHT_MODE,$/;"	e	enum:LIGHT_MODE
+WAIT_CALL_OUT_COUNT	Variable.h	12;"	d
+WAIT_CONNECT_TO_DEVICE	Variable.h	15;"	d
+WAIT_HEART_BEAT_COUNT	Variable.h	4;"	d
+WAIT_WPS_STATE_COUNT	Variable.h	14;"	d
+WPS_BEGIN_TONE	Variable.h	31;"	d
+_COMMON_H_	Common.h	2;"	d
+_IPCHANDLER_H_	IPCHandler.h	2;"	d
+_POWERUPHANDLER_H_	PowerUpHandler.h	2;"	d
+_STATESHOLDER_H_	StatesHolder.h	2;"	d
+_TWTHANDLER_H_	TwtHandler.h	2;"	d
+ack	PowerUpHandler.h	/^	WPSSTATES ack;$/;"	m	class:PowerUpHandler
+alertRst	watchdog.sh	/^alertRst() {$/;"	f
+alert_enable	Common.h	/^	char alert_enable;$/;"	m	struct:audio_det_struct
+audio_det_struct	Common.h	/^struct audio_det_struct {$/;"	s
+changeColor	TwtHandler.cpp	/^void TwtHandler::changeColor()$/;"	f	class:TwtHandler
+check_associate	PowerUpHandler.cpp	/^void PowerUpHandler::check_associate()$/;"	f	class:PowerUpHandler
+close_i2c_device	Common.cpp	/^int close_i2c_device(int fd)$/;"	f
+create_pidfile	Jobber.cpp	/^bool create_pidfile(const char *path)$/;"	f
+det	Jobber.h	/^	struct audio_det_struct det;$/;"	m	class:Jobber	typeref:struct:Jobber::audio_det_struct
+die	watchdog.sh	/^die() {$/;"	f
+diff_curr_uptime_count	Common.cpp	/^long diff_curr_uptime_count(struct timeval t)$/;"	f
+does_eth_plug	Common.cpp	/^int does_eth_plug()$/;"	f
+enterNormal	TwtHandler.cpp	/^void TwtHandler::enterNormal()$/;"	f	class:TwtHandler
+enterNormalBootup	PowerUpHandler.cpp	/^int PowerUpHandler::enterNormalBootup()$/;"	f	class:PowerUpHandler
+get_light_mode	Common.cpp	/^LIGHT_MODE get_light_mode()$/;"	f
+get_nfc_count	Common.cpp	/^int get_nfc_count()$/;"	f
+get_quit	Common.cpp	/^bool get_quit()$/;"	f
+get_reload	Common.cpp	/^bool get_reload()$/;"	f
+get_uptime	Common.cpp	/^struct timeval get_uptime()$/;"	f
+get_volume	Common.cpp	/^int get_volume()$/;"	f
+handle_factory_reset	IPCHandler.cpp	/^int IPCHandler::handle_factory_reset()$/;"	f	class:IPCHandler
+handle_ipc_depend_on_status	PowerUpHandler.cpp	/^int PowerUpHandler::handle_ipc_depend_on_status(IpcCommand cmd)$/;"	f	class:PowerUpHandler
+handle_ipc_depend_on_status	TwtHandler.cpp	/^int TwtHandler::handle_ipc_depend_on_status(IpcCommand cmd)$/;"	f	class:TwtHandler
+handle_network_states	IPCHandler.cpp	/^int IPCHandler::handle_network_states()$/;"	f	class:IPCHandler
+handle_network_states	PowerUpHandler.cpp	/^int PowerUpHandler::handle_network_states()$/;"	f	class:PowerUpHandler
+handle_select_time_out	IPCHandler.cpp	/^int IPCHandler::handle_select_time_out()$/;"	f	class:IPCHandler
+handle_select_time_out	PowerUpHandler.cpp	/^int PowerUpHandler::handle_select_time_out()$/;"	f	class:PowerUpHandler
+handle_select_time_out	TwtHandler.cpp	/^int TwtHandler::handle_select_time_out()$/;"	f	class:TwtHandler
+holder	IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
+holder	Jobber.h	/^	StatesHolder *holder;$/;"	m	class:Jobber
+holder	StatesHolder.cpp	/^static StatesHolder *holder = NULL;$/;"	v	file:
+init	IPCHandler.cpp	/^int IPCHandler::init()$/;"	f	class:IPCHandler
+init	Jobber.cpp	/^int Jobber::init()$/;"	f	class:Jobber
+init	PowerUpHandler.cpp	/^int PowerUpHandler::init()$/;"	f	class:PowerUpHandler
+init	TwtHandler.cpp	/^int TwtHandler::init()$/;"	f	class:TwtHandler
+initSignal	Jobber.cpp	/^bool initSignal()$/;"	f
+ipc_daemon	IPCHandler.h	/^	IpcDaemon ipc_daemon;$/;"	m	class:IPCHandler
+is_quit	Common.cpp	/^bool is_quit = false;$/;"	v
+is_reload	Common.cpp	/^bool is_reload = false;$/;"	v
+job	Jobber.cpp	/^Jobber *job = NULL;$/;"	v
+keepButtonStates	IPCHandler.h	/^	button_states keepButtonStates;$/;"	m	class:IPCHandler
+led	IPCHandler.h	/^	LEDController led;$/;"	m	class:IPCHandler
+light_mode	Common.cpp	/^LIGHT_MODE light_mode = UNDER_DAY_MODE;$/;"	v
+main	Jobber.cpp	/^int main(int \/*argc*\/, const char *argv[])$/;"	f
+mainStates	StatesHolder.h	/^	MAINSTATES mainStates;$/;"	m	class:StatesHolder
+mainStatesLock	StatesHolder.h	/^	pthread_mutex_t mainStatesLock;$/;"	m	class:StatesHolder
+mic_enable	Common.h	/^	char mic_enable;$/;"	m	struct:audio_det_struct
+needStopCallingOut	TwtHandler.h	/^	bool needStopCallingOut;$/;"	m	class:TwtHandler
+need_clean_notify	Jobber.h	/^	bool need_clean_notify;$/;"	m	class:Jobber
+need_exit	Common.h	/^	bool need_exit;$/;"	m	struct:audio_det_struct
+nfc_count	Common.cpp	/^int nfc_count = 0;$/;"	v
+nfc_handler	Common.cpp	/^void nfc_handler(int \/*sigNum *\/ )$/;"	f
+noWifiSetting	PowerUpHandler.h	/^	bool noWifiSetting;$/;"	m	class:PowerUpHandler
+oldMainStates	StatesHolder.h	/^	MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
+open_i2c_device	Common.cpp	/^int open_i2c_device()$/;"	f
+pack	IPCHandler.h	/^	MultiCastPackage pack;$/;"	m	class:IPCHandler
+pid	Common.h	/^	pthread_t pid;$/;"	m	struct:audio_det_struct
+pid	TwtHandler.h	/^	pthread_t pid;$/;"	m	class:TwtHandler
+referCount	StatesHolder.cpp	/^static int referCount = 0;$/;"	v	file:
+release	IPCHandler.cpp	/^int IPCHandler::release()$/;"	f	class:IPCHandler
+release	Jobber.cpp	/^int Jobber::release()$/;"	f	class:Jobber
+release	PowerUpHandler.cpp	/^int PowerUpHandler::release()$/;"	f	class:PowerUpHandler
+release	TwtHandler.cpp	/^int TwtHandler::release()$/;"	f	class:TwtHandler
+releaseStatesHolder	StatesHolder.cpp	/^void StatesHolder::releaseStatesHolder()$/;"	f	class:StatesHolder
+requestExitHandler	Jobber.cpp	/^void requestExitHandler(int sigNum)$/;"	f
+requestReloadHandler	Jobber.cpp	/^void requestReloadHandler(int sigNum)$/;"	f
+run	Jobber.cpp	/^int Jobber::run()$/;"	f	class:Jobber
+runWPSStartThread	PowerUpHandler.cpp	/^void * PowerUpHandler::runWPSStartThread(void *args)$/;"	f	class:PowerUpHandler
+run_alert_det_thread	Common.cpp	/^void* run_alert_det_thread(void *args)$/;"	f
+run_calling_out_thread	Common.cpp	/^void *run_calling_out_thread(void *args)$/;"	f
+run_parsing_command	IPCHandler.cpp	/^int IPCHandler::run_parsing_command()$/;"	f	class:IPCHandler
+send_ipccmd	Common.cpp	/^void send_ipccmd(const char *path, int ipc)$/;"	f
+sender	IPCHandler.h	/^	MultiSender sender;$/;"	m	class:IPCHandler
+setMicMut	Common.cpp	/^void setMicMut(bool mute)$/;"	f
+setSpeakerMute	Common.cpp	/^void setSpeakerMute(bool mute)$/;"	f
+set_light_mode	Common.cpp	/^void set_light_mode(LIGHT_MODE m)$/;"	f
+set_nfc_count	Common.cpp	/^void set_nfc_count(int n)$/;"	f
+set_quit	Common.cpp	/^void set_quit(bool b)$/;"	f
+set_reload	Common.cpp	/^void set_reload(bool b)$/;"	f
+set_volume	Common.cpp	/^void set_volume(int v)$/;"	f
+showUsage	watchdog.sh	/^showUsage() {$/;"	f
+start	watchdog.sh	/^start() {$/;"	f
+start_thread	Common.cpp	/^int start_thread(void *callback, pthread_t & pid, void *pass)$/;"	f
+start_thread_join	Common.cpp	/^int start_thread_join(void *callback, pthread_t & pid, void *pass)$/;"	f
+status	watchdog.sh	/^status() {$/;"	f
+stop	watchdog.sh	/^stop() {$/;"	f
+suspend_flag	Common.h	/^	char suspend_flag;$/;"	m	struct:audio_det_struct
+threshold	Common.h	/^	unsigned int threshold;$/;"	m	struct:audio_det_struct
+timeout_count	TwtHandler.h	/^	int timeout_count;$/;"	m	class:TwtHandler
+volume	Common.cpp	/^int volume = 0;$/;"	v
+volume	Common.h	/^	int volume;$/;"	m	struct:audio_det_struct
+waitHeartbeatNotifyCount	PowerUpHandler.h	/^	int waitHeartbeatNotifyCount;$/;"	m	class:PowerUpHandler
+~IPCHandler	IPCHandler.cpp	/^IPCHandler::~IPCHandler()$/;"	f	class:IPCHandler
+~Jobber	Jobber.cpp	/^Jobber::~Jobber()$/;"	f	class:Jobber
+~PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::~PowerUpHandler()$/;"	f	class:PowerUpHandler
+~StatesHolder	StatesHolder.cpp	/^StatesHolder::~StatesHolder()$/;"	f	class:StatesHolder
+~TwtHandler	TwtHandler.cpp	/^TwtHandler::~TwtHandler()$/;"	f	class:TwtHandler

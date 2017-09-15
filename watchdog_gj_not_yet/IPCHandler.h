@@ -4,6 +4,9 @@
 #include "ipc/ipc_cmd.h"
 #include "sys/socket.h"
 #include "wlan/wlan.h"
+#include "sensor/sensor.h"
+#include "MulCast/MulCast.h"
+#include "str/str.h"
 #include "todo.h"
 #include "command.h"
 #include "Common.h"
@@ -24,12 +27,18 @@ public:
 protected:
 	IpcDaemon ipc_daemon;
 	StatesHolder *holder;
+	HwManager *hw_manager;
 	int ipc_fd;
+
+	/* IPC EVENT */
 	int handle_factory_reset();
 	int handle_detect_factory_button();
 	int handle_stream_count(bool isActive);
 	int handle_associated();
 	int handle_deassociated();
+	int handle_day_mode();
+	int handle_night_mode();
+	int handler_firmware_upgrade();
 };
 
 #endif

@@ -91,9 +91,10 @@ void *NetworkStatus::run_network_status_thread(void *args)
 				signal_stage = FIRST_STAGE;
 				wled_state = WLED_WEAK;
 				old_wled_state = wled_state;
+				s_network_status_setting.link_state = LINK_IS_OFF;
 				break;
 			} else {
-				/* Do Nothing */
+				s_network_status_setting.link_state = LINK_IS_ON;
 			}
 
 			/* Get wled_state and check wled needs to set again or not */

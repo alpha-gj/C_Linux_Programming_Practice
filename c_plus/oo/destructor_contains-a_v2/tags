@@ -1,0 +1,72 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AUDIO_ALER_MAX_DB	Jobber.h	15;"	d
+CC	Makefile	/^CC = g++$/;"	m
+CreateHandlerByStates	Jobber.cpp	/^IPCHandler *Jobber::CreateHandlerByStates()$/;"	f	class:Jobber
+CreateStatesHolder	StatesHolder.cpp	/^StatesHolder *StatesHolder::CreateStatesHolder()$/;"	f	class:StatesHolder
+GetMainHandlerState	PowerUpHandler.cpp	/^MAINSTATES PowerUpHandler::GetMainHandlerState()$/;"	f	class:PowerUpHandler
+GetMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetMainStates()$/;"	f	class:StatesHolder
+GetOldMainStates	StatesHolder.cpp	/^MAINSTATES StatesHolder::GetOldMainStates()$/;"	f	class:StatesHolder
+GoNextState	IPCHandler.cpp	/^bool IPCHandler::GoNextState()$/;"	f	class:IPCHandler
+IPCHandler	IPCHandler.cpp	/^IPCHandler::IPCHandler()$/;"	f	class:IPCHandler
+IPCHandler	IPCHandler.h	/^class IPCHandler$/;"	c
+Jobber	Jobber.cpp	/^Jobber::Jobber()$/;"	f	class:Jobber
+Jobber	Jobber.h	/^class Jobber$/;"	c
+MAINSTATES	StatesHolder.h	/^enum MAINSTATES {$/;"	g
+MAINSTATES_COUNT	StatesHolder.h	/^	MAINSTATES_COUNT,$/;"	e	enum:MAINSTATES
+OBJS	Makefile	/^OBJS = $(shell find . -name *.cpp | cut -d\/ -f2 | cut -d. -f1).o $/;"	m
+POWERUP	StatesHolder.h	/^	POWERUP,$/;"	e	enum:MAINSTATES
+PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::PowerUpHandler()$/;"	f	class:PowerUpHandler
+PowerUpHandler	PowerUpHandler.h	/^class PowerUpHandler : public IPCHandler$/;"	c
+SetMainStates	StatesHolder.cpp	/^void StatesHolder::SetMainStates(MAINSTATES s)$/;"	f	class:StatesHolder
+StatesHolder	StatesHolder.cpp	/^StatesHolder::StatesHolder()$/;"	f	class:StatesHolder
+StatesHolder	StatesHolder.h	/^class StatesHolder$/;"	c
+Target	Makefile	/^Target = $(shell find . -name *.cpp | cut -d\/ -f2 | cut -d. -f1) $/;"	m
+_IPCHANDLER_H_	IPCHandler.h	2;"	d
+_POWERUPHANDLER_H_	PowerUpHandler.h	2;"	d
+_STATESHOLDER_H_	StatesHolder.h	2;"	d
+ack	PowerUpHandler.h	/^	WPSSTATES ack;$/;"	m	class:PowerUpHandler
+check_associate	PowerUpHandler.cpp	/^void PowerUpHandler::check_associate()$/;"	f	class:PowerUpHandler
+det	Jobber.h	/^	struct audio_det_struct det;$/;"	m	class:Jobber	typeref:struct:Jobber::audio_det_struct
+enterNormalBootup	PowerUpHandler.cpp	/^int PowerUpHandler::enterNormalBootup()$/;"	f	class:PowerUpHandler
+handle_factory_reset	IPCHandler.cpp	/^int IPCHandler::handle_factory_reset()$/;"	f	class:IPCHandler
+handle_ipc_depend_on_status	PowerUpHandler.cpp	/^int PowerUpHandler::handle_ipc_depend_on_status(IpcCommand cmd)$/;"	f	class:PowerUpHandler
+handle_network_states	IPCHandler.cpp	/^int IPCHandler::handle_network_states()$/;"	f	class:IPCHandler
+handle_network_states	PowerUpHandler.cpp	/^int PowerUpHandler::handle_network_states()$/;"	f	class:PowerUpHandler
+handle_select_time_out	IPCHandler.cpp	/^int IPCHandler::handle_select_time_out()$/;"	f	class:IPCHandler
+handle_select_time_out	PowerUpHandler.cpp	/^int PowerUpHandler::handle_select_time_out()$/;"	f	class:PowerUpHandler
+holder	IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
+holder	Jobber.h	/^	StatesHolder *holder;$/;"	m	class:Jobber
+holder	StatesHolder.cpp	/^static StatesHolder *holder = NULL;$/;"	v	file:
+init	IPCHandler.cpp	/^int IPCHandler::init()$/;"	f	class:IPCHandler
+init	Jobber.cpp	/^int Jobber::init()$/;"	f	class:Jobber
+init	PowerUpHandler.cpp	/^int PowerUpHandler::init()$/;"	f	class:PowerUpHandler
+ipc_daemon	IPCHandler.h	/^	IpcDaemon ipc_daemon;$/;"	m	class:IPCHandler
+job	Jobber.cpp	/^Jobber *job = NULL;$/;"	v
+keepButtonStates	IPCHandler.h	/^	button_states keepButtonStates;$/;"	m	class:IPCHandler
+led	IPCHandler.h	/^	LEDController led;$/;"	m	class:IPCHandler
+main	Jobber.cpp	/^int main(int \/*argc*\/, const char *argv[])$/;"	f
+mainStates	StatesHolder.h	/^	MAINSTATES mainStates;$/;"	m	class:StatesHolder
+mainStatesLock	StatesHolder.h	/^	pthread_mutex_t mainStatesLock;$/;"	m	class:StatesHolder
+need_clean_notify	Jobber.h	/^	bool need_clean_notify;$/;"	m	class:Jobber
+noWifiSetting	PowerUpHandler.h	/^	bool noWifiSetting;$/;"	m	class:PowerUpHandler
+oldMainStates	StatesHolder.h	/^	MAINSTATES oldMainStates;$/;"	m	class:StatesHolder
+pack	IPCHandler.h	/^	MultiCastPackage pack;$/;"	m	class:IPCHandler
+referCount	StatesHolder.cpp	/^static int referCount = 0;$/;"	v	file:
+release	IPCHandler.cpp	/^int IPCHandler::release()$/;"	f	class:IPCHandler
+release	Jobber.cpp	/^int Jobber::release()$/;"	f	class:Jobber
+release	PowerUpHandler.cpp	/^int PowerUpHandler::release()$/;"	f	class:PowerUpHandler
+releaseStatesHolder	StatesHolder.cpp	/^void StatesHolder::releaseStatesHolder()$/;"	f	class:StatesHolder
+run	Jobber.cpp	/^int Jobber::run()$/;"	f	class:Jobber
+runWPSStartThread	PowerUpHandler.cpp	/^void * PowerUpHandler::runWPSStartThread(void *args)$/;"	f	class:PowerUpHandler
+run_parsing_command	IPCHandler.cpp	/^int IPCHandler::run_parsing_command()$/;"	f	class:IPCHandler
+sender	IPCHandler.h	/^	MultiSender sender;$/;"	m	class:IPCHandler
+waitHeartbeatNotifyCount	PowerUpHandler.h	/^	int waitHeartbeatNotifyCount;$/;"	m	class:PowerUpHandler
+~IPCHandler	IPCHandler.cpp	/^IPCHandler::~IPCHandler()$/;"	f	class:IPCHandler
+~Jobber	Jobber.cpp	/^Jobber::~Jobber()$/;"	f	class:Jobber
+~PowerUpHandler	PowerUpHandler.cpp	/^PowerUpHandler::~PowerUpHandler()$/;"	f	class:PowerUpHandler
+~StatesHolder	StatesHolder.cpp	/^StatesHolder::~StatesHolder()$/;"	f	class:StatesHolder
