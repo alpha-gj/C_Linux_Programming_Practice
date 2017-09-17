@@ -29,6 +29,7 @@ typedef enum {
 } IR_MODE;		
 
 typedef enum {
+	IR_LED_unknown, /* Let's check once at least */
 	IR_LED_OFF,		/* For Day Mode  */
 	IR_LED_ON,		/* For Night mode */
 } IR_LED_STATE;		

@@ -69,9 +69,11 @@ void *NetworkStatus::run_network_status_thread(void *args)
 	WIFI_SETTING wifi_setting;
 	SIGNAL_STAGE signal_stage = FIRST_STAGE;
 	WIFI_LED_STATE wled_state = WLED_OFF;
-	WIFI_LED_STATE old_wled_state = WLED_OFF;
+
 	TinyDB db;
 	db.init("Wireless");
+	/* Call holder to set wled status according to wled_state */
+	StatesHolder *holder = StatesHolder::CreateStatesHolder();
 
 	while (!get_quit() && !get_reload()) {
 		
@@ -83,51 +85,44 @@ void *NetworkStatus::run_network_status_thread(void *args)
 
 		/* Check Network State */
 		do {
+			/* Need to check enable Wireless or not first */
+			if (db.getByte("Enable") == 1) {
+				check_link_state();
+			} else {
+				break;
+			}
+
 			/* Wireless Enable isn't 1 or deassociated that should't do led state by rssi */
-			pt_hw_manager->get_hw_info_by_type("WIFI", &wifi_setting);
-			if (db.getByte("Enable") != 1				   || 
-				wifi_setting.isAssociated != AHAL_CST_TRUE ||
-				return_link_state() == LINK_IS_OFF) {
+			if (s_network_status_setting.link_state == LINK_IS_OFF) {
 				signal_stage = FIRST_STAGE;
 				wled_state = WLED_WEAK;
-				old_wled_state = wled_state;
-				s_network_status_setting.link_state = LINK_IS_OFF;
 				break;
 			} else {
-				s_network_status_setting.link_state = LINK_IS_ON;
+				/* Do Nothing */
 			}
 
 			/* Get wled_state and check wled needs to set again or not */
 			wled_state = return_wled_state_by_rssi(wifi_setting.wifi_radio_info.rssi1, signal_stage);
-			if (wled_state == old_wled_state) {
-				break;
-			} else {
-				old_wled_state = wled_state;
-				/* Call holder to set wled status according to wled_state */
-				StatesHolder *holder = StatesHolder::CreateStatesHolder();
-				LED_STATUS_SETTING led_status_setting;
+			LED_STATUS_SETTING led_status_setting;
 
-				holder->get_status_info_by_type("LEDStatus", &led_status_setting);
-				switch (wled_state) {
-					case WLED_OFF:
-						led_status_setting.wled_state = WLED_OFF;
-						break;
-					case WLED_NORMAL: 
-						led_status_setting.wled_state = WLED_NORMAL;
-						break;
-					case WLED_STRONG:
-						led_status_setting.wled_state = WLED_STRONG;
-						break;
-					case WLED_WEAK:
-					default:
-						/* TODO: Daemon of associ_check will handle it */
-						break;
-				}
-				holder->set_status_info_by_type("LEDStatus", &led_status_setting);
-
-				StatesHolder::ReleaseStatesHolder();
-				holder = NULL;
+			holder->get_status_info_by_type("LEDStatus", &led_status_setting);
+			switch (wled_state) {
+				case WLED_OFF:
+					led_status_setting.wled_state = WLED_OFF;
+					break;
+				case WLED_NORMAL: 
+					led_status_setting.wled_state = WLED_NORMAL;
+					break;
+				case WLED_STRONG:
+					led_status_setting.wled_state = WLED_STRONG;
+					break;
+				case WLED_WEAK:
+				default:
+					/* TODO: Daemon of associ_check will handle it */
+					break;
 			}
+			holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+
 			/* Finsh first stage and then always do second stage until deassociated */
 			if (signal_stage == FIRST_STAGE)
 				signal_stage = SECOND_STAGE;
@@ -141,6 +136,8 @@ void *NetworkStatus::run_network_status_thread(void *args)
 			sleep(5);
 	};
 
+	StatesHolder::ReleaseStatesHolder();
+	holder = NULL;
 	db.release();
 	fprintf(stderr, "%s done\n", __func__);
 	pthread_exit(0);
@@ -288,18 +285,19 @@ void NetworkStatus::standard_deviation(float data[], unsigned int t, float *mu, 
 	*sigma = sqrt(sum_deviation/n);           
 }
 
-LINK_STATE NetworkStatus::return_link_state()
+int NetworkStatus::check_link_state()
 {
 /* FIXME Need to check this project has ethernet or not */
 #if 1
 	IF_INFO if_info;
 	if (does_wifi_associated(NULL) &&
 			get_active_interface(PLATFORM_DEV_BR, &if_info) &&
-			if_info.ipaddr.s_addr != 0) {
-		return LINK_IS_ON;
+			if_info.ipaddr.s_addr != 0) {	
+		s_network_status_setting.link_state = LINK_IS_ON;
 	} else {
-		return LINK_IS_OFF;
+		s_network_status_setting.link_state = LINK_IS_OFF;
 	}	
+	return 0;
 #else 
 	if (probe_link()) {
 		return LINK_IS_ON;

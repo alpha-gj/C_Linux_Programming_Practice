@@ -5,7 +5,7 @@ bool LightSensorStatus::isPauseDetect = false;
 LIGHT_SENSOR_STATUS_SETTING LightSensorStatus::s_light_sensor_status_setting {
 	.ir_mode = IR_AUTO,
 	.ir_led_state = IR_LED_OFF,
-	.old_ir_led_state = IR_LED_OFF,
+	.old_ir_led_state = IR_LED_unknown,
 	.threshold = 0,
 	.D2N_offset = 0,	 
 	.N2D_offset = 0	
@@ -86,7 +86,6 @@ void *LightSensorStatus::run_light_sensor_status_detect_thread(void *args)
 
 	/* 2rd Step: Set IR LED STATE accroding to DB settings */
 	s_light_sensor_status_setting.ir_led_state = get_IR_MODE_by_cam_settings(light_sensor_setting_from_cam);
-	s_light_sensor_status_setting.old_ir_led_state = s_light_sensor_status_setting.ir_led_state;
 
 	/* 3rd Step: Set IR MODE accroding to DB settings */
 	s_light_sensor_status_setting.ir_mode = (IR_MODE)light_sensor_setting_from_cam.ir_set.ir_mode;
@@ -122,14 +121,18 @@ void *LightSensorStatus::run_light_sensor_status_detect_thread(void *args)
 			}
 
 			printf("LightSensor's lux is %d\n", light_sensor_setting.value);
+			printf("state is %d\n", s_light_sensor_status_setting.ir_led_state);
+			printf("old_state is %d\n", s_light_sensor_status_setting.old_ir_led_state);
 
 			/* Check LightSensor and light_sensor_status_setting.threshold */
 			if (light_sensor_setting.value >= (s_light_sensor_status_setting.threshold + s_light_sensor_status_setting.N2D_offset)) {
 
+				printf("will IR_LED_OFF\n");
 				s_light_sensor_status_setting.ir_led_state = IR_LED_OFF;
 
 			} else if (light_sensor_setting.value <= (s_light_sensor_status_setting.threshold - s_light_sensor_status_setting.D2N_offset)) {
 
+				printf("will IR_LED_ON\n");
 				s_light_sensor_status_setting.ir_led_state = IR_LED_ON;
 
 			} else {

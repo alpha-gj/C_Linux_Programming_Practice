@@ -12,9 +12,6 @@ PowerUpHandler::~PowerUpHandler()
 
 int PowerUpHandler::init()
 {
-	if (IPCHandler::init()) {
-		return -1;
-	} else {
 		/* TODO Let's get it smiple */
 		printf("hello power up\n");
 		ICR_SETTING icr_setting {
@@ -22,7 +19,7 @@ int PowerUpHandler::init()
 		};
 		hw_manager->set_hw_info_by_type("ICR", &icr_setting);
 		check_associate(); /* For PowerUp state */
-	}
+		return 0;
 }
 
 int PowerUpHandler::release()

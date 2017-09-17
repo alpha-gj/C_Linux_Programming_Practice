@@ -114,6 +114,7 @@ SwStatus *StatesHolder::ReturnSwStatusObjectByType(const char* sw_status_name)
 		sw_status = in_map_sw_status->second;
 	} else {
 		/* No result */
+		fprintf(stderr, "%s: %s[%d] We can't find the object in MAP'\n", __FILE__, __FUNCTION__, __LINE__);
 	}
 	return sw_status;
 }

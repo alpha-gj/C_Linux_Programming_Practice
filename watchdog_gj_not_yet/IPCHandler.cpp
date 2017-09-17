@@ -97,11 +97,11 @@ int IPCHandler::run_parsing_command()
 			INFO("\033[1;33m[watchDog]: received command[%d]\033[0m", cmd.id);
 			switch (cmd.id) {
 				case CMD_DET_FACTORY_BUTTON:
-					printf("DET_FACTORY_BUTTON\n");
+					fprintf(stderr, "DET_FACTORY_BUTTON\n");
 					res.result = handle_detect_factory_button();
 					break;
 				case CMD_FACTORY_RESET_ACT: 
-					printf("FACTORY_RESET_ACT\n");
+					fprintf(stderr, "FACTORY_RESET_ACT\n");
 					res.result = handle_factory_reset();
 					break;
 				case CMD_SET_ACTIVE:
@@ -112,18 +112,20 @@ int IPCHandler::run_parsing_command()
 					}
 					break;
 				case CMD_ASSOCIATED:
+					fprintf(stderr, "CMD_ASSOCIATED\n");
 					res.result = handle_associated();
 					break;
 				case CMD_DEASSOCIATED:
-					/* associ_check will handle this behavior, such as enable AP Mode or not */
+					fprintf(stderr, "CMD_DEASSOCIATED\n");
 					res.result = handle_deassociated();
+					/* TODO: And then, associ_check will handle this behavior, such as enable AP Mode or not */
 					break;
 				case CMD_ENTER_DAY_MODE:
-					printf("ENTER DAY MODE\n");
+					fprintf(stderr, "CMD_ENTER_DAY_MODE\n");
 					res.result = handle_day_mode();
 					break;
 				case CMD_ENTER_NIGHT_MODE:
-					printf("ENTER NIGHT MODE\n");
+					fprintf(stderr, "CMD_ENTER_NIGHT_MODE\n");
 					res.result = handle_night_mode();
 					break;
 				case CMD_NETWORK_RESTART:
@@ -209,17 +211,33 @@ int IPCHandler::handle_stream_count(bool isActive)
 	LED_STATUS_SETTING led_status_setting;
 	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
 	if (count > 0) {
-		/* TODO It should need to check this status is same or not, It will set it when they are not same. */
 		if(led_status_setting.pled_state != PLED_ACTIVE && (led_status_setting.pled_state = PLED_ACTIVE)) {
 			holder->set_status_info_by_type("LEDStatus", &led_status_setting);
 		}
 	} else if (count == 0) {
-		/* FIXME Need to check Network status first by NetworkStatus thead */
-		led_status_setting.pled_state = PLED_CLIENT_MODE;
-		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+		NETWORK_STATUS_SETTING network_status_setting;
+		holder->get_status_info_by_type("NetworkStatus", &network_status_setting);
+		
+		switch (network_status_setting.link_state) {
+			case LINK_IS_OFF:
+				printf("LINK_IS_OFF");
+				if(led_status_setting.pled_state != PLED_BT_MODE && (led_status_setting.pled_state = PLED_BT_MODE)) {
+					printf("set it\n");
+					holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+				}
+				break;
+			case LINK_IS_ON:
+				printf("LINK_IS_ON");
+				if(led_status_setting.pled_state != PLED_CLIENT_MODE && (led_status_setting.pled_state = PLED_CLIENT_MODE)) {
+					printf("set it\n");
+					holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+				}
+				break;
+		}
 	} else {
 		INFO("BUG@%d", __LINE__);
 	}
+
 	return 0;
 }
 
@@ -233,7 +251,11 @@ int IPCHandler::handle_associated()
 		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
 	}
 
-	/* wled state follow NetworkStatus. So, wled state does nothing here */
+	/* TODO wled state follow NetworkStatus. The wled state does nothing here, but we can set WLED_STRONG first */
+	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
+	if(led_status_setting.wled_state != WLED_STRONG && (led_status_setting.wled_state = WLED_STRONG)) {
+		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
+	}
 
 	return 0;
 }
@@ -248,8 +270,8 @@ int IPCHandler::handle_deassociated()
 		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
 	}
 
-	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
 	/* wled_state get WLED_WEAK by using led_status in IPCHandler */
+	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
 	if(led_status_setting.wled_state != WLED_WEAK && (led_status_setting.wled_state = WLED_WEAK)) {
 		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
 	}

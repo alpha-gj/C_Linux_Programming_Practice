@@ -40,7 +40,7 @@ class NetworkStatus : public SwStatus
 		static void *run_network_status_thread(void *args);
 		static bool isPauseDetect;
 		static NETWORK_STATUS_SETTING s_network_status_setting;
-		static LINK_STATE return_link_state();
+		static int check_link_state();
 		static WIFI_LED_STATE return_wled_state_by_rssi(int rssi, SIGNAL_STAGE signal_stage);
 		static WIFI_LED_STATE return_wled_state_from_first_stage(int rssi);
 		static WIFI_LED_STATE return_wled_state_from_second_stage(int rssi, bool isReset);
