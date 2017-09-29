@@ -96,6 +96,18 @@ int IPCHandler::run_parsing_command()
 			IpcResponse res = { 0, 0, 0, "" };	// always response with success.
 			INFO("\033[1;33m[watchDog]: received command[%d]\033[0m", cmd.id);
 			switch (cmd.id) {
+				case CMD_IR_AUTO:
+					fprintf(stderr, "CMD_IR_AUTO\n");
+					res.result = handle_set_ir_mode_auto();
+					break;
+				case CMD_IR_OFF:
+					fprintf(stderr, "CMD_IR_OFF\n");
+					res.result = handle_set_ir_mode_off();
+					break;
+				case CMD_IR_ON:
+					fprintf(stderr, "CMD_IR_ON\n");
+					res.result = handle_set_ir_mode_on();
+					break;
 				case CMD_DET_FACTORY_BUTTON:
 					fprintf(stderr, "DET_FACTORY_BUTTON\n");
 					res.result = handle_detect_factory_button();
@@ -129,10 +141,12 @@ int IPCHandler::run_parsing_command()
 					res.result = handle_night_mode();
 					break;
 				case CMD_NETWORK_RESTART:
+					fprintf(stderr, "CMD_NETWORK_RESTART\n");
 					system("/etc/rc.d/init.d/network.sh reload &");
 					res.result = 0;
 					break;
 				case CMD_BLUEZ_STOP:
+					fprintf(stderr, "CMD_BLUEZ_STOP\n");
 					system("/etc/rc.d/init.d/bluetoothd.sh stop &");
 					res.result = 0;
 					break;
@@ -141,27 +155,14 @@ int IPCHandler::run_parsing_command()
 					res.result = handler_firmware_upgrade();
 					break;
 				/*
-				case CMD_IR_AUTO:
-					set_light_mode(IR_AUTO_BY_LIGHT);
-					break;
-				case CMD_IR_OFF:
-					light.watch.old_light_state = LIGHT_OFF;
-					res.result = set_ir_icr_behavior_by_state(LIGHT_OFF);
-					set_light_mode(IR_MANUAL);
-					break;
-				case CMD_IR_ON:
-					light.watch.old_light_state = LIGHT_ON;
-					res.result = set_ir_icr_behavior_by_state(LIGHT_ON); 
-					set_light_mode(IR_MANUAL);
-					break;
 				case CMD_RELOAD_CONFIG:
 					//is_reload = true;
 					update_thread_value();
 					break;
 				default:
-											 res.result = handle_ipc_depend_on_status(cmd);
-											 break;
-				*/
+				res.result = handle_ipc_depend_on_status(cmd);
+				break;
+				 */
 			}
 
 			ipc_daemon.reply_cmd(client_fd, &res, sizeof(res));
@@ -172,17 +173,64 @@ int IPCHandler::run_parsing_command()
 	return 0;
 }
 
+int IPCHandler::handle_set_ir_mode_auto()
+{
+	LIGHT_SENSOR_STATUS_SETTING light_sensor_status_setting;
+
+	/* It should get current Light Sensor_state First */ 
+	holder->get_status_info_by_type("LightSensorStatus", &light_sensor_status_setting);
+
+	/* Set only one of settings that you want to do */
+	light_sensor_status_setting.ir_mode = IR_AUTO;
+	holder->set_status_info_by_type("LightSensorStatus", &light_sensor_status_setting);
+
+	return 0;
+}
+
+int IPCHandler::handle_set_ir_mode_off()
+{
+	LIGHT_SENSOR_STATUS_SETTING light_sensor_status_setting;
+
+	/* It should get current Light Sensor_state First */ 
+	holder->get_status_info_by_type("LightSensorStatus", &light_sensor_status_setting);
+
+	/* Set only one of settings that you want to do */
+	light_sensor_status_setting.ir_mode = IR_MANUAL;
+	light_sensor_status_setting.ir_led_state = IR_LED_OFF;
+	light_sensor_status_setting.old_ir_led_state = IR_LED_OFF;
+	holder->set_status_info_by_type("LightSensorStatus", &light_sensor_status_setting);
+
+	return handle_day_mode();
+}
+
+int IPCHandler::handle_set_ir_mode_on()
+{
+	LIGHT_SENSOR_STATUS_SETTING light_sensor_status_setting;
+
+	/* It should get current Light Sensor_state First */ 
+	holder->get_status_info_by_type("LightSensorStatus", &light_sensor_status_setting);
+
+	/* Set only one of settings that you want to do */
+	light_sensor_status_setting.ir_mode = IR_MANUAL;
+	light_sensor_status_setting.ir_led_state = IR_LED_ON;
+	light_sensor_status_setting.old_ir_led_state = IR_LED_ON;
+	holder->set_status_info_by_type("LightSensorStatus", &light_sensor_status_setting);
+
+	return handle_night_mode();
+}
+
 int IPCHandler::handle_detect_factory_button()
 {
 	LED_STATUS_SETTING led_status_setting;
 
 	/* It should get current LED_state First */ 
 	holder->get_status_info_by_type("LEDStatus", &led_status_setting);
-	
+
 	/* Set only one of settings that you want to do */
-	if(led_status_setting.pled_state != PLED_RESET && (led_status_setting.pled_state = PLED_RESET)) {
+	if (led_status_setting.pled_state != PLED_RESET && (led_status_setting.pled_state = PLED_RESET)) {
 		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
 	}
+
 	return 0;
 }
 

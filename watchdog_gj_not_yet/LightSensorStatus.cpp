@@ -88,11 +88,16 @@ void *LightSensorStatus::run_light_sensor_status_detect_thread(void *args)
 	s_light_sensor_status_setting.ir_led_state = get_IR_MODE_by_cam_settings(light_sensor_setting_from_cam);
 
 	/* 3rd Step: Set IR MODE accroding to DB settings */
-	s_light_sensor_status_setting.ir_mode = (IR_MODE)light_sensor_setting_from_cam.ir_set.ir_mode;
+	if ((IR_MODE)light_sensor_setting_from_cam.ir_set.ir_mode == IR_AUTO)
+		s_light_sensor_status_setting.ir_mode = IR_AUTO;
+	else
+		s_light_sensor_status_setting.ir_mode = IR_MANUAL;
 
 	/* 4rd Step: Set IRLED/ICR behavior by state for IR Manual or not */
-	if (s_light_sensor_status_setting.ir_mode != 0) /* ir mode = 0 is IR Auto */
+	if (s_light_sensor_status_setting.ir_mode != 0) { /* ir mode = 0 is IR Auto */
 		set_ir_icr_behavior_by_state(s_light_sensor_status_setting.ir_led_state);
+		s_light_sensor_status_setting.old_ir_led_state = s_light_sensor_status_setting.ir_led_state;
+	}
 
 	/* Set light_sensor_status_setting accroding to DB settings for IR Auto */
 	s_light_sensor_status_setting.threshold = (int)light_sensor_setting_from_cam.lightsensor_set.light_sensor_level;
@@ -103,7 +108,9 @@ void *LightSensorStatus::run_light_sensor_status_detect_thread(void *args)
 	s_light_sensor_status_setting.N2D_offset = (int)light_sensor_setting_from_cam.lightsensor_set.N2D_offset;
 
 	while (!get_quit() && !get_reload()) {
-		if (s_light_sensor_status_setting.ir_mode == 0) {
+
+		/* Follow ir mode to do something */
+		if (s_light_sensor_status_setting.ir_mode == IR_AUTO) {
 
 			LIGHT_SENSOR_SETTING light_sensor_setting {
 				.value = 0
@@ -121,18 +128,16 @@ void *LightSensorStatus::run_light_sensor_status_detect_thread(void *args)
 			}
 
 			printf("LightSensor's lux is %d\n", light_sensor_setting.value);
-			printf("state is %d\n", s_light_sensor_status_setting.ir_led_state);
-			printf("old_state is %d\n", s_light_sensor_status_setting.old_ir_led_state);
+			printf("ir_led_state is %d\n", s_light_sensor_status_setting.ir_led_state);
+			printf("old_ir_led_old_state is %d\n", s_light_sensor_status_setting.old_ir_led_state);
 
 			/* Check LightSensor and light_sensor_status_setting.threshold */
 			if (light_sensor_setting.value >= (s_light_sensor_status_setting.threshold + s_light_sensor_status_setting.N2D_offset)) {
 
-				printf("will IR_LED_OFF\n");
 				s_light_sensor_status_setting.ir_led_state = IR_LED_OFF;
 
 			} else if (light_sensor_setting.value <= (s_light_sensor_status_setting.threshold - s_light_sensor_status_setting.D2N_offset)) {
 
-				printf("will IR_LED_ON\n");
 				s_light_sensor_status_setting.ir_led_state = IR_LED_ON;
 
 			} else {
@@ -143,7 +148,6 @@ void *LightSensorStatus::run_light_sensor_status_detect_thread(void *args)
 
 			/* Let's' count for it */
 			static int count = 0;
-
 			if (s_light_sensor_status_setting.old_ir_led_state != s_light_sensor_status_setting.ir_led_state) {
 				++count;
 				if (s_light_sensor_status_setting.old_ir_led_state == IR_LED_OFF) {
@@ -166,8 +170,10 @@ void *LightSensorStatus::run_light_sensor_status_detect_thread(void *args)
 			}
 
 			usleep(TIME_INTERVAL);
-		} else {
+		} else if (s_light_sensor_status_setting.ir_mode == IR_MANUAL) {
 			sleep(2);
+		} else {
+			/* Do Nothing */
 		}
 	}
 	fprintf(stderr, "%s done\n", __func__);
@@ -175,28 +181,43 @@ void *LightSensorStatus::run_light_sensor_status_detect_thread(void *args)
 }
 
 
-int LightSensorStatus::set_status_info(void *)
+int LightSensorStatus::set_status_info(void *status_struct)
 {
-	return(int)AHAL_RET_NOT_SUPPORT;
+	LIGHT_SENSOR_STATUS_SETTING *temp_light_sensor_status_setting = (LIGHT_SENSOR_STATUS_SETTING *) status_struct;
+	TinyDB db;
+
+	db.init("Image", true);
+
+	if (temp_light_sensor_status_setting->ir_mode == IR_AUTO) {
+		db.setByte("IrAuto", 1); /* IrAuto is 1 for auto, but def. from cam, ir_mode = 0 when set auto */
+		s_light_sensor_status_setting.ir_mode = IR_AUTO;
+	} else if (temp_light_sensor_status_setting->ir_mode == IR_MANUAL) {
+		db.setByte("IrAuto", 0); /* IrAuto is 1 for auto, but def. from cam, ir_mode = 0 when set auto */
+		s_light_sensor_status_setting.ir_mode = IR_MANUAL;
+	}
+
+	s_light_sensor_status_setting.ir_led_state		= temp_light_sensor_status_setting->ir_led_state;
+	s_light_sensor_status_setting.old_ir_led_state	= temp_light_sensor_status_setting->old_ir_led_state;
+	s_light_sensor_status_setting.threshold			= temp_light_sensor_status_setting->threshold;
+	s_light_sensor_status_setting.D2N_offset		= temp_light_sensor_status_setting->D2N_offset;
+	s_light_sensor_status_setting.N2D_offset		= temp_light_sensor_status_setting->N2D_offset;
+
+	db.release();
+	return (int)AHAL_RET_SUCCESS;
 }
 
-int LightSensorStatus::get_status_info(void *)
+int LightSensorStatus::get_status_info(void *status_struct)
 {
-	/* FIXME */
-#if 0
-	
-		void set_light_mode(int m)
-		{
-			if (mode != m) {
-				TinyDB db;
-				db.init("Image", true);
-				db.setByte("IrAuto", !m); /* IrAuto is 1 for auto, but def. from cam, ir_mode = 0 when set auto */
-				db.release();
-				mode = m;
-			}
-		}
-#endif
-	return(int)AHAL_RET_NOT_SUPPORT;
+	LIGHT_SENSOR_STATUS_SETTING *temp_light_sensor_status_setting = (LIGHT_SENSOR_STATUS_SETTING *) status_struct;
+
+	temp_light_sensor_status_setting->ir_mode		   = s_light_sensor_status_setting.ir_mode;
+	temp_light_sensor_status_setting->ir_led_state	   = s_light_sensor_status_setting.ir_led_state;
+	temp_light_sensor_status_setting->old_ir_led_state = s_light_sensor_status_setting.old_ir_led_state;
+	temp_light_sensor_status_setting->threshold		   = s_light_sensor_status_setting.threshold;
+	temp_light_sensor_status_setting->D2N_offset	   = s_light_sensor_status_setting.D2N_offset;
+	temp_light_sensor_status_setting->N2D_offset	   = s_light_sensor_status_setting.N2D_offset;
+
+	return (int)AHAL_RET_SUCCESS;
 }
 
 IR_LED_STATE LightSensorStatus::get_IR_MODE_by_cam_settings(LIGHT_SENSOR_SETTING_FROM_CAM light_sensor_setting_from_cam) 

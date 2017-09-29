@@ -31,6 +31,9 @@ protected:
 	int ipc_fd;
 
 	/* IPC EVENT */
+	int handle_set_ir_mode_auto();
+	int handle_set_ir_mode_off();
+	int handle_set_ir_mode_on();
 	int handle_factory_reset();
 	int handle_detect_factory_button();
 	int handle_stream_count(bool isActive);

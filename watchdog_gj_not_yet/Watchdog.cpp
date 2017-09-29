@@ -196,7 +196,7 @@ int Watchdog::run()
 	LIGHT_SENSOR_SETTING light_sensor_setting {
 		.value = 0
 	};
-	//FIXME just init and uninit again, or will occur i2c error
+	//FIXME just init and uninit once, or will occur i2c error
 	for (int i = 0; i < 5; i++) {
 		hw_manager->get_hw_info_by_type("LIGHTSENSOR", &light_sensor_setting);
 		printf("LightSensor's lux is %d\n", light_sensor_setting.value);
