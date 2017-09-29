@@ -9,6 +9,10 @@
 
 using namespace std;
 
+typedef struct LED_SETTING_FROM_CAM {
+	gpio_setting gpio_set;
+} LED_SETTING_FROM_CAM;		/* It should get settings from DB first */
+
 typedef enum {
 	PLED_BOOTING,
 	PLED_CLIENT_MODE,
@@ -31,6 +35,7 @@ typedef enum {
 typedef struct LED_STATUS {
 	POWER_LED_STATE pled_state;
 	WIFI_LED_STATE wled_state;
+	bool enable_silent_led;
 } LED_STATUS_SETTING;
 
 class LEDStatus : public SwStatus
@@ -42,6 +47,7 @@ class LEDStatus : public SwStatus
 		static LED_STATUS_SETTING s_led_status_setting;
 		static int set_pled_status_by_state(POWER_LED_STATE pled_state, LED_SETTING *led_setting);
 		static int set_wled_status_by_state(WIFI_LED_STATE wled_state, LED_SETTING *led_setting);
+		static bool get_need_silent_led_status();
 
 		public:
 		LEDStatus();
@@ -54,6 +60,7 @@ class LEDStatus : public SwStatus
 		virtual bool get_pause_detect_flag();
 		virtual int set_status_info(void* status_struct);
 		virtual int get_status_info(void* status_struct);
+		virtual int update_thread_value();
 };
 
 #endif

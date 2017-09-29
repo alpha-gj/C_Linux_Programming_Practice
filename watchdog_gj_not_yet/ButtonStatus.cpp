@@ -149,3 +149,8 @@ RESET_BUTTON_STATE ButtonStatus::return_button_state_by_press_count(int press_co
 		return RESET_READY;
 	}
 }
+
+int ButtonStatus::update_thread_value()
+{
+	return(int)AHAL_RET_NOT_SUPPORT;
+}

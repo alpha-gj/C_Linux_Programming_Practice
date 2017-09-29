@@ -117,6 +117,7 @@ int IPCHandler::run_parsing_command()
 					res.result = handle_factory_reset();
 					break;
 				case CMD_SET_ACTIVE:
+					fprintf(stderr, "CMD_SET_ACTIVE\n");
 					if(cmd.action == 0) { /* streaming is active */
 						res.result = handle_stream_count(true);
 					} else {			  /* streaming is inactive */
@@ -151,18 +152,16 @@ int IPCHandler::run_parsing_command()
 					res.result = 0;
 					break;
 				case CMD_FIRMWARE_UPGRADE_START:
-					printf("FIRMWARE_UPGRADE_START\n");
-					res.result = handler_firmware_upgrade();
+					fprintf(stderr, "FIRMWARE_UPGRADE_START\n");
+					res.result = handle_firmware_upgrade();
 					break;
-				/*
 				case CMD_RELOAD_CONFIG:
-					//is_reload = true;
-					update_thread_value();
+					fprintf(stderr, "CMD_RELOAD_CONFIG\n");
+					res.result = handle_update_thread_value();
 					break;
 				default:
-				res.result = handle_ipc_depend_on_status(cmd);
+					res.result = handle_ipc_depend_on_status(cmd);
 				break;
-				 */
 			}
 
 			ipc_daemon.reply_cmd(client_fd, &res, sizeof(res));
@@ -380,7 +379,7 @@ int IPCHandler::handle_night_mode()
 	return 0;
 }
 
-int IPCHandler::handler_firmware_upgrade()
+int IPCHandler::handle_firmware_upgrade()
 {
 	/* pled state is PLED_BT_MODE */
 	LED_STATUS_SETTING led_status_setting;
@@ -389,5 +388,17 @@ int IPCHandler::handler_firmware_upgrade()
 	if(led_status_setting.pled_state != PLED_FWUPDATE  && (led_status_setting.pled_state = PLED_FWUPDATE)) {
 		holder->set_status_info_by_type("LEDStatus", &led_status_setting);
 	}
+	return 0;
+}
+
+int IPCHandler::handle_update_thread_value()
+{
+	holder->update_thread_value_by_type("LightSensorStatus");
+	holder->update_thread_value_by_type("LEDStatus");
+
+	return 0;
+}
+int IPCHandler::handle_ipc_depend_on_status(IpcCommand &cmd)
+{
 	return 0;
 }

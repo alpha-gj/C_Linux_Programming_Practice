@@ -15,33 +15,39 @@
 
 class IPCHandler
 {
-public:
-	IPCHandler ();
-	virtual ~IPCHandler ();
-	virtual int init() = 0;
-	virtual int release() = 0;
-	virtual int run_parsing_command();
-	virtual bool GoNextState();
-	virtual MAINSTATES GetMainHandlerState() = 0;
+	public:
+		IPCHandler ();
+		virtual ~IPCHandler ();
+		virtual int init() = 0;
+		virtual int release() = 0;
+		virtual int run_parsing_command();
+		virtual bool GoNextState();
+		virtual MAINSTATES GetMainHandlerState() = 0;
 
-protected:
-	IpcDaemon ipc_daemon;
-	StatesHolder *holder;
-	HwManager *hw_manager;
-	int ipc_fd;
+	protected:
+		IpcDaemon ipc_daemon;
+		StatesHolder *holder;
+		HwManager *hw_manager;
+		int ipc_fd;
 
-	/* IPC EVENT */
-	int handle_set_ir_mode_auto();
-	int handle_set_ir_mode_off();
-	int handle_set_ir_mode_on();
-	int handle_factory_reset();
-	int handle_detect_factory_button();
-	int handle_stream_count(bool isActive);
-	int handle_associated();
-	int handle_deassociated();
-	int handle_day_mode();
-	int handle_night_mode();
-	int handler_firmware_upgrade();
+		/* IPC Event Common */
+		int handle_factory_reset();
+		int handle_detect_factory_button();
+		int handle_firmware_upgrade();
+		int handle_stream_count(bool isActive);
+		int handle_update_thread_value();
+		virtual int handle_ipc_depend_on_status(IpcCommand &cmd);
+
+		/* IPC Event ICR/IR */
+		int handle_set_ir_mode_auto();
+		int handle_set_ir_mode_off();
+		int handle_set_ir_mode_on();
+		int handle_day_mode();
+		int handle_night_mode();
+
+		/* IPC Event Network */
+		int handle_associated();
+		int handle_deassociated();
 };
 
 #endif

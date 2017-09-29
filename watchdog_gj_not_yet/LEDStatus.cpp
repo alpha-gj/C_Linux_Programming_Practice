@@ -4,7 +4,8 @@
 bool LEDStatus::isPauseDetect = false;
 LED_STATUS_SETTING LEDStatus::s_led_status_setting {
 	.pled_state = PLED_BOOTING,
-	.wled_state = WLED_OFF
+	.wled_state = WLED_OFF,
+	.enable_silent_led = false
 };
 
 LEDStatus::LEDStatus():led_status_pid(0)
@@ -67,10 +68,22 @@ bool LEDStatus::get_pause_detect_flag()
 void *LEDStatus::run_led_status_thread(void *args)
 {
 	HwManager *pt_hw_manager = (HwManager *) args;
+	LED_SETTING_FROM_CAM led_setting_from_cam;
 	LED_SETTING led_setting;
 
+	if (cam_get_gpio(&led_setting_from_cam.gpio_set) != CAM_SUCCESS) {
+		fprintf(stderr, "get gpio setting failed.\n");
+		led_setting_from_cam.gpio_set.silent_led = 0;
+	}
+
+	/* Set SilentLED or not */
+	if (led_setting_from_cam.gpio_set.silent_led == 0)
+		s_led_status_setting.enable_silent_led = false;
+	else
+		s_led_status_setting.enable_silent_led = true;
+
 	while (!get_quit() && !get_reload()) {
-		
+
 		/* Pause detect condition */
 		if (isPauseDetect) {
 			sleep(1);
@@ -145,7 +158,7 @@ int LEDStatus::set_pled_status_by_state(POWER_LED_STATE pled_state, LED_SETTING 
 			break;
 		case PLED_CLIENT_MODE:
 			/* Solid Green */
-			if(false) { //FIXME Silent LED
+			if (get_need_silent_led_status()) {
 				led_setting->id = AHAL_LED_ID_POWER;
 				led_setting->color = AHAL_LED_COLOR_OFF;
 			} else {
@@ -156,7 +169,7 @@ int LEDStatus::set_pled_status_by_state(POWER_LED_STATE pled_state, LED_SETTING 
 		case PLED_WPS:
 		case PLED_ACTIVE:
 			/* Blinking Green */
-			if(false) { //FIXME Silent LED
+			if (get_need_silent_led_status()) {
 				led_setting->id = AHAL_LED_ID_POWER;
 				led_setting->color = AHAL_LED_COLOR_OFF;
 				break;
@@ -192,9 +205,10 @@ int LEDStatus::set_wled_status_by_state(WIFI_LED_STATE wled_state, LED_SETTING *
 	static bool wled_on = false;
 	wled_on = !wled_on;
 
-	/*FIXME Silent LED
-	  wled_state = WLED_OFF;
-	*/
+	/* Check it needs to silent led or not */
+	if (get_need_silent_led_status())
+		wled_state = WLED_OFF;
+
 	switch(wled_state) {
 		case WLED_OFF:
 			led_setting->id = AHAL_LED_ID_WIFI_24G;
@@ -223,6 +237,28 @@ int LEDStatus::set_wled_status_by_state(WIFI_LED_STATE wled_state, LED_SETTING *
 		default:
 			break;
 	}
+
+	return 0;
+}
+
+bool LEDStatus::get_need_silent_led_status()
+{
+	return s_led_status_setting.enable_silent_led;
+}
+
+int LEDStatus::update_thread_value()
+{
+	LED_SETTING_FROM_CAM led_setting_from_cam;
+
+	if (cam_get_gpio(&led_setting_from_cam.gpio_set) != CAM_SUCCESS) {
+		fprintf(stderr, "get gpio setting failed.\n");
+		led_setting_from_cam.gpio_set.silent_led = 0;
+	}
+
+	if (led_setting_from_cam.gpio_set.silent_led == 0)
+		s_led_status_setting.enable_silent_led = false;
+	else
+		s_led_status_setting.enable_silent_led = true;
 
 	return 0;
 }

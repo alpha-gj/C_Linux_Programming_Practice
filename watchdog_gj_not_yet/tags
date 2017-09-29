@@ -92,6 +92,8 @@ LEDController	LEDController.h	/^class LEDController : public HwController$/;"	c
 LEDStatus	LEDStatus.cpp	/^LEDStatus::LEDStatus():led_status_pid(0)$/;"	f	class:LEDStatus
 LEDStatus	LEDStatus.h	/^class LEDStatus : public SwStatus$/;"	c
 LED_SETTING	LEDController.h	/^} LED_SETTING;$/;"	t	typeref:struct:LED
+LED_SETTING_FROM_CAM	LEDStatus.h	/^typedef struct LED_SETTING_FROM_CAM {$/;"	s
+LED_SETTING_FROM_CAM	LEDStatus.h	/^} LED_SETTING_FROM_CAM;		\/* It should get settings from DB first *\/$/;"	t	typeref:struct:LED_SETTING_FROM_CAM
 LED_STATUS	LEDStatus.h	/^typedef struct LED_STATUS {$/;"	s
 LED_STATUS_SETTING	LEDStatus.h	/^} LED_STATUS_SETTING;$/;"	t	typeref:struct:LED_STATUS
 LIGHT_SENSOR	LightSensorController.h	/^typedef struct LIGHT_SENSOR$/;"	s
@@ -243,6 +245,7 @@ deinit_hw_info_by_type	HwManager.cpp	/^int HwManager::deinit_hw_info_by_type(con
 deinit_status_detect_by_type	StatesHolder.cpp	/^int StatesHolder::deinit_status_detect_by_type(const char* status_name)$/;"	f	class:StatesHolder
 diff_curr_uptime_count	Common.cpp	/^long diff_curr_uptime_count(struct timeval t)$/;"	f
 do_wifi_wps	WifiController.cpp	/^int WifiController::do_wifi_wps(void *hw_struct)$/;"	f	class:WifiController
+enable_silent_led	LEDStatus.h	/^	bool enable_silent_led;$/;"	m	struct:LED_STATUS
 get_IR_MODE_by_cam_settings	LightSensorStatus.cpp	/^IR_LED_STATE LightSensorStatus::get_IR_MODE_by_cam_settings(LIGHT_SENSOR_SETTING_FROM_CAM light_sensor_setting_from_cam) $/;"	f	class:LightSensorStatus
 get_hw_info	AudioController.cpp	/^int AudioController::get_hw_info(void *)$/;"	f	class:AudioController
 get_hw_info	ButtonController.cpp	/^int ButtonController::get_hw_info(void *hw_struct)$/;"	f	class:ButtonController
@@ -252,6 +255,7 @@ get_hw_info	LEDController.cpp	/^int LEDController::get_hw_info(void *)$/;"	f	cla
 get_hw_info	LightSensorController.cpp	/^int LightSensorController::get_hw_info(void *hw_struct)$/;"	f	class:LightSensorController
 get_hw_info	WifiController.cpp	/^int WifiController::get_hw_info(void *hw_struct)$/;"	f	class:WifiController
 get_hw_info_by_type	HwManager.cpp	/^int HwManager::get_hw_info_by_type(const char* hw_name, void* hw_struct)$/;"	f	class:HwManager
+get_need_silent_led_status	LEDStatus.cpp	/^bool LEDStatus::get_need_silent_led_status()$/;"	f	class:LEDStatus
 get_pause_detect_flag	ButtonStatus.cpp	/^bool ButtonStatus::get_pause_detect_flag()$/;"	f	class:ButtonStatus
 get_pause_detect_flag	LEDStatus.cpp	/^bool LEDStatus::get_pause_detect_flag()$/;"	f	class:LEDStatus
 get_pause_detect_flag	LightSensorStatus.cpp	/^bool LightSensorStatus::get_pause_detect_flag()$/;"	f	class:LightSensorStatus
@@ -268,11 +272,14 @@ get_uptime	Common.cpp	/^struct timeval get_uptime()$/;"	f
 get_wifi_associated_status	WifiController.cpp	/^int WifiController::get_wifi_associated_status(void *hw_struct)$/;"	f	class:WifiController
 get_wifi_radio_status	WifiController.cpp	/^int WifiController::get_wifi_radio_status(void *hw_struct)$/;"	f	class:WifiController
 get_wifi_wps_status	WifiController.cpp	/^int WifiController::get_wifi_wps_status(void *hw_struct) $/;"	f	class:WifiController
+gpio_set	LEDStatus.h	/^	gpio_setting gpio_set;$/;"	m	struct:LED_SETTING_FROM_CAM
 handle_associated	IPCHandler.cpp	/^int IPCHandler::handle_associated() $/;"	f	class:IPCHandler
 handle_day_mode	IPCHandler.cpp	/^int IPCHandler::handle_day_mode()$/;"	f	class:IPCHandler
 handle_deassociated	IPCHandler.cpp	/^int IPCHandler::handle_deassociated()$/;"	f	class:IPCHandler
 handle_detect_factory_button	IPCHandler.cpp	/^int IPCHandler::handle_detect_factory_button()$/;"	f	class:IPCHandler
 handle_factory_reset	IPCHandler.cpp	/^int IPCHandler::handle_factory_reset()$/;"	f	class:IPCHandler
+handle_firmware_upgrade	IPCHandler.cpp	/^int IPCHandler::handle_firmware_upgrade()$/;"	f	class:IPCHandler
+handle_ipc_depend_on_status	IPCHandler.cpp	/^int IPCHandler::handle_ipc_depend_on_status(IpcCommand &cmd)$/;"	f	class:IPCHandler
 handle_ipc_depend_on_status	PowerUpHandler.cpp	/^int PowerUpHandler::handle_ipc_depend_on_status(IpcCommand cmd)$/;"	f	class:PowerUpHandler
 handle_ipc_depend_on_status	ResetHandler.cpp	/^int ResetHandler::handle_ipc_depend_on_status(IpcCommand \/*cmd*\/)$/;"	f	class:ResetHandler
 handle_night_mode	IPCHandler.cpp	/^int IPCHandler::handle_night_mode()$/;"	f	class:IPCHandler
@@ -280,12 +287,12 @@ handle_set_ir_mode_auto	IPCHandler.cpp	/^int IPCHandler::handle_set_ir_mode_auto
 handle_set_ir_mode_off	IPCHandler.cpp	/^int IPCHandler::handle_set_ir_mode_off()$/;"	f	class:IPCHandler
 handle_set_ir_mode_on	IPCHandler.cpp	/^int IPCHandler::handle_set_ir_mode_on()$/;"	f	class:IPCHandler
 handle_stream_count	IPCHandler.cpp	/^int IPCHandler::handle_stream_count(bool isActive)$/;"	f	class:IPCHandler
-handler_firmware_upgrade	IPCHandler.cpp	/^int IPCHandler::handler_firmware_upgrade()$/;"	f	class:IPCHandler
-holder	IPCHandler.h	/^	StatesHolder *holder;$/;"	m	class:IPCHandler
+handle_update_thread_value	IPCHandler.cpp	/^int IPCHandler::handle_update_thread_value()$/;"	f	class:IPCHandler
+holder	IPCHandler.h	/^		StatesHolder *holder;$/;"	m	class:IPCHandler
 holder	StatesHolder.h	/^		static StatesHolder *holder;$/;"	m	class:StatesHolder
 holder	Watchdog.h	/^		StatesHolder *holder;$/;"	m	class:Watchdog
 hw_manager	HwManager.h	/^		static HwManager *hw_manager;$/;"	m	class:HwManager
-hw_manager	IPCHandler.h	/^	HwManager *hw_manager;$/;"	m	class:IPCHandler
+hw_manager	IPCHandler.h	/^		HwManager *hw_manager;$/;"	m	class:IPCHandler
 hw_manager	SwStatus.h	/^		HwManager *hw_manager;$/;"	m	class:SwStatus
 hw_manager	Watchdog.h	/^		HwManager *hw_manager;$/;"	m	class:Watchdog
 icr_setting	LightSensorStatus.h	/^	ICR_SETTING icr_setting;$/;"	m	struct:IRLED_ICR
@@ -312,8 +319,8 @@ init	WifiController.cpp	/^int WifiController::init()$/;"	f	class:WifiController
 initSignal	Watchdog.cpp	/^bool initSignal()$/;"	f
 init_hw_info_by_type	HwManager.cpp	/^int HwManager::init_hw_info_by_type(const char* hw_name)$/;"	f	class:HwManager
 init_status_detect_by_type	StatesHolder.cpp	/^int StatesHolder::init_status_detect_by_type(const char* status_name)$/;"	f	class:StatesHolder
-ipc_daemon	IPCHandler.h	/^	IpcDaemon ipc_daemon;$/;"	m	class:IPCHandler
-ipc_fd	IPCHandler.h	/^	int ipc_fd;$/;"	m	class:IPCHandler
+ipc_daemon	IPCHandler.h	/^		IpcDaemon ipc_daemon;$/;"	m	class:IPCHandler
+ipc_fd	IPCHandler.h	/^		int ipc_fd;$/;"	m	class:IPCHandler
 ir_led_state	LightSensorStatus.h	/^	IR_LED_STATE ir_led_state;$/;"	m	struct:LIGHT_SENSOR_STATUS
 ir_mode	LightSensorStatus.h	/^	IR_MODE ir_mode;$/;"	m	struct:LIGHT_SENSOR_STATUS
 ir_set	LightSensorStatus.h	/^	ir_setting ir_set;$/;"	m	struct:LIGHT_SENSOR_SETTING_FROM_CAM
@@ -401,6 +408,11 @@ state	ICRController.h	/^	AHAL_CST_STATE state;$/;"	m	struct:ICR
 status	ButtonController.h	/^	AHAL_BTN_STATUS status;$/;"	m	struct:BUTTON
 status	Status.h	/^		int status;$/;"	m	class:Status
 threshold	LightSensorStatus.h	/^	int threshold;$/;"	m	struct:LIGHT_SENSOR_STATUS
+update_thread_value	ButtonStatus.cpp	/^int ButtonStatus::update_thread_value()$/;"	f	class:ButtonStatus
+update_thread_value	LEDStatus.cpp	/^int LEDStatus::update_thread_value()$/;"	f	class:LEDStatus
+update_thread_value	LightSensorStatus.cpp	/^int LightSensorStatus::update_thread_value()$/;"	f	class:LightSensorStatus
+update_thread_value	NetworkStatus.cpp	/^int NetworkStatus::update_thread_value()$/;"	f	class:NetworkStatus
+update_thread_value_by_type	StatesHolder.cpp	/^int StatesHolder::update_thread_value_by_type(const char* status_name)$/;"	f	class:StatesHolder
 value	AudioController.h	/^	AHAL_INT32 value;$/;"	m	struct:AUDIO
 value	IRLEDController.h	/^	AHAL_INT32 value;$/;"	m	struct:IRLED
 value	LightSensorController.h	/^	AHAL_INT32 value;$/;"	m	struct:LIGHT_SENSOR

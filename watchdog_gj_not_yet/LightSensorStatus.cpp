@@ -176,6 +176,7 @@ void *LightSensorStatus::run_light_sensor_status_detect_thread(void *args)
 			/* Do Nothing */
 		}
 	}
+
 	fprintf(stderr, "%s done\n", __func__);
 	pthread_exit(0);
 }
@@ -244,4 +245,26 @@ int LightSensorStatus::set_ir_icr_behavior_by_state(IR_LED_STATE ir_led_state)
 	} else {
 		/* Do Nothing */
 	}
+}
+
+int LightSensorStatus::update_thread_value()
+{
+	LIGHT_SENSOR_SETTING_FROM_CAM light_sensor_setting_from_cam;
+
+	if (cam_get_ir(&light_sensor_setting_from_cam.ir_set) != CAM_SUCCESS) {
+		fprintf(stderr, "get ir set failed.\n");
+		light_sensor_setting_from_cam.ir_set.ir_mode = 0; /* IR Auto */
+	}
+
+	if (cam_get_lightsensor(&light_sensor_setting_from_cam.lightsensor_set) != CAM_SUCCESS) {
+		fprintf(stderr, "get light set failed.\n");
+		light_sensor_setting_from_cam.ir_set.ir_mode = 0; /* IR Auto */
+	}
+
+	s_light_sensor_status_setting.threshold = (int)light_sensor_setting_from_cam.lightsensor_set.light_sensor_level;
+	if (s_light_sensor_status_setting.threshold <= MIN_threshold) {
+		s_light_sensor_status_setting.threshold = MIN_threshold;
+	}
+
+	return (int)AHAL_RET_SUCCESS;
 }

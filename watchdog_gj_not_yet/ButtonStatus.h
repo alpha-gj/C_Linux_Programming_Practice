@@ -34,6 +34,7 @@ class ButtonStatus : public SwStatus
 		virtual bool get_pause_detect_flag();
 		virtual int set_status_info(void* status_struct);
 		virtual int get_status_info(void* status_struct);
+		virtual int update_thread_value();
 };
 
 #endif

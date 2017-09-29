@@ -59,6 +59,7 @@ class StatesHolder
 		int get_pause_detect_flag_by_type(const char* status_name);
 		int set_status_info_by_type(const char* status_name, void* status_struct);
 		int get_status_info_by_type(const char* status_name, void* status_struct);
+		int update_thread_value_by_type(const char* status_name);
 
 		void SetMainStates(MAINSTATES s);
 		MAINSTATES GetMainStates();

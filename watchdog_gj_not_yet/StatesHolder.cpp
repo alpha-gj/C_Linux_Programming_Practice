@@ -197,6 +197,16 @@ int StatesHolder::get_status_info_by_type(const char* status_name, void* status_
 		return sw_status->get_status_info(status_struct);
 }
 
+int StatesHolder::update_thread_value_by_type(const char* status_name)
+{
+	SwStatus *sw_status = ReturnSwStatusObjectByType(status_name);
+
+	if (sw_status == NULL)
+		return -1; //TODO need to verify, not find out or function is not supported
+	else
+		return sw_status->update_thread_value();
+}
+
 void StatesHolder::SetMainStates(MAINSTATES s)
 {
 	oldMainStates = mainStates;

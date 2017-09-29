@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include "cam/cam.h"
 #include "tinydb/tinydb.h"
 #include "command.h"
 #include "HwManager.h"
@@ -34,6 +35,7 @@ class SwStatus
 		virtual bool get_pause_detect_flag() = 0;
 		virtual int set_status_info(void* status_struct) = 0;
 		virtual int get_status_info(void* status_struct) = 0;
+		virtual int update_thread_value() = 0;
 };
 
 #endif

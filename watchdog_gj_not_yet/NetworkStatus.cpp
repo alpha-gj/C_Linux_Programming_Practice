@@ -313,3 +313,8 @@ int NetworkStatus::check_link_state()
 	}
 #endif
 }
+
+int NetworkStatus::update_thread_value()
+{
+	return(int)AHAL_RET_NOT_SUPPORT;
+}
