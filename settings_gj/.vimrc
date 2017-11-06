@@ -1,7 +1,10 @@
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+set pastetoggle=<f5>
+set path=.
 
 "===alias===
 ab m make
@@ -108,7 +111,7 @@ nnoremap <silent> <F8> :A<CR>
 
 
 map <F8> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif""""'")"")""'")""'")
+""au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif""""'")"")""'")""'")
 
 " wiki
 set nu
@@ -125,13 +128,10 @@ set incsearch
 
 " good setting
 filetype indent on
-inoremap ( ()<Esc>i
-inoremap {<CR> {<CR>}<Esc>ko
-inoremap {{ {}<ESC>i
-inoremap " ""<Esc>i
-inoremap ' ''<Esc>i
-inoremap [ []<Esc>i
-inoremap ;; <Esc>
+""inoremap " ""<Esc>i
+""inoremap ' ''<Esc>i
+""inoremap [ []<Esc>i
+""inoremap ;; <Esc>
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
