@@ -2,11 +2,19 @@
 #include <iostream>
 using namespace std;
 
+//TODO make ipc to class by following Singleton Pattern
+static int ipc_fd = -1;
+
 IPCHandler::IPCHandler():holder(NULL),hw_manager(NULL)
 {
 	int	ret = -1;
 	cout << "*** IPCHandler constructer without pra is running ... ***" << endl;
-	ipc_fd = ipc_daemon.init(WATCHDOG_SOCKET_NAME);
+
+	//TODO make ipc to class by following Singleton Pattern
+	if (ipc_fd == -1) {
+		ipc_fd = ipc_daemon.init(WATCHDOG_SOCKET_NAME);
+		fprintf(stderr, "It should just create once, or IPChandler may not get IPC.\n");
+	}
 
 	cout << "ipc_fd is " << ipc_fd << endl;
 	do {
@@ -48,50 +56,41 @@ IPCHandler::~IPCHandler()
 
 int IPCHandler::init()
 {
-	int ret = 0;
-	/*
-	do {
-		if (ipc_daemon.init(WATCHDOG_SOCKET_NAME) < 0) {
-			ERROR("create ipc daemon fail");
-			break;
-		}
-		ret = 0;
-	} while(false);
-	led.init();
-	holder = StatesHolder::CreateStatesHolder();
-	if (!holder) {
-		fprintf(stderr, "%s: %s[%d] can not alloc holder\n", __FILE__, __FUNCTION__, __LINE__);
-	}
-	*/
-	return ret;
-}
-
-int IPCHandler::release()
-{
-	/*
-	fprintf(stderr, "%s: %s[%d] IPCHandler is released\n", __FILE__, __FUNCTION__, __LINE__);
-	if (holder) {
-		StatesHolder::releaseStatesHolder();
-		holder = NULL;
-	}
-	*/
 	return 0;
 }
 
-bool IPCHandler::GoNextState()
+int IPCHandler::deinit()
 {
-	//return (GetMainHandlerState() != holder->GetMainStates());
 	return 0;
+}
+
+MAINSTATES IPCHandler::GetMainStates()
+{
+	return holder->GetMainStates();
+}
+
+MAINSTATES IPCHandler::GetOldMainStates()
+{
+	return holder->GetOldMainStates();
+}
+
+void IPCHandler::SetMainStates(MAINSTATES states)
+{
+	holder->SetMainStates(states);
+}
+
+bool IPCHandler::IsStatesChanged()
+{
+	return holder->IsStatesChanged();
 }
 
 int IPCHandler::run_parsing_command()
 {
 	int client_fd, ret;
 	IpcCommand cmd;
-	while (!get_quit() && !get_reload() && !GoNextState()) {
+	while (!get_quit() && !get_reload() && !IsStatesChanged()) {
 		//INFO("%d %d", get_quit(), get_reload());
-		ret = ipc_daemon.wait_cmd_timeout(&cmd, sizeof(cmd), client_fd, 0, POLLING_TIMEOUT);
-		//ret = ipc_daemon.wait_cmd_timeout(&cmd, sizeof(cmd), client_fd, 0, 1000000);
+		ret = ipc_daemon.wait_cmd_timeout(&cmd, sizeof(cmd), client_fd, 0, 0);
 		if (ret > 0) {
 			IpcResponse res = { 0, 0, 0, "" };	// always response with success.
 			INFO("\033[1;33m[watchDog]: received command[%d]\033[0m", cmd.id);
@@ -115,6 +114,7 @@ int IPCHandler::run_parsing_command()
 				case CMD_FACTORY_RESET_ACT: 
 					fprintf(stderr, "FACTORY_RESET_ACT\n");
 					res.result = handle_factory_reset();
+					/* res.result = 0; */
 					break;
 				case CMD_SET_ACTIVE:
 					fprintf(stderr, "CMD_SET_ACTIVE\n");
@@ -236,7 +236,6 @@ int IPCHandler::handle_detect_factory_button()
 int IPCHandler::handle_factory_reset()
 {
 	system("( /etc/rc.d/init.d/services.sh stop; factoryReset > /dev/null 2> /dev/null; /sbin/reboot ) &");
-	
 	return 0;
 }
 
@@ -396,9 +395,5 @@ int IPCHandler::handle_update_thread_value()
 	holder->update_thread_value_by_type("LightSensorStatus");
 	holder->update_thread_value_by_type("LEDStatus");
 
-	return 0;
-}
-int IPCHandler::handle_ipc_depend_on_status(IpcCommand &cmd)
-{
 	return 0;
 }

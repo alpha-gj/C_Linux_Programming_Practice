@@ -9,11 +9,17 @@
 #include "LightSensorStatus.h"
 #include "LEDStatus.h"
 
-//TODO They can include State.h? 
-enum MAINSTATES {
-	POWERUP,
-	MAINSTATES_COUNT,
-};
+typedef enum MAINSTATES {
+	BOOTING,
+	NETWORK_CONNECT,
+	NETWORK_DISCONNECT,
+	FACTORY_RESET,
+	FW_UPDATE,
+} MAINSTATES;
+
+typedef enum EVENT {
+	BUTTON_EVENT,
+} EVENT;
 
 class StatesHolder
 {
@@ -32,6 +38,14 @@ class StatesHolder
 		int init();
 		int deinit();
 
+		/* For States */
+		pthread_mutex_t SetMainStatesLock;
+		pthread_mutex_t GetMainStatesLock;
+		pthread_mutex_t GetOldMainStatesLock;
+		static MAINSTATES MainStates;
+		static MAINSTATES OldMainStates;
+		static bool IsStatesChangedFlag;
+		
 		/* 
 			NOTE: Don't use const char* as primary key of STL map.
 			It doesn't comapre "xxx", rather it comapres 0x12345678 
@@ -41,14 +55,16 @@ class StatesHolder
 		map<string, SwStatus *> map_sw_status;
 		SwStatus *ReturnSwStatusObjectByType(const char* sw_status_name);
 
-		//pthread_mutex_t mainStatesLock;
-		MAINSTATES mainStates;
-		MAINSTATES oldMainStates;
-
 	public:
 		/* Follow Singleton Pattern */
 		static StatesHolder *CreateStatesHolder();
 		static int ReleaseStatesHolder();
+		
+		/* Common API with States */
+		MAINSTATES GetMainStates();
+		MAINSTATES GetOldMainStates();
+		void SetMainStates(MAINSTATES);
+		bool IsStatesChanged();
 		
 		/* Operate SwStatus object from API */
 		int init_status_detect_by_type(const char* status_name);
@@ -60,10 +76,6 @@ class StatesHolder
 		int set_status_info_by_type(const char* status_name, void* status_struct);
 		int get_status_info_by_type(const char* status_name, void* status_struct);
 		int update_thread_value_by_type(const char* status_name);
-
-		void SetMainStates(MAINSTATES s);
-		MAINSTATES GetMainStates();
-		MAINSTATES GetOldMainStates();
 };
 
 #endif

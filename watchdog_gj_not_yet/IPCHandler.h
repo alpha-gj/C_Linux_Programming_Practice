@@ -19,24 +19,30 @@ class IPCHandler
 		IPCHandler ();
 		virtual ~IPCHandler ();
 		virtual int init() = 0;
-		virtual int release() = 0;
-		virtual int run_parsing_command();
-		virtual bool GoNextState();
-		virtual MAINSTATES GetMainHandlerState() = 0;
+		virtual int deinit() = 0;
+		int run_parsing_command();
+
+		/* Get Event By Type */
+		virtual int DoEventByType(EVENT sw_event_name) = 0;
 
 	protected:
 		IpcDaemon ipc_daemon;
 		StatesHolder *holder;
 		HwManager *hw_manager;
-		int ipc_fd;
 
+		/* Opreate States of Handler */
+		MAINSTATES GetMainStates();
+		MAINSTATES GetOldMainStates();
+		void SetMainStates(MAINSTATES states);
+		bool IsStatesChanged();
+		
 		/* IPC Event Common */
 		int handle_factory_reset();
 		int handle_detect_factory_button();
 		int handle_firmware_upgrade();
 		int handle_stream_count(bool isActive);
 		int handle_update_thread_value();
-		virtual int handle_ipc_depend_on_status(IpcCommand &cmd);
+		virtual int handle_ipc_depend_on_status(IpcCommand cmd) = 0;
 
 		/* IPC Event ICR/IR */
 		int handle_set_ir_mode_auto();

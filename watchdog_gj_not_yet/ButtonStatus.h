@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <iostream>
 #include "Common.h"
 #include "SwStatus.h"
 #include "ButtonController.h"
@@ -15,13 +16,24 @@ typedef enum {
 	RESET_LAUNCH,
 } RESET_BUTTON_STATE;
 
+typedef  struct BUTTON_STATE {
+	RESET_BUTTON_STATE reset_button_state;	
+} BUTTIN_STATE;
+
+class StatesHandler;
 class ButtonStatus : public SwStatus
 {
 	private:
+		/* For detect thread */
 		static void *run_reset_button_status_detect_thread(void *args);
 		pthread_t reset_button_status_pid;
 		static bool isPauseDetect;
-		static RESET_BUTTON_STATE return_button_state_by_press_count(int press_count);
+		static StatesHandler *handler;
+
+		/* For status info */
+		pthread_mutex_t SetResetButtonStatesLock;
+		pthread_mutex_t GetResetButtonStatesLock;
+		BUTTON_STATE button_state;
 
 	public:
 		ButtonStatus();

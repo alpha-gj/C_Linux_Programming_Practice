@@ -4,21 +4,32 @@ using namespace std;
 
 StatesHolder *StatesHolder::holder = NULL;
 int StatesHolder::referCount = 0;
+MAINSTATES StatesHolder::MainStates = BOOTING;
+MAINSTATES StatesHolder::OldMainStates = BOOTING;
+bool StatesHolder::IsStatesChangedFlag = false;
 
-
-StatesHolder::StatesHolder():mainStates(POWERUP),oldMainStates(POWERUP)
+StatesHolder::StatesHolder()
 {
 	/* Insert something that you want to detect, such as TWT, button, network status, lightsensor(day,night mode) */
 	map_sw_status.insert(make_pair("LEDStatus", new LEDStatus()));
 	map_sw_status.insert(make_pair("NetworkStatus", new NetworkStatus()));
 	map_sw_status.insert(make_pair("ButtonStatus", new ButtonStatus()));
 	map_sw_status.insert(make_pair("LightSensorStatus", new LightSensorStatus()));
+
+	/* pthread_mutex_init */
+	pthread_mutex_init(&SetMainStatesLock, NULL);
+	pthread_mutex_init(&GetOldMainStatesLock, NULL);
+	pthread_mutex_init(&GetMainStatesLock, NULL);
 }
 
 StatesHolder::~StatesHolder()
 {
-	map<string, SwStatus *>::iterator in_map_sw_status;
+	/* pthread_mutex_destroy */
+	pthread_mutex_destroy(&SetMainStatesLock);
+	pthread_mutex_destroy(&GetMainStatesLock);
+	pthread_mutex_destroy(&GetOldMainStatesLock);
 
+	map<string, SwStatus *>::iterator in_map_sw_status;
 	for (in_map_sw_status = map_sw_status.begin(); 
 		 in_map_sw_status != map_sw_status.end();
 		 in_map_sw_status++) {
@@ -99,6 +110,48 @@ int StatesHolder::ReleaseStatesHolder()
 	} while(false);
 
 	return ret;
+}
+
+MAINSTATES StatesHolder::GetMainStates()
+{
+	pthread_mutex_lock(&GetMainStatesLock);
+	MAINSTATES states = MainStates;
+	pthread_mutex_unlock(&GetMainStatesLock);
+
+	return states;
+}
+
+MAINSTATES StatesHolder::GetOldMainStates()
+{
+	pthread_mutex_lock(&GetOldMainStatesLock);
+	MAINSTATES states = OldMainStates;
+	pthread_mutex_unlock(&GetOldMainStatesLock);
+
+	return states;
+}
+void StatesHolder::SetMainStates(MAINSTATES state)
+{
+	/* It must check MainStates & state is same or not, or it may do again when they are same */
+	pthread_mutex_lock(&SetMainStatesLock);
+	if (MainStates != state) {
+		OldMainStates = MainStates;
+		MainStates = state;
+		IsStatesChangedFlag = true;
+	} else {
+		/* Do Nothing */
+	}
+	pthread_mutex_unlock(&SetMainStatesLock);
+
+	return;
+}
+bool StatesHolder::IsStatesChanged()
+{
+	if (IsStatesChangedFlag) {
+		IsStatesChangedFlag = false;
+		return true;
+	} else { 
+		return false;
+	}
 }
 
 SwStatus *StatesHolder::ReturnSwStatusObjectByType(const char* sw_status_name)
@@ -206,22 +259,3 @@ int StatesHolder::update_thread_value_by_type(const char* status_name)
 	else
 		return sw_status->update_thread_value();
 }
-
-void StatesHolder::SetMainStates(MAINSTATES s)
-{
-	oldMainStates = mainStates;
-	mainStates = s;
-}
-
-MAINSTATES StatesHolder::GetMainStates()
-{
-	MAINSTATES t = mainStates;
-	return t;
-}
-
-MAINSTATES StatesHolder::GetOldMainStates()
-{
-	MAINSTATES t = oldMainStates;
-	return t;
-}
-

@@ -13,7 +13,7 @@
 #include "Common.h"
 #include "HwManager.h"
 #include "StatesHolder.h"
-#include "PowerUpHandler.h"
+#include "StatesHandler.h"
 #include "IPCHandler.h"
 
 class Watchdog
@@ -28,5 +28,5 @@ class Watchdog
 	private:
 		HwManager *hw_manager;
 		StatesHolder *holder;
-		IPCHandler *CreateHandlerByStates();
+		StatesHandler *handler;
 };

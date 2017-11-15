@@ -1,15 +1,26 @@
-#include <iostream>
 #include "ButtonStatus.h"
+#include "StatesHandler.h"
 
 bool ButtonStatus::isPauseDetect = false;
+StatesHandler *ButtonStatus::handler = NULL;
+
 
 ButtonStatus::ButtonStatus():reset_button_status_pid(0)
 {
-	/* Do Nothing */
+	BUTTON_STATE button_state {
+		.reset_button_state = RESET_LAUNCH
+	};
+	/* pthread_mutex_init */
+	pthread_mutex_init(&SetResetButtonStatesLock, NULL);
+	pthread_mutex_init(&GetResetButtonStatesLock, NULL);
 }
 
 ButtonStatus::~ButtonStatus()
 {
+	/* pthread_mutex_destroy */
+	pthread_mutex_destroy(&SetResetButtonStatesLock);
+	pthread_mutex_destroy(&GetResetButtonStatesLock);
+
 	if (reset_button_status_pid) {
 		pthread_join(reset_button_status_pid, NULL);
 	}
@@ -62,93 +73,47 @@ bool ButtonStatus::get_pause_detect_flag()
 
 void *ButtonStatus::run_reset_button_status_detect_thread(void *args)
 {
-	HwManager *pt_hw_manager = (HwManager *) args;
-	BUTTON_SETTING button_setting {
-		.id = AHAL_BTN_ID_RESET,
-		.status = AHAL_BTN_STATUS_UNKNOWN
-	};
-	RESET_BUTTON_STATE state = RESET_READY;
-	unsigned int press_count = 0;
+	handler = StatesHandler::CreateStatesHandler();	
 
 	while (!get_quit() && !get_reload()) {
 		
-		/* Get Button Status */
-		pt_hw_manager->get_hw_info_by_type("BUTTON", &button_setting);
-
 		/* Pause detect condition */
 		if (isPauseDetect) {
 			sleep(1);
 			continue;
 		} 
 
-		/* Check Button Status and count it */
-		if (button_setting.status == AHAL_BTN_STATUS_PRESSED) {
-			printf("count is %d\n", press_count);
-			press_count++;
-		} else if (button_setting.status == AHAL_BTN_STATUS_RELEASE) {
-			press_count = 0;
-		} else if (button_setting.status == AHAL_BTN_STATUS_UNKNOWN) {
-			ERROR("RESET BUTTON Get AHAL_BTN_STATUS_UNKNOWN");
-			press_count = 0;
-		}
-		else {
-			/* Do Nothing */
-		}
-
-		/* Check Button State */
-		if(state != RESET_LAUNCH) {
-			state = return_button_state_by_press_count(press_count);
-		}
-		switch (state) {
-			case RESET_READY:
-				break;
-			case RESET_STANDBY:
-				INFO("Set Reset LED");
-				fprintf(stderr, "Set Reset LED!\n");
-				send_ipccmd(WATCHDOG_SOCKET_NAME, CMD_DET_FACTORY_BUTTON);
-				state = RESET_LAUNCH;
-				break;
-			case RESET_LAUNCH:
-				if (button_setting.status == AHAL_BTN_STATUS_RELEASE) {
-					INFO("Do RESET");
-					fprintf(stderr, "Do Reset!\n");
-					isPauseDetect = true;
-					send_ipccmd(WATCHDOG_SOCKET_NAME, CMD_FACTORY_RESET_ACT);
-				} else if (button_setting.status == AHAL_BTN_STATUS_PRESSED) {
-					fprintf(stderr, "You can Release button to do Reset right now!\n");
-				}
-				break;
-			default:
-				INFO("BUG@%s %d", __FUNCTION__,  __LINE__);
-				break;
-		}
+		if (handler != NULL) {
+			handler->do_event_by_main_states(BUTTON_EVENT);
+		} 
 
 		sleep(1);
 	}
+
+	StatesHandler::ReleaseStatesHandler();	
+	handler = NULL;
 
 	fprintf(stderr, "%s done\n", __func__);
 	pthread_exit(0);
 }
 
-int ButtonStatus::set_status_info(void *) 
-{
-	return(int)AHAL_RET_NOT_SUPPORT;
+int ButtonStatus::set_status_info(void *status_struct) 
+{	
+	pthread_mutex_lock(&SetResetButtonStatesLock);
+	BUTTON_STATE *t_button_state = (BUTTON_STATE *) status_struct;
+	button_state.reset_button_state = t_button_state->reset_button_state;
+	pthread_mutex_unlock(&SetResetButtonStatesLock);
+	return 0;
 }
-int ButtonStatus::get_status_info(void *)
+int ButtonStatus::get_status_info(void *status_struct)
 {
-	return(int)AHAL_RET_NOT_SUPPORT;
+	pthread_mutex_lock(&GetResetButtonStatesLock);
+	BUTTON_STATE *t_button_state = (BUTTON_STATE *) status_struct;
+	t_button_state->reset_button_state = button_state.reset_button_state;
+	pthread_mutex_unlock(&GetResetButtonStatesLock);
+	return 0;
 }
 
-RESET_BUTTON_STATE ButtonStatus::return_button_state_by_press_count(int press_count)
-{
-	PIB pib;
-	if (press_count >= pib.get_reset_button_press_count()) {
-		return RESET_STANDBY;
-	}
-	else {
-		return RESET_READY;
-	}
-}
 
 int ButtonStatus::update_thread_value()
 {

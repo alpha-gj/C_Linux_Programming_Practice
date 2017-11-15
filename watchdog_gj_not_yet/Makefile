@@ -1,17 +1,17 @@
 DAEMON = Watchdog
 TARGETS = $(DAEMON)
 
-SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp SwStatus.cpp IPCHandler.cpp Common.cpp \
+SRCS = $(DAEMON).cpp HwManager.cpp HwController.cpp StatesHolder.cpp StatesHandler.cpp SwStatus.cpp IPCHandler.cpp Common.cpp \
 	   ButtonController.cpp WifiController.cpp LEDController.cpp IRLEDController.cpp ICRController.cpp LightSensorController.cpp AudioController.cpp\
 	   NetworkStatus.cpp ButtonStatus.cpp LightSensorStatus.cpp LEDStatus.cpp \
-	   PowerUpHandler.cpp
+	   BootingHandler.cpp FactoryResetHandler.cpp
 
 
 PREFIX = $(PJ_PREFIX)
 PREFIX_SBINDIR := $(PREFIX)/sbin
 CROSS_COMPILE = $(PJ_TARGET)-
 
-CFLAGS    = $(PLATFORM_CFLAGS) -Wall -W -D$(subst -,_,$(PJ_MODEL))
+CFLAGS    = $(PLATFORM_CFLAGS) -Wall -W -D$(subst -,_,$(PJ_MODEL)) -DDEBUG_FPRINTF
 CXXFLAGS  = $(CFLAGS)
 CPPFLAGS  = $(PLATFORM_CPPFLAGS) -D_REENTRANT -D_LINUX -I$(PREFIX)/include -I$(PREFIX)/include/ahal\
 			-I../include 
@@ -69,7 +69,7 @@ ifneq ($(MAKECMDGOALS),clean)
 -include $(DEPENDS)
 endif
 
-$(DAEMON): $(DAEMON).o HwManager.o HwController.o StatesHolder.o SwStatus.o IPCHandler.o  Common.o \
+$(DAEMON): $(DAEMON).o HwManager.o HwController.o StatesHolder.o StatesHandler.o SwStatus.o IPCHandler.o  Common.o \
 	   ButtonController.o WifiController.o LEDController.o IRLEDController.o ICRController.o LightSensorController.o AudioController.o \
 	   NetworkStatus.o ButtonStatus.o LightSensorStatus.o LEDStatus.o \
-	   PowerUpHandler.o
+	   BootingHandler.o FactoryResetHandler.o
