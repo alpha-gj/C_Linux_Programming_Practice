@@ -15,4 +15,15 @@ extern int opterr;
 #define SIZE 1024
 const char *program_name = NULL;
 
+/* ACTION FLAG */
+typedef struct {
+	bool dir_flag;
+	bool speed_flag;
+} CAR_ACTION_FLAG;
+
+
+void showUsage();
+bool isArgcIsVaild(int argc, int optind);
+bool checkCommandOptions(int argc, char *argv[]);
+
 #endif /* _GETOPT_ */

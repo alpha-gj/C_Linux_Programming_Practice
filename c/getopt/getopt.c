@@ -14,25 +14,14 @@ bool isArgcIsVaild(int argc, int optind)
 		return false;
 	}
 }
-
-int main(int argc, char *argv[])
+bool checkCommandOptions(int argc, char *argv[]) 
 {
-	/* Initialize opt variables */
-	optarg = NULL;
-	optind = 1;
-	optopt = 0;
-	opterr = 0; //disable error output
-	program_name = argv[0];
-
 	//TODO make command_options snprintf process
 	//const char *command_options = NULL;
 	const char *command_options = "nt:";
 	char opt = 0;
 
 	/* Parser option & argument are vaild or not */
-	do {
-
-	} while (false);
 	while ((opt = getopt(argc, argv, command_options)) != EOF) {
 		switch (opt) {
 			case 'n':
@@ -44,16 +33,43 @@ int main(int argc, char *argv[])
 				break;
 			default:
 				printf("optopt = %c\n", optopt); //error opt
-				showUsage();
-				exit(EXIT_FAILURE);
+				opt = EOF;
+				return false;
 		}
 	}
 
+	/* Check numbers of argc is vaild or not */
 	if (isArgcIsVaild(argc, optind)) {
 		fprintf(stderr, "Expected argument after options\n");
+		return true;
 	} else {
 		fprintf(stderr, "Un-expected argument after options\n");
+		return false;
+	}
+
+}
+
+int main(int argc, char *argv[])
+{
+	/* Initialize opt variables */
+	optarg = NULL;
+	optind = 1;
+	optopt = 0;
+	opterr = 0; //disable error output
+	program_name = argv[0];
+
+	/* Step1. Check Command options are vaild or not */
+	if (checkCommandOptions(argc, argv)) {
+		/* Do Nothing */
+	} else {
 		showUsage();
 		exit(EXIT_FAILURE);
 	}
+
+	/* Step2. Action */
+	//TODO
+
+	/* Step3. Result */
+	//TODO
+	return 0;
 }
