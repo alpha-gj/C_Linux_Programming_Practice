@@ -73,7 +73,7 @@ int main()
 
 	isGoodResourceUse = doResourceUsing();
 
-	if (isGoodResourceUse == true)
+	if (isGoodResourceUse)
 		fprintf(stdout, "No Resource leak\n");
 	else
 		fprintf(stdout, "Occur Resource leak!\n");
