@@ -4,6 +4,15 @@
 #include <unistd.h>
 #include "tlpi_hdr.h"
 
+#define NUM_THREADS 4
+#define check_error(return_val, msg) { \
+	if (return_val != 0) { \
+	fprintf(stderr, "%s: %s\n", msg, strerror(return_val)); \
+	exit(-1); \
+} \
+}
+
+#if 0
 void *threadFunc(void* arg)
 {
 	/* pthread_detach(pthread_self()); */
@@ -32,7 +41,7 @@ int main(int argc , char *args[])
 	/* if (pthread_equal(id, pthread_self())) */
 	/* 		printf("tid matches self\n"); */
 
-	pthread_detach(id);
+//	pthread_detach(id);
 	printf("Message from main\n");
 	sleep(3);
 	/* ret = pthread_join(id, &res); */
@@ -40,7 +49,32 @@ int main(int argc , char *args[])
 	printf("Will cancel thread\n");
 	sleep(3);
 	pthread_cancel(id);
-	printf("hello~, it is %d\n", (int) res);
+	printf("hello~, it is %d\n", (int *) res);
 	pthread_exit(NULL);
 	return 0;
 }
+
+#else
+
+void Hello(void *t)
+{
+	pthread_t my_tid = pthread_self();
+	printf("\t Thread %d: my tid is %lx, Hello World!\n", t, my_tid);
+}
+
+int main(int argc, char *argv[])
+{
+	pthread_t tid;
+	int rv, t;
+
+	for (t = 0; t < NUM_THREADS; t++) {
+		rv = pthread_create(&tid, NULL, (void *(*)(void *))Hello, (void *)t);
+		check_error(rv, "pthread_create()");
+		printf("Create thread %lx\n", tid);
+	}
+
+	printf("GoodBye\n");
+	pthread_exit(NULL);
+}
+
+#endif

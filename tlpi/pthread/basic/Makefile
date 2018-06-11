@@ -18,7 +18,7 @@ all: $(Target)
 	$(CC) -c -o $@ $<
 
 $(Target): $(OBJS)
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ -lpthread
 
 clean:
 	rm -f $(Target) 
