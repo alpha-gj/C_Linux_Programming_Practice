@@ -64,13 +64,17 @@ void Hello(void *t)
 
 int main(int argc, char *argv[])
 {
-	pthread_t tid;
+	pthread_t tid[NUM_THREADS];
 	int rv, t;
 
 	for (t = 0; t < NUM_THREADS; t++) {
-		rv = pthread_create(&tid, NULL, (void *(*)(void *))Hello, (void *)t);
+		rv = pthread_create(&tid[t], NULL, (void *(*)(void *))Hello, (void *)t);
 		check_error(rv, "pthread_create()");
 		printf("Create thread %lx\n", tid);
+	}
+
+	for (t = 0; t < NUM_THREADS; t++) {
+		pthread_join(tid[t], NULL);
 	}
 
 	printf("GoodBye\n");
