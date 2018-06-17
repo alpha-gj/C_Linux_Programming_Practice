@@ -5,6 +5,6 @@
 int main(void)
 {
 	char *string = "hello world";
-	string[0] = 'H';
+//	string[0] = 'H'; //it will get segmentation fault
 	return 0;
 }
