@@ -1,10 +1,7 @@
-#include <iostream>
-#include<stdlib.h>
-#include<stdio.h>
-#include <libgen.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <stdio.h>      /* printf */
 #include <stdarg.h>     /* va_list, va_start, va_arg, va_end */
-using namespace std;
 
 #define EXECUTABLE_NAME "watchdog"
 #define NONE            "\033[0m"
@@ -16,22 +13,31 @@ using namespace std;
 #define MAGENTA         "\033[1;35m"
 
 typedef enum {
-	DBG_OFF,
+	DBG_FATAL,	   /** Fatal result */
+	DBG_ERROR,     /** Un-expected flow */
+	DBG_WARNING,   /** Weird flow */
 	DBG_INFO,      /** Tracking flow */
 	DBG_DEBUG,
 	DBG_TRACE,
-	DBG_WARNING,   /** Weird flow */
-	DBG_ERROR,     /** Un-expected flow */
-	DBG_FATAL,	   /** Fatal result */
 	DBG_ALL,
 } DBG_LEVEL;
 
 int dbg_print(DBG_LEVEL level, const char *file_name, const char *function_name, int line_nums, const char *format, ...) {
 
-	//TODO debug level control
-//		if (level > gDebugLevel)
-//			return 0;
+	DBG_LEVEL env_dbg_level = DBG_INFO;				/* As default */
+	char *dbgenv = getenv("WATCHDOG_DBG_LEVEL");	/* Usage: export WATCHDOG_DBG_LEVEL=1 */
+	if (dbgenv) {
+		env_dbg_level = (DBG_LEVEL)atoi(dbgenv);
+	}
 
+	/* Check the dbg level is vaild or not */
+	if (level < DBG_FATAL || level > DBG_ALL) {
+        return 0;
+	}
+	
+	/* DBG LOG visibility */ 
+    if (level > env_dbg_level)
+        return 0;
 
 	/* EXAMPLE FORMAT: [watchdog][DEBUG] hello_world.cpp: main() @95: hi DBG_DEBUG */
 	/* EXECUTABLE NAME */
@@ -40,10 +46,10 @@ int dbg_print(DBG_LEVEL level, const char *file_name, const char *function_name,
 	/* DBG LEVEL and log color*/
     switch (level) {
         case DBG_INFO:
-            fprintf(stdout, NONE "[INFO] ");
+            fprintf(stdout, GREEN "[INFO] ");
             break;
         case DBG_DEBUG:
-            fprintf(stdout, GREEN "[DEBUG] ");
+            fprintf(stdout, NONE "[DEBUG] ");
             break;
         case DBG_TRACE:
             fprintf(stdout, NONE "[TRACE] ");
