@@ -41,7 +41,7 @@ int dbg_print(DBG_LEVEL level, const char *file_name, const char *function_name,
 
 	/* EXAMPLE FORMAT: [watchdog][DEBUG] hello_world.cpp: main() @95: hi DBG_DEBUG */
 	/* EXECUTABLE NAME */
-	fprintf(stdout, "[%s]", EXECUTABLE_NAME); 
+	fprintf(stdout, GRAY "[%s]" NONE, EXECUTABLE_NAME); 
 
 	/* DBG LEVEL and log color*/
     switch (level) {
