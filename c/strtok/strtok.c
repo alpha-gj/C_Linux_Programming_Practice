@@ -59,10 +59,12 @@ int main()
 
 	printf("%s, %s\n", end_time_hh_mm[0], end_time_hh_mm[1]);
 #else
+	char start_time[] = "15:40";
+	char end_time[] = "16:40";
 	int start_time_hh_mm[2];
 	int end_time_hh_mm[2];
-	strtok_time_string(start_time_hh_mm, sizeof(start_time_hh_mm)/sizeof(int), "15:40");
-	strtok_time_string(end_time_hh_mm, sizeof(end_time_hh_mm)/sizeof(int), "16:50");
+	strtok_time_string(start_time_hh_mm, sizeof(start_time_hh_mm)/sizeof(int), start_time);
+	strtok_time_string(end_time_hh_mm, sizeof(end_time_hh_mm)/sizeof(int), end_time);
 	printf("%d, %d\n", start_time_hh_mm[0], start_time_hh_mm[1]);
 	printf("%d, %d\n", end_time_hh_mm[0], end_time_hh_mm[1]);
 #endif
