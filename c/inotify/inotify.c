@@ -5,6 +5,7 @@
 #include <string>
 #include <string.h>
 #include <errno.h>
+#include <limits.h>
 #include <sys/types.h>
 #include <sys/inotify.h>
 #include <libgen.h>
@@ -12,7 +13,7 @@
 using namespace std;
 
 #define SPECIFIC_FILE_PATH  "/var/run/watchdog"
-#define EVENT_BUF_LEN       32
+#define EVENT_BUF_LEN       (10 * (sizeof(struct inotify_event) + NAME_MAX + 1))
 
 int main( )
 {
