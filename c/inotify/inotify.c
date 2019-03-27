@@ -69,6 +69,7 @@ int main( )
 	/* Read to determine the event change happens on “/tmp” directory. Actually this read blocks until the change event occurs*/ 
 
 	bool find_it = false;
+    struct inotify_event *event = (struct inotify_event *) &buffer;
 
 	do {
 
@@ -80,9 +81,6 @@ int main( )
 			fprintf(stderr,"%s [%d] %s\n", __FUNCTION__, __LINE__, strerror(errno));
 			exit(0);
 		}  
-
-		printf("%s", buffer);
-		struct inotify_event *event = ( struct inotify_event * ) &buffer;
 
 		if (event->mask & IN_DELETE && string(event->name).compare(filename) == 0) {
 			printf( "New filename %s delete.\n", event->name);
