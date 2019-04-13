@@ -71,6 +71,8 @@ int main( )
 	bool find_it = false;
     struct inotify_event *event = (struct inotify_event *) &buffer;
 
+    printf("IN_ATTRIB: %d\n", IN_ATTRIB);
+
 	do {
 
 		printf("read...\n");
@@ -90,6 +92,25 @@ int main( )
 			printf( "New filename %s create.\n", event->name);
 			find_it = true;
 		}
+
+		if (event->mask & IN_MODIFY && string(event->name).compare(filename) == 0) {
+			printf( "New filename %s modify.\n", event->name);
+			find_it = true;
+		}
+		if (event->mask & IN_ATTRIB && string(event->name).compare(filename) == 0) {
+			printf( "New filename %s attrib.\n", event->name);
+			find_it = true;
+		}
+		if (event->mask & IN_ACCESS && string(event->name).compare(filename) == 0) {
+			printf( "New filename %s access.\n", event->name);
+			find_it = true;
+		}
+
+        if (string(event->name).compare(filename) == 0) {
+            printf("get watchdog\n");
+            find_it = true;
+        }
+ 
 
 		printf("event->mask: %d\n", event->mask);
 		printf("event->name: %s\n", event->name);
