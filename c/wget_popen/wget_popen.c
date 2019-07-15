@@ -118,13 +118,13 @@ string wget_download_file(
 	return str_result;
 }
 
-bool is_md5sum_of_file_validation(const char *md5sum_value, const char *full_path_file)
+bool is_md5sum_of_file_validation(const char *md5sum_parameter, const char *full_path_file)
 {
 	/* Check validation of parameters */
 	bool ret = false;
-	string str_result;
+	string str_md5sum_of_file;
 
-	if (md5sum_value == NULL ||
+	if (md5sum_parameter == NULL ||
 		full_path_file == NULL) {
 		printf("parameter is NULL\n");
 		return ret;
@@ -136,7 +136,7 @@ bool is_md5sum_of_file_validation(const char *md5sum_value, const char *full_pat
 	}
 
 	/* Setup the cmd length for buffer */
-	string str_md5sum_value = md5sum_value;
+	string str_md5sum_parameter = md5sum_parameter;
 	string str_full_path_file = full_path_file;
 
 	int md5sum_cmd_strlen = str_full_path_file.length() +
@@ -153,14 +153,21 @@ bool is_md5sum_of_file_validation(const char *md5sum_value, const char *full_pat
 			printf("malloc failed\n");
 			break;
 		}
-		snprintf(md5sum_cmd_buf, md5sum_cmd_strlen, "md5sum '%s' | awk '{print $1}'", full_path_file);
+		snprintf(md5sum_cmd_buf, md5sum_cmd_strlen,
+				"md5sum '%s' | awk '{print $1}'",
+				str_full_path_file.c_str());
 
 		/* Get the popen result */
-		str_result = popen_cmd(md5sum_cmd_buf);
+		str_md5sum_of_file = popen_cmd(md5sum_cmd_buf);
 
-		/* Compare the md5sum is ok? */
-		if (strncmp(md5sum_value, str_result.c_str(), str_md5sum_value.length()) == 0)
+		/* Compare these md5sum is ok? */
+		if (strncmp(str_md5sum_parameter.c_str(),
+					str_md5sum_of_file.c_str(),
+					str_md5sum_of_file.length()) == 0) {
+
 			ret = true;
+
+		}
 
 	} while(false);
 
@@ -168,8 +175,8 @@ bool is_md5sum_of_file_validation(const char *md5sum_value, const char *full_pat
 	if (md5sum_cmd_buf != NULL) {
 		free(md5sum_cmd_buf);
 	}
-	printf("md5sum from parameter:\t%s\n", md5sum_value);
-	printf("md5sum of file:\t\t%s\n", str_result.c_str());
+	printf("md5sum from parameter:\t%s\n", str_md5sum_parameter.c_str());
+	printf("md5sum of file:\t\t%s\n", str_md5sum_of_file.c_str());
 
 	return ret;
 }
@@ -193,7 +200,8 @@ int main(int argc, char *argv[])
 	}
 
 	/* check wget_download_file validation */
-	if (strncmp(wget_download_file(DOWNLOAD_URL, DOWNLOAD_DIR_PATH, filename).c_str(), "0", strlen("0")) == 0) {
+	const char *wget_download_file_result = wget_download_file(DOWNLOAD_URL, DOWNLOAD_DIR_PATH, filename).c_str();
+	if (strncmp(wget_download_file_result, "0", strlen("0")) == 0) {
 
 		printf("wget_download_file: ok\n");
 
