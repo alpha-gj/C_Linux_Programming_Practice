@@ -113,6 +113,13 @@ bool is_md5sum_of_file_validation(const char *md5sum_value, const char *full_pat
 			break;
 		}
 
+		if (access(full_path_file, F_OK) != 0 ) {
+			printf("%s is NOT existed\n", full_path_file);
+			break;
+		} else {
+			printf("%s is existed\n", full_path_file);
+		}
+
 		snprintf(md5_cmd_buf, sizeof(md5_cmd_buf), "md5sum '%s' | awk '{print $1}'", full_path_file);
 		if (md5_cmd_buf == NULL) {
 			printf("md5_cmd_buf is NULL\n");
@@ -139,10 +146,7 @@ bool is_md5sum_of_file_validation(const char *md5sum_value, const char *full_pat
 		if (buf != NULL) {
 
 			if (strncmp(buf, md5sum_value, sizeof(buf)) == 0) {
-				printf("wget download %s: ok\n", full_path_file);
 				ret = true;
-			} else {
-				printf("wget download %s: fail\n", full_path_file);
 			}
 
 		} else {
@@ -187,11 +191,9 @@ int main(int argc, char *argv[])
 	wget_download_file(DOWNLOAD_URL, ".", filename);
 
 
-	//TODO check md5sum
 	char full_path_file[256] = {};
 	snprintf(full_path_file, sizeof(full_path_file), "%s/%s", ".", filename);
 
-	printf("%s\n", full_path_file);
 	if (is_md5sum_of_file_validation(MD5SUM, full_path_file)) {
 
 		printf("md5sum validation: ok\n");
@@ -201,7 +203,5 @@ int main(int argc, char *argv[])
 		printf("md5sum validation: fail\n");
 	}
 
-	//	char *cmd = NULL;
-	//	FILE *fp_md5sum_value = NULL;
     return 0;
 }
