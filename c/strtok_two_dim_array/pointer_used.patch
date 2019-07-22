@@ -1,0 +1,97 @@
+diff --git a/c/example/Makefile b/c/example/Makefile
+index e193e8a..ced81c7 100644
+--- a/c/example/Makefile
++++ b/c/example/Makefile
+@@ -15,10 +15,10 @@ all: $(Target)
+ #	@echo $(OBJS)
+ 
+ %.o: %.c
+-	$(CC) -c -o $@ $<
++	$(CC) -c -o $@ $< -g -lpthread -lrt
+ 
+ $(Target): $(OBJS)
+-	$(CC) -o $@ $^
++	$(CC) -o $@ $^ -g -lpthread -lrt
+ 
+ clean:
+ 	rm -f $(Target) 
+diff --git a/c/example/hello_world b/c/example/hello_world
+index ef7daaf..d5c4956 100755
+Binary files a/c/example/hello_world and b/c/example/hello_world differ
+diff --git a/c/example/hello_world.c b/c/example/hello_world.c
+index 00e9e10..fcbe91d 100644
+--- a/c/example/hello_world.c
++++ b/c/example/hello_world.c
+@@ -1,14 +1,15 @@
+-#include <stdlib.h>
+ #include <stdio.h>
+-#include <errno.h>
++#include <string.h>
+ 
+-#define err_exit(MESSAGE) ( \
+-	perror(MESSAGE),		\
+-	exit(1)					\
+-)
+ 
+-int main(void)
++int main ()
+ {
+-	printf("Hello World!\n");
+-	return 0;
++   int len;
++   const char str1[] = "ABCDEF4960910";
++   const char str2[] = "X";
++
++   len = strcspn(str1, str2);
++
++   printf("First matched character is at %d\n", len + 1);
++   return(0);
+ }
+diff --git a/c/strtok_two_dim_array/strtok_two_dim_array.c b/c/strtok_two_dim_array/strtok_two_dim_array.c
+index dba0ea1..78dbbc8 100644
+--- a/c/strtok_two_dim_array/strtok_two_dim_array.c
++++ b/c/strtok_two_dim_array/strtok_two_dim_array.c
+@@ -5,7 +5,7 @@
+ #define APP_UPDATE_STRING_SIZE 2
+ #define APP_UPDATE_STRING_LEN  512
+ 
+-void strtok_app_update_message(char app_update_string[APP_UPDATE_STRING_SIZE][APP_UPDATE_STRING_LEN],
++void strtok_app_update_message(char *app_update_string,
+ 								int app_update_string_array_size,
+ 								const char* published_message)
+ {
+@@ -27,8 +27,9 @@ void strtok_app_update_message(char app_update_string[APP_UPDATE_STRING_SIZE][AP
+ 
+ 	pch = strtok(buf, delim);
+ 	while (pch != NULL) {
+-		strncpy(app_update_string[index++], pch, APP_UPDATE_STRING_LEN);
++		strncpy(app_update_string, pch, APP_UPDATE_STRING_LEN);
+ 		pch = strtok (NULL, delim);
++		app_update_string = app_update_string + (APP_UPDATE_STRING_LEN * sizeof(char));
+ 	}
+ }
+ 
+@@ -39,7 +40,7 @@ int main()
+ 
+ 	char app_update_string[APP_UPDATE_STRING_SIZE][APP_UPDATE_STRING_LEN] = {};
+ 
+-	strtok_app_update_message(app_update_string, sizeof(app_update_string)/sizeof(app_update_string[0]), published_message);
++	strtok_app_update_message((char *)app_update_string, sizeof(app_update_string)/sizeof(app_update_string[0]), published_message);
+ 
+ 	printf("%s\n", app_update_string[0]);
+ 	printf("%s\n", app_update_string[1]);
+diff --git a/tlpi/pthread/basic/pthread b/tlpi/pthread/basic/pthread
+index 2b82347..39d61c8 100755
+Binary files a/tlpi/pthread/basic/pthread and b/tlpi/pthread/basic/pthread differ
+diff --git a/tlpi/pthread/basic/pthread.c b/tlpi/pthread/basic/pthread.c
+index 4bdae84..40ba4e3 100644
+--- a/tlpi/pthread/basic/pthread.c
++++ b/tlpi/pthread/basic/pthread.c
+@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
+ 
+ 	for (t = 0; t < NUM_THREADS; t++) {
+ 		rv = pthread_create(&tid[t], NULL, (void *(*)(void *))Hello, (void *)t);
++//		rv = pthread_create(&tid[t], NULL, (void *)&Hello, (void *)t);
+ 		check_error(rv, "pthread_create()");
+ 		printf("Create thread %lx\n", tid);
+ 	}
