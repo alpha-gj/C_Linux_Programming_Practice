@@ -11,12 +11,12 @@ using namespace std;
         exit(1)					\
         )
 
-#define POPEN_BUFSIZE 2048
+#define POPEN_FREAD_BUFSIZE 4096
 
-string popen_cmd_fget(const char *cmd)
+string popen_cmd_fread(const char *cmd)
 {
     FILE *fp = NULL;
-    char buf[POPEN_BUFSIZE] = {};
+    char buf[POPEN_FREAD_BUFSIZE] = {};
     string result_str;
 
     do {
@@ -71,11 +71,11 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    printf("\n[NOTICE] We use popen() with fread(), and use popen buffer:%d\n", POPEN_BUFSIZE);
+    printf("\n[NOTICE] We use popen() with fread(), and use popen buffer:%d\n", POPEN_FREAD_BUFSIZE);
     printf("you type: %s \n", argv[1]);
 
     printf("\n====== [Result start] ======\n\n");
-    printf("%s", popen_cmd_fget(argv[1]).c_str());
+    printf("%s", popen_cmd_fread(argv[1]).c_str());
     printf("\n\n====== [Result stop] ======\n");
 
     return 0;
